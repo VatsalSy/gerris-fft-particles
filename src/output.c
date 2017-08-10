@@ -2512,6 +2512,8 @@ static void gfs_output_droplet_sums_destroy (GtsObject * object)
 {
   GfsOutputDropletSums * d = GFS_OUTPUT_DROPLET_SUMS (object);
   gts_object_destroy (GTS_OBJECT (d->c));
+  if (d->tag)
+    gts_object_destroy (GTS_OBJECT (d->tag));
 
   (* GTS_OBJECT_CLASS (gfs_output_droplet_sums_class ())->parent_class->destroy) (object);
 }
@@ -2529,8 +2531,8 @@ static void gfs_output_droplet_sums_read (GtsObject ** o, GtsFile * fp)
     return;
 
   if (fp->type == GTS_STRING) {
-    if (!(d->tag = gfs_domain_get_or_add_variable (domain, fp->token->str, "Droplet tag"))) {
-      gts_file_error (fp, "unknown variable `%s'", fp->token->str);
+    if (!(d->tag = gfs_domain_get_or_add_variable (domain, fp->token->str, "Droplet index"))) {
+      gts_file_error (fp, "`%s' is a reserved variable name", fp->token->str);
       return;
     }
     gts_file_next_token (fp);
@@ -2611,7 +2613,7 @@ static gboolean gfs_output_droplet_sums_event (GfsEvent * event, GfsSimulation *
 	p.v = gv;
       }
 #endif /* HAVE_MPI */
-//      qsort (p.v, p.n, sizeof (VolumePair), volume_sort);
+      qsort (p.v, p.n, sizeof (VolumePair), volume_sort);
       gchar * f = GFS_OUTPUT_SCALAR (event)->format;
       gchar * format;
       if (f)
@@ -2668,124 +2670,6 @@ GfsOutputClass * gfs_output_droplet_sums_class (void)
 }
 
 /** \endobject{GfsOutputDropletSums} */
-
-/**
- * \beginobject{GfsOutputInterface}
- */
-
-static void gfs_output_interface_read (GtsObject ** o, GtsFile * fp)
-{
-  (* GTS_OBJECT_CLASS (gfs_output_interface_class ())->parent_class->read) (o, fp);
-  if (fp->type == GTS_ERROR)
-    return;
-
-  GfsOutputInterface * d = GFS_OUTPUT_INTERFACE (*o);
-  GfsDomain * domain = GFS_DOMAIN (gfs_object_simulation (*o));
-
-  if (!(d->v = gfs_variable_from_name (domain->variables, fp->token->str))) {
-    gts_file_error (fp, "unknown variable `%s'", fp->token->str);
-    return;
-  }
-
-  if (!GFS_IS_VARIABLE_TRACER_VOF (d->v)) {
-     gts_file_error (fp, "variable `%s' is not a VOF tracer", fp->token->str);
-     return;
-  }
-
-  gts_file_next_token (fp);
-  
-  d->tag = NULL;
-  if (fp->type == GTS_STRING) {
-    if (!(d->tag = gfs_variable_from_name (domain->variables, fp->token->str))) {
-      gts_file_error (fp, "unknown variable `%s'", fp->token->str);
-      return;
-    }
-
-    gts_file_next_token (fp);
-  } 
-}
-
-static void gfs_output_interface_write (GtsObject * o, FILE * fp)
-{
-  (* GTS_OBJECT_CLASS (gfs_output_interface_class ())->parent_class->write) (o, fp);
-
-  GfsOutputInterface * d = GFS_OUTPUT_INTERFACE (o);
-  if (d->tag)
-    fprintf (fp, " %s %s", GFS_VARIABLE(d->v)->name, d->tag->name);
-  else
-    fprintf (fp, " %s", GFS_VARIABLE(d->v)->name);
-
-}
-
-static gboolean is_interfacial (FttCell * cell, GfsVariable * v)
-{
-  return (GFS_VALUE (cell, v) > 0. && GFS_VALUE (cell, v) < 1.);
-}
-
-static void output_interface_and_tag (FttCell * cell, GfsOutputInterface * d)
-{
-  FttVector p;
-  gdouble vof = gfs_vof_center (cell, d->v, &p);
-  fprintf (GFS_OUTPUT (d)->file->fp, "%g %g %g %g \n", GFS_VALUE (cell, d->tag), p.x, p.y, p.z );
-}
-
-static void output_interface (FttCell * cell, GfsOutputInterface * d)
-{
-  FttVector p;
-  gdouble vof = gfs_vof_center (cell, d->v, &p);
-  fprintf (GFS_OUTPUT (d)->file->fp, "%g %g %g \n", p.x, p.y, p.z );
-}
-
-static gboolean gfs_output_interface_event (GfsEvent * event, GfsSimulation * sim)
-{
-  if ((* GFS_EVENT_CLASS (gfs_output_class())->event) (event, sim)) {
-
-    GfsDomain * domain = GFS_DOMAIN (sim);
-    GfsOutputInterface * d = GFS_OUTPUT_INTERFACE (event);
-    fprintf (GFS_OUTPUT (d)->file->fp, "#t = %g \n", sim->time.t);
-    if (d->tag)
-      gfs_domain_cell_traverse_condition (domain, FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
-          (FttCellTraverseFunc) output_interface_and_tag, d, is_interfacial, GFS_VARIABLE(d->v));          
-    else
-      gfs_domain_cell_traverse_condition (domain, FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
-          (FttCellTraverseFunc) output_interface, d, is_interfacial, GFS_VARIABLE(d->v));          
-
-    return TRUE;
-  }
-  return FALSE;
-}
-
-static void gfs_output_interface_class_init (GfsEventClass * klass)
-{
-  klass->event = gfs_output_interface_event;
-  GTS_OBJECT_CLASS (klass)->read     = gfs_output_interface_read;
-  GTS_OBJECT_CLASS (klass)->write    = gfs_output_interface_write;
-}
-
-GfsOutputClass * gfs_output_interface_class (void)
-{
-  static GfsOutputClass * klass = NULL;
-
-  if (klass == NULL) {
-    GtsObjectClassInfo gfs_output_interface_info = {
-      "GfsOutputInterface",
-      sizeof (GfsOutputInterface),
-      sizeof (GfsOutputClass),
-      (GtsObjectClassInitFunc) gfs_output_interface_class_init,
-      (GtsObjectInitFunc) NULL,
-      (GtsArgSetFunc) NULL,
-      (GtsArgGetFunc) NULL
-    };
-    klass = gts_object_class_new (GTS_OBJECT_CLASS (gfs_output_class ()),
-				  &gfs_output_interface_info);
-  }
-
-  return klass;
-}
-
-/** \endobject{GfsOutputInterface} */
-
-
 
 /**
  * Computing differences to a reference solution.

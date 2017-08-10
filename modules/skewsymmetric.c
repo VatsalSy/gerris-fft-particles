@@ -22,52 +22,6 @@
 #include "adaptive.h"
 #include "output.h"
 #include "init.h"
-#include "variable.h"
-
-/* GfsVariableTracerSkew: header */
-
-typedef struct _GfsVariableTracerSkew        GfsVariableTracerSkew;
-
-struct _GfsVariableTracerSkew {
-  /*< private >*/
-  GfsVariableTracer parent;
-
-  /*< public >*/
-  GfsVariable *t[FTT_NEIGHBORS], *told[FTT_NEIGHBORS];
-};
-
-#define GFS_VARIABLE_TRACER_SKEW(obj)            GTS_OBJECT_CAST (obj,\
-					           GfsVariableTracerSkew,\
-					           gfs_variable_tracer_skew_class ())
-#define GFS_IS_VARIABLE_TRACER_SKEW(obj)         (gts_object_is_from_class (obj,\
-						   gfs_variable_tracer_skew_class ()))
-
-GfsVariableClass * gfs_variable_tracer_skew_class  (void);
-
-/** \beginobject{GfsVariableTracerSkew} */
-
-
-GfsVariableClass * gfs_variable_tracer_skew_class (void)
-{
-  static GfsVariableClass * klass = NULL;
-
-  if (klass == NULL) {
-    GtsObjectClassInfo info = {
-      "GfsVariableTracerSkew",
-      sizeof (GfsVariableTracerSkew),
-      sizeof (GfsVariableClass),
-      (GtsObjectClassInitFunc) NULL,
-      (GtsObjectInitFunc) NULL,
-      (GtsArgSetFunc) NULL,
-      (GtsArgGetFunc) NULL
-    };
-    klass = gts_object_class_new (GTS_OBJECT_CLASS (gfs_variable_class ()), &info);
-  }
-
-  return klass;
-}
-
-/** \endobject{GfsVariableTracerSkew} */
 
 /* GfsSkewSymmetric: Header */
 
@@ -92,8 +46,8 @@ struct _GfsSkewSymmetric {
 GfsSimulationClass * gfs_skew_symmetric_class  (void);
 
 typedef struct {
-  GfsVariable **velfaces , **velold , **u, **bc; 
-  GfsDomain * domain;
+  GfsVariable **velfaces , **velold , **u; 
+  GfsVariable *p;
   gdouble * dt, beta; 
 } FaceData;
 
@@ -192,6 +146,8 @@ static void get_face_values (FttCell * cell, FaceData * fd)
     s->f[d].un = GFS_VALUE (cell, fd->u[c])/2.;
     if (ftt_cell_neighbor (cell, d))
       s->f[d].un += GFS_VALUE (ftt_cell_neighbor (cell, d), fd->u[c])/2.;
+    else
+      s->f[d].un  = 0;
   }
 }
 
@@ -239,28 +195,6 @@ static void advance_face_values (FttCell * cell, FaceData * fd)
 
 /* d: direction of the face required */
 /* d2: cell direction with respect to cellref */
-static gdouble face_fraction_skew (FttCell * cellref,
-				       FttDirection d, 
-				       FttDirection * d2, 
-				       FaceData * fd)
-{
-  FttCell * cell;
-  FttComponent c = d/2;
-  if (d2)
-    cell = ftt_cell_neighbor (cellref, *d2);
-  else
-    cell = cellref;
-
-  if (!cell) 
-    return 0.;
-  else {
-    FttCellFace f = gfs_cell_face (cell,d);  
-    return gfs_domain_face_fraction(fd->domain, &f);
-  }
-}
-
-/* d: direction of the face required */
-/* d2: cell direction with respect to cellref */
 static gdouble interpolate_value_skew (FttCell * cellref,
 				       FttDirection d, 
 				       FttDirection * d2, 
@@ -273,8 +207,13 @@ static gdouble interpolate_value_skew (FttCell * cellref,
   else
     cell = cellref;
 
-  if (!cell) 
-    return GFS_VALUE (cellref,fd->bc[c]);
+  if (!cell) {
+    /* Symmetric BC */
+    if ( d == (*d2) ) 
+      return -GFS_VALUE (cellref,fd->velfaces[FTT_OPPOSITE_DIRECTION(d)]);
+    else
+      return GFS_VALUE (cellref,fd->velfaces[d]);
+  } 
 
   if (!FTT_CELL_IS_LEAF (cell)) { 
     FttDirection corner[FTT_DIMENSION];
@@ -354,12 +293,12 @@ static gdouble interpolate_value_skew (FttCell * cellref,
 static gdouble transverse_advection (FttCell * cell, 
 				     FttComponent oc,
 				     FttDirection d,
+				     gdouble un,
 				     FaceData * fd,
 				     gboolean b)
 {
   gdouble uauxbot, uauxtop,size_ratio;
   gdouble vn, vntop, vnbot, vndiag;
-  gdouble fn, fntop, fnbot, fndiag;
   FttDirection daux;
   FttCell * cellnext = ftt_cell_neighbor (cell, d);
   if (!cellnext) cellnext = cell;
@@ -370,13 +309,9 @@ static gdouble transverse_advection (FttCell * cell,
     if (!FTT_CELL_IS_LEAF (cellnext))
       size_ratio /= 2.;
     vn      = interpolate_value_skew (cell,2*oc,NULL,fd);
-    fn      = face_fraction_skew (cell,2*oc,NULL,fd);
     vntop   = interpolate_value_skew (cell,2*oc,&d  ,fd);
-    fntop   = face_fraction_skew (cell,2*oc,&d  ,fd);
     vndiag  = interpolate_value_skew (cell,2*oc+1,&d ,fd);
-    fndiag  = face_fraction_skew (cell,2*oc+1,&d ,fd);
     vnbot   = interpolate_value_skew (cell,2*oc+1,NULL,fd);
-    fnbot   = face_fraction_skew (cell,2*oc+1,NULL,fd);
     daux    = 2*oc;
     uauxtop = interpolate_value_skew (cell, d, &daux, fd);
     daux    = 2*oc+1;
@@ -387,27 +322,21 @@ static gdouble transverse_advection (FttCell * cell,
       size_ratio *= 2.;
     daux    = FTT_OPPOSITE_DIRECTION(d);
     vn      = interpolate_value_skew (cell,2*oc,&daux, fd);
-    fn      = face_fraction_skew (cell,2*oc,&daux, fd);
     vntop   = interpolate_value_skew (cell,2*oc,&daux, fd);
-    fntop   = face_fraction_skew (cell,2*oc,&daux, fd);
     vndiag  = interpolate_value_skew (cell,2*oc+1,NULL,fd);
-    fndiag  = face_fraction_skew (cell,2*oc+1,NULL,fd);
     vnbot   = interpolate_value_skew (cell,2*oc,&daux ,fd);
-    fnbot   = face_fraction_skew (cell,2*oc,&daux ,fd);
     daux    = 2*oc;
     uauxtop = interpolate_value_skew (cell, FTT_OPPOSITE_DIRECTION(d), &daux, fd);
     daux    = 2*oc+1;
     uauxbot = interpolate_value_skew (cell, FTT_OPPOSITE_DIRECTION(d), &daux, fd);
   }
 
-  return (uauxtop*(vn*fn + vntop*fntop*size_ratio) - 
-          uauxbot*(vnbot*fnbot + vndiag*fndiag*size_ratio)) / 4.;
+  return (uauxtop*(vn + vntop*size_ratio) - uauxbot*(vnbot + vndiag*size_ratio)) / 4.;
 }
 
 static void advection_term (FttCell * cell, FaceData * fd)
 {
   gdouble un, unext, unprev;
-  gdouble fn, fnext, fnprev;
 
   FttDirection d0;
   for (d0 = 0; d0 < FTT_NEIGHBORS; d0++) {
@@ -418,35 +347,29 @@ static void advection_term (FttCell * cell, FaceData * fd)
   gboolean cond;
 
   un = GFS_VALUE (cell,fd->velfaces[d0]);
-  fn = face_fraction_skew (cell, d0, NULL, fd);
-
   if ((d0 % 2 ) != 0 ) {
     cond = TRUE;
     d = FTT_OPPOSITE_DIRECTION (d0);
     unext     = interpolate_value_skew (cell, d,    NULL , fd);
-    fnext     = face_fraction_skew (cell, d,    NULL , fd);
     unprev    = interpolate_value_skew (cell, d0, &d0, fd); 
-    fnprev    = face_fraction_skew (cell, d0, &d0, fd); 
   }
   else { 
     cond = FALSE;
     d = d0;
-    unext    = interpolate_value_skew (cell, d, &d, fd);
-    fnext    = face_fraction_skew (cell, d, &d, fd);
-    unprev   = interpolate_value_skew (cell, FTT_OPPOSITE_DIRECTION(d), NULL, fd);
-    fnprev   = face_fraction_skew (cell, FTT_OPPOSITE_DIRECTION(d), NULL, fd);
+    unext     = interpolate_value_skew (cell, d, &d, fd);
+    unprev    = interpolate_value_skew (cell, FTT_OPPOSITE_DIRECTION(d), NULL, fd);
   }
 
-  s->f[d0].v = ((un*fn + unext*fnext)*unext - (un*fn + unprev*fnprev)*unprev) / 4.;
+  s->f[d0].v = ((un + unext)*unext - (un + unprev)*unprev) / 4.;
 #if FTT_2D
   s->f[d0].v += transverse_advection (cell, 
-				      FTT_ORTHOGONAL_COMPONENT (c), d, fd, cond);
+				      FTT_ORTHOGONAL_COMPONENT (c), d, un, fd, cond);
 #else  /* FTT_3D */
   static FttComponent orthogonal[FTT_DIMENSION][2] = {
     {FTT_Y, FTT_Z}, {FTT_X, FTT_Z}, {FTT_X, FTT_Y}
   };
-  s->f[d0].v += transverse_advection (cell, orthogonal[c][0], d, fd, cond);
-  s->f[d0].v += transverse_advection (cell, orthogonal[c][1], d, fd, cond); 
+  s->f[d0].v += transverse_advection (cell, orthogonal[c][0], d, un, fd, cond);
+  s->f[d0].v += transverse_advection (cell, orthogonal[c][1], d, un, fd, cond); 
 #endif
   }
 }
@@ -490,7 +413,6 @@ static void diffusion_term (FttCell * cell, DataDif * data)
   /* fixme: I need to account for the metric */
   gdouble size, sizenext, size_ratio;
   gdouble un, unext, unprev;
-  gdouble fn, fnext, fnprev;
 
   FttDirection d0;
   for (d0 = 0; d0 < FTT_NEIGHBORS; d0++) {
@@ -505,38 +427,32 @@ static void diffusion_term (FttCell * cell, DataDif * data)
   FttDirection od = FTT_OPPOSITE_DIRECTION(d0);
 
   un = interpolate_value_skew (cell, d0, NULL, data->fd);
-  fn = face_fraction_skew (cell, d0, NULL, data->fd);
 
   if ((d0 % 2) != 0) {
     unext    = interpolate_value_skew (cell, od , NULL, data->fd);
-    fnext    = face_fraction_skew (cell, od , NULL, data->fd);
     unprev   = interpolate_value_skew (cell, d0 , &(d0) , data->fd); 
-    fnprev   = face_fraction_skew (cell, d0 , &(d0) , data->fd); 
     sizenext = ftt_cell_size (cell); 
     size     = get_size_next (cell, d0);
   }
   else {
     unext    = interpolate_value_skew (cell, d0, &(d0), data->fd);
-    fnext    = face_fraction_skew (cell, d0, &(d0), data->fd);
     unprev   = interpolate_value_skew (cell, od,      NULL,    data->fd);
-    fnprev   = face_fraction_skew (cell, od,      NULL,    data->fd);
     size     = ftt_cell_size (cell); 
     sizenext = get_size_next (cell, d0);
   } 
   size_ratio = ( 1. + sizenext / size ) / 2;
-  flux = ( (unext - un)/sizenext * (fnext + fn ) / 2 - 
-           (un - unprev)/size * (fn + fnprev ) / 2 );
+  flux = ( (unext - un)/sizenext - (un - unprev)/size );
 
   FttComponent c = d0/2;
 #if FTT_2D
   FttComponent oc = FTT_ORTHOGONAL_COMPONENT (c);
-  flux += size_ratio * transverse_diffusion(cell, oc, d0, un, data->fd) * (fnext + fn ) / 2 ;
+  flux += size_ratio * transverse_diffusion(cell, oc, d0, un, data->fd);
 #else
   static FttComponent orthogonal[FTT_DIMENSION][2] = {
     {FTT_Y, FTT_Z}, {FTT_X, FTT_Z}, {FTT_X, FTT_Y}
   };
-  flux += size_ratio * transverse_diffusion(cell, orthogonal[c][0], d0, un, data->fd) * (fnext + fn ) / 2;
-  flux += size_ratio * transverse_diffusion(cell, orthogonal[c][1], d0, un, data->fd) * (fnext + fn ) / 2;
+  flux += size_ratio * transverse_diffusion(cell, orthogonal[c][0], d0, un, data->fd);
+  flux += size_ratio * transverse_diffusion(cell, orthogonal[c][1], d0, un, data->fd);
 #endif 
 
   s->f[d0].v -= invdens*visc*flux;
@@ -640,9 +556,6 @@ static void gfs_skew_symmetric_momentum (GfsSimulation * sim, FaceData * fd, Gfs
   for (d = 0; d <  FTT_NEIGHBORS; d++)
     gfs_domain_bc (domain, FTT_TRAVERSE_LEAFS, -1, fd->velfaces[d]);
 
-  for (c = 0; c < FTT_DIMENSION; c++)
-    gfs_domain_copy_bc (domain, FTT_TRAVERSE_LEAFS, -1, fd->u[c], fd->bc[c]);
-
   gfs_domain_cell_traverse (domain, 
 			    FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
 			    (FttCellTraverseFunc) advection_term, fd);
@@ -666,137 +579,16 @@ static void gfs_skew_symmetric_momentum (GfsSimulation * sim, FaceData * fd, Gfs
 			    FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
 			    (FttCellTraverseFunc) update_vel, fd);
 
-  for (c = 0; c <  FTT_DIMENSION; c++)
-    gfs_domain_face_bc (domain, c, fd->u[c]);
-
   gfs_velocity_face_sources (domain, fd->u, (*fd->dt), sim->physical_params.alpha, gmac);
 
   gfs_domain_cell_traverse (domain, 
                             FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1, 
                             (FttCellTraverseFunc) correct_face_velocity, NULL);
-
 }
-
-static void get_face_fraction (FttCell * cell, GfsVariableTracerSkew * vts)
-{
-  FttDirection d;
-  for (d = 0; d < FTT_NEIGHBORS; d++){
-    GFS_VALUE (cell, vts->t[d])    = GFS_VALUE (cell, GFS_VARIABLE(vts));
-    GFS_VALUE (cell, vts->told[d]) = GFS_VALUE (cell, vts->t[d]); 
-  }
-  
-}
-
-/* fixme: initialize inside the object if possible */
-static void variable_tracer_skew_init (GfsDomain * domain, GfsVariableTracerSkew * object)
-{
-  FttDirection d;
-  for (d = 0; d < FTT_NEIGHBORS; d++) {
-    object->t[d]      = gfs_temporary_variable (domain);
-    object->told[d]   = gfs_temporary_variable (domain);
-  }
-}
-
-static void destroy_skew_tracers (GfsSimulation * sim)
-{
-  g_return_if_fail (sim != NULL);
-
-  GfsDomain * domain = GFS_DOMAIN (sim);
-  GSList * i = domain->variables;
-  FttDirection d;
-
-  while (i) {
-    if (GFS_IS_VARIABLE_TRACER_SKEW (i->data)) {
-
-      GfsVariableTracerSkew * vts = GFS_VARIABLE_TRACER_SKEW (i->data);
-      for (d = 0; d < FTT_NEIGHBORS; d++) {
-        gts_object_destroy (GTS_OBJECT (vts->t[d]));
-        gts_object_destroy (GTS_OBJECT (vts->told[d]));
-      }
-    }
-    i = i->next;
-  }  
-}
-
-
-static void init_skew_tracers (GfsSimulation * sim)
-{
-  g_return_if_fail (sim != NULL);
-
-  GfsDomain * domain = GFS_DOMAIN (sim);
-  GSList * i = domain->variables;
-
-  while (i) {
-    if (GFS_IS_VARIABLE_TRACER_SKEW (i->data)) {
-
-      GfsVariableTracerSkew * vts = GFS_VARIABLE_TRACER_SKEW (i->data);
-
-      variable_tracer_skew_init (domain, vts);
-      gfs_domain_cell_traverse (domain, FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
-                            (FttCellTraverseFunc) get_face_fraction, vts); 
-      
-    }
-    i = i->next;
-  }  
-}
-
-typedef struct {
-  GfsVariableTracerSkew * vts; 
-  FaceData * fd;
-} TracerSkewData;
-
-
-static void update_tracer_skew (FttCell * cell, TracerSkewData * tsd)
-{
-  gdouble size;
-
-  FttDirection d;
-  for (d = 0; d < FTT_NEIGHBORS; d++) {
-    size = ( ftt_cell_size (cell) + get_size_next (cell, d) ) / 2;
-  }
-}
-
-
-/**
- * advance_tracers_skew:
- * @sim: a #GfsSimulation.
- * @dt: the timestep.
- *
- * Performs advection/difussion of tracers associated with @sim dt/2 with respect to 
- *          the current fraction.
- */
-static void advance_tracers_skew (GfsSimulation * sim, FaceData * fd)
-{
-  g_return_if_fail (sim != NULL);
-
-  GfsDomain * domain = GFS_DOMAIN (sim);
-  GSList * i = domain->variables;
-  TracerSkewData tsd;
-  tsd.fd = fd;
-
-  while (i) {
-    if (GFS_IS_VARIABLE_TRACER_SKEW (i->data)) {
-      
-      tsd.vts = GFS_VARIABLE_TRACER_SKEW (i->data);
-      
-      gfs_domain_cell_traverse (domain, 
-                       		FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
-			        (FttCellTraverseFunc) update_tracer_skew, &tsd);
-
-      gfs_domain_cell_traverse (domain,
-				FTT_POST_ORDER, FTT_TRAVERSE_NON_LEAFS, -1,
-				(FttCellTraverseFunc) GFS_VARIABLE (tsd.vts)->fine_coarse, GFS_VARIABLE_TRACER (tsd.vts));
-    }
-    i = i->next;
-  }  
-  
-}
-
-
 
 static void gfs_skew_symmetric_run (GfsSimulation * sim)
 {
-  GfsVariable * p,  * res = NULL, * gmac[FTT_DIMENSION], * bc[FTT_DIMENSION];
+  GfsVariable * p,  * res = NULL, * gmac[FTT_DIMENSION]; 
   GfsDomain * domain;
   GSList * i;
 
@@ -806,17 +598,10 @@ static void gfs_skew_symmetric_run (GfsSimulation * sim)
 
   g_assert (p);
   FttComponent c;
-  for (c = 0; c < FTT_DIMENSION; c++){
+  for (c = 0; c < FTT_DIMENSION; c++) 
     gmac[c] = gfs_temporary_variable (domain);
-    bc[c]   = gfs_temporary_variable (domain);
-  }
 
   gfs_variable_set_vector (gmac, FTT_DIMENSION);
-  gfs_variable_set_vector (bc, FTT_DIMENSION);
-
-  for (c = 0; c < FTT_DIMENSION; c++) 
-    gfs_domain_cell_traverse (domain, FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
-                             (FttCellTraverseFunc) gfs_cell_reset, bc[c]);
 
   gfs_simulation_refine (sim);
   gfs_simulation_init (sim);
@@ -830,13 +615,11 @@ static void gfs_skew_symmetric_run (GfsSimulation * sim)
 
   gfs_simulation_set_timestep (sim);
 
-  init_skew_tracers (sim);
-
   GfsVariable ** u = gfs_domain_velocity (domain);
   GfsVariable ** velfaces = GFS_SKEW_SYMMETRIC(sim)->velfaces;
   GfsVariable ** velold   = GFS_SKEW_SYMMETRIC(sim)->velold;
 
-  FaceData fd = { velfaces, velold, u, bc, domain, &sim->advection_params.dt, GFS_SKEW_SYMMETRIC(sim)->beta};
+  FaceData fd = { velfaces, velold, u, p, &sim->advection_params.dt, GFS_SKEW_SYMMETRIC(sim)->beta};
 
   if (sim->time.i == 0) {
 
@@ -850,9 +633,6 @@ static void gfs_skew_symmetric_run (GfsSimulation * sim)
     gfs_domain_cell_traverse (domain, 
         FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
         (FttCellTraverseFunc) get_face_values, &fd);
-
-    for (c = 0; c <  FTT_DIMENSION; c++)
-      gfs_domain_face_bc (domain, c, u[c]);
   
     gfs_mac_projection (domain,
 			&sim->projection_params, 
@@ -905,7 +685,6 @@ static void gfs_skew_symmetric_run (GfsSimulation * sim)
 
     gfs_simulation_set_timestep (sim);
     gfs_advance_tracers (sim, sim->advection_params.dt);
-    advance_tracers_skew (sim, &fd);
 
     gts_range_add_value (&domain->timestep, gfs_clock_elapsed (domain->timer) - tstart);
     gts_range_update (&domain->timestep);
@@ -915,12 +694,8 @@ static void gfs_skew_symmetric_run (GfsSimulation * sim)
   gts_container_foreach (GTS_CONTAINER (sim->events), (GtsFunc) gfs_event_do, sim);  
   gts_container_foreach (GTS_CONTAINER (sim->events), (GtsFunc) gts_object_destroy, NULL);
 
-  destroy_skew_tracers (sim);
-
-  for (c = 0; c < FTT_DIMENSION; c++){ 
+  for (c = 0; c < FTT_DIMENSION; c++) 
     gts_object_destroy (GTS_OBJECT (gmac[c]));
-    gts_object_destroy (GTS_OBJECT (bc[c]));
-  }
 
 }
 
@@ -1024,59 +799,6 @@ GfsGenericInitClass * gfs_init_face_values_class (void)
 
 /** \endobject{GfsInitFaceValues} */
 
-/* GfsBcDirichletSkew: Header */
-
-#define GFS_IS_BC_DIRICHLET_SKEW(obj)         (gts_object_is_from_class (obj,\
-						 gfs_bc_dirichlet_skew_class ()))
-
-GfsBcClass * gfs_bc_dirichlet_skew_class  (void);
-
-/**
- * Dirichlet boundary condition.
- * \beginobject{GfsBcDirichletSkew}
- */
-
-static void dirichlet_skew (FttCellFace * f, GfsBc * b)
-{
-  GFS_VALUE (f->neighbor, b->v) = gfs_function_face_value (GFS_BC_VALUE (b)->val, f);
-    
-}
-
-static void face_dirichlet_skew (FttCellFace * f, GfsBc * b)
-{
-  GFS_STATE (f->neighbor)->f[FTT_OPPOSITE_DIRECTION(f->d)].un = GFS_STATE (f->neighbor)->f[FTT_OPPOSITE_DIRECTION (f->d)].un = 
-    gfs_function_face_value (GFS_BC_VALUE (b)->val, f);
-}
-
-static void gfs_bc_dirichlet_skew_init (GfsBc * object)
-{
-  object->bc =                     (FttFaceTraverseFunc) dirichlet_skew;
-  object->face_bc =                (FttFaceTraverseFunc) face_dirichlet_skew;
-}
-
-GfsBcClass * gfs_bc_dirichlet_skew_class (void)
-{
-  static GfsBcClass * klass = NULL;
-
-  if (klass == NULL) {
-    GtsObjectClassInfo gfs_bc_dirichlet_skew_info = {
-      "GfsBcDirichletSkew",
-      sizeof (GfsBcValue),
-      sizeof (GfsBcClass),
-      (GtsObjectClassInitFunc) NULL,
-      (GtsObjectInitFunc) gfs_bc_dirichlet_skew_init,
-      (GtsArgSetFunc) NULL,
-      (GtsArgGetFunc) NULL
-    };
-    klass = gts_object_class_new (GTS_OBJECT_CLASS (gfs_bc_value_class ()),
-				  &gfs_bc_dirichlet_skew_info);
-  }
-
-  return klass;
-}
-
-/** \endobject{GfsBcDirichletSkew} */
-
 /* Initialize module */
 
 /* only define gfs_module_name for "official" modules (i.e. those installed in
@@ -1086,9 +808,7 @@ const gchar * g_module_check_init (void);
 
 const gchar * g_module_check_init (void)
 {
-  gfs_variable_tracer_skew_class ();
   gfs_skew_symmetric_class ();
   gfs_init_face_values_class ();
-  gfs_bc_dirichlet_skew_class ();
   return NULL;
 } 

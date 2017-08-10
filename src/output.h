@@ -25,7 +25,6 @@ extern "C" {
 #endif /* __cplusplus */
 
 #include "event.h"
-#include "vof.h"
 
 /* GfsOutput: Header */
 
@@ -278,28 +277,6 @@ struct _GfsOutputDropletSums {
 						 gfs_output_droplet_sums_class ()))
 
 GfsOutputClass * gfs_output_droplet_sums_class  (void);
-
-/* GfsOutputInterface: Header */
-
-typedef struct _GfsOutputInterface         GfsOutputInterface;
-
-struct _GfsOutputInterface {
-  /*< private >*/
-  GfsOutput parent;
-
-  /*< public >*/
-  GfsVariable * tag;
-  GfsVariableTracerVOF * v;
-};
-
-#define GFS_OUTPUT_INTERFACE(obj)            GTS_OBJECT_CAST (obj,\
-					         GfsOutputInterface,\
-					         gfs_output_interface_class ())
-#define GFS_IS_OUTPUT_INTERFACE(obj)         (gts_object_is_from_class (obj,\
-						 gfs_output_interface_class ()))
-
-GfsOutputClass * gfs_output_interface_class  (void);
-
 
 /* GfsOutputErrorNorm: Header */
 

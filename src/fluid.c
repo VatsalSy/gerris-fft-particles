@@ -1897,10 +1897,7 @@ void gfs_cell_coarse_fine (FttCell * parent, GfsVariable * v)
     if (v->domain->cell_metric) {
       gdouble a[FTT_CELLS], sa = 0.;
       for (n = 0; n < FTT_CELLS; n++) {
-        if (child.c[n])
-	    a[n] = (* v->domain->cell_metric) (v->domain, child.c[n]);
-        else
-            a[n] = 0.;
+	a[n] = (* v->domain->cell_metric) (v->domain, child.c[n]);
 	sa += a[n];
       }
       g_assert (sa > 0.);
@@ -1908,14 +1905,10 @@ void gfs_cell_coarse_fine (FttCell * parent, GfsVariable * v)
 #if FTT_2D
       double gx1 = g.x*(a[0] + a[2])/sa, gx2 = - g.x*(a[1] + a[3])/sa;
       double gy1 = g.y*(a[2] + a[3])/sa, gy2 = - g.y*(a[0] + a[1])/sa;
-      if (child.c[0])
-          GFS_VALUE (child.c[0], v) += gx2 + gy1;
-      if (child.c[1])
-        GFS_VALUE (child.c[1], v) += gx1 + gy1;
-      if (child.c[2])
-        GFS_VALUE (child.c[2], v) += gx2 + gy2;
-      if (child.c[3])
-        GFS_VALUE (child.c[3], v) += gx1 + gy2;
+      GFS_VALUE (child.c[0], v) += gx2 + gy1;
+      GFS_VALUE (child.c[1], v) += gx1 + gy1;
+      GFS_VALUE (child.c[2], v) += gx2 + gy2;
+      GFS_VALUE (child.c[3], v) += gx1 + gy2;
 #else /* 3D */
       double gx1 = g.x*(a[0] + a[2])/sa, gx2 = - g.x*(a[1] + a[3])/sa;
       double gx3 = g.x*(a[4] + a[6])/sa, gx4 = - g.x*(a[5] + a[7])/sa;
@@ -1923,22 +1916,14 @@ void gfs_cell_coarse_fine (FttCell * parent, GfsVariable * v)
       double gy3 = g.y*(a[6] + a[7])/sa, gy4 = - g.y*(a[4] + a[5])/sa;
       double gz1 = g.z*(a[2] + a[6])/sa, gz2 = - g.z*(a[0] + a[4])/sa;
       double gz3 = g.z*(a[3] + a[7])/sa, gz4 = - g.z*(a[1] + a[5])/sa;
-      if (child.c[0])
-        GFS_VALUE (child.c[0], v) += gx2 + gy1 + gz1;
-      if (child.c[1])
-        GFS_VALUE (child.c[1], v) += gx1 + gy1 + gz1;
-      if (child.c[2])
-        GFS_VALUE (child.c[2], v) += gx2 + gy2 + gz1;
-      if (child.c[3])
-        GFS_VALUE (child.c[3], v) += gx1 + gy2 + gz1;
-      if (child.c[4])
-        GFS_VALUE (child.c[4], v) += gx2 + gy1 + gz2;
-      if (child.c[5])
-        GFS_VALUE (child.c[5], v) += gx1 + gy1 + gz2;
-      if (child.c[6])
-        GFS_VALUE (child.c[6], v) += gx2 + gy2 + gz2;
-      if (child.c[7])
-        GFS_VALUE (child.c[7], v) += gx1 + gy2 + gz2;
+      GFS_VALUE (child.c[0], v) += gx2 + gy1 + gz1;
+      GFS_VALUE (child.c[1], v) += gx1 + gy1 + gz1;
+      GFS_VALUE (child.c[2], v) += gx2 + gy2 + gz1;
+      GFS_VALUE (child.c[3], v) += gx1 + gy2 + gz1;
+      GFS_VALUE (child.c[4], v) += gx2 + gy1 + gz2;
+      GFS_VALUE (child.c[5], v) += gx1 + gy1 + gz2;
+      GFS_VALUE (child.c[6], v) += gx2 + gy2 + gz2;
+      GFS_VALUE (child.c[7], v) += gx1 + gy2 + gz2;
 #endif /* 3D */
     }
     else

@@ -118,15 +118,6 @@ GfsVariableClass * gfs_variable_vof_concentration_class  (void);
 
 /* GfsVariableTracerVOFHeight: header */
 
-typedef struct {
-  GfsVariable * f; /* volume fraction */
-  GfsVariable * hb, * ht; /* heights in either orientation */
-  GfsBc * angle; /* contact angle BC */
-  FttComponent c; /* x, y or z */
-  FttDirection d;
-} HFState;
-
-
 typedef struct _GfsVariableTracerVOFHeight GfsVariableTracerVOFHeight;
 
 struct _GfsVariableTracerVOFHeight {
@@ -190,14 +181,6 @@ GfsVariable * gfs_closest_height   (FttCell * cell,
 				    GfsVariableTracerVOFHeight * t,
 				    FttComponent c,
 				    gdouble * orientation);
-void     height_vof                (FttCell * cell, 
-                                    HFState * hf);
-void     box_periodic_bc           (GfsBox * box, 
-                                    HFState * hf);
-void     box_contact_bc            (GfsBox * box, 
-                                    HFState * hf);
-void     variable_tracer_vof_update (GfsVariable * v, 
-                                     GfsDomain * domain);
 
 #ifdef __cplusplus
 }

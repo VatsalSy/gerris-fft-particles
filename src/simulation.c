@@ -33,7 +33,6 @@
 #include "vof.h"
 #include "tension.h"
 #include "map.h"
-#include "particle.h"
 #include "river.h"
 #include "version.h"
 
@@ -475,7 +474,6 @@ static void simulation_run (GfsSimulation * sim)
   else if (sim->advection_params.gc)
     gfs_update_gradients (domain, p, sim->physical_params.alpha, g);
 
-  
   while (sim->time.t < sim->time.end &&
 	 sim->time.i < sim->time.iend) {
     gdouble tstart = gfs_clock_elapsed (domain->timer);
@@ -492,22 +490,18 @@ static void simulation_run (GfsSimulation * sim)
 				(FttFaceTraverseFunc) gfs_face_interpolated_normal_velocity,
 				sim->u0);
     }
-    else {
+    else
       gfs_predicted_face_velocities (domain, FTT_DIMENSION, &sim->advection_params);
-     
-      gfs_variables_swap (p, pmac);
-      gfs_mac_projection (domain,
+      
+    gfs_variables_swap (p, pmac);
+    gfs_mac_projection (domain,
     			&sim->projection_params, 
     			sim->advection_params.dt/2.,
 			p, sim->physical_params.alpha, gmac, NULL);
-      gfs_variables_swap (p, pmac);
-
-    }
-
+    gfs_variables_swap (p, pmac);
 
     gts_container_foreach (GTS_CONTAINER (sim->events), (GtsFunc) gfs_event_half_do, sim);
 
- 
     gfs_centered_velocity_advection_diffusion (domain,
 					       FTT_DIMENSION,
 					       &sim->advection_params,
@@ -565,11 +559,11 @@ static gdouble simulation_cfl (GfsSimulation * sim)
     GfsVariable * v = i->data;
 
     if (GFS_IS_VARIABLE_TRACER (v) && 
-	GFS_VARIABLE_TRACER (v)->advection.scheme != GFS_NONE &&
-	gts_vector_norm (GFS_VARIABLE_TRACER (v)->advection.sink) > 0.) {
-      gfs_add_sinking_velocity (GFS_DOMAIN (sim), GFS_VARIABLE_TRACER (v)->advection.sink);
+ 	GFS_VARIABLE_TRACER (v)->advection.scheme != GFS_NONE &&
+	GFS_VARIABLE_TRACER (v)->advection.sink[0]) {
+      gfs_add_sinking_velocity (GFS_DOMAIN (sim), &GFS_VARIABLE_TRACER (v)->advection);
       gdouble cfl = gfs_domain_cfl (GFS_DOMAIN (sim), FTT_TRAVERSE_LEAFS, -1);
-      gfs_remove_sinking_velocity (GFS_DOMAIN (sim), GFS_VARIABLE_TRACER (v)->advection.sink);
+      gfs_remove_sinking_velocity (GFS_DOMAIN (sim), &GFS_VARIABLE_TRACER (v)->advection);
       if (cfl < cflmin)
 	cflmin = cfl;
     }
@@ -1388,50 +1382,6 @@ static void write_edge (GtsGEdge * edge, FILE * fp)
 }
 #endif /* HAVE_MPI */
 
-void  gfs_remove_particles_not_in_domain(GfsEvent * event, GfsEventList *elist)
-{
- 
-  GfsSimulation *sim = gfs_object_simulation(elist);
-  GfsDomain *domain = GFS_DOMAIN(sim);
-
-  GfsParticle *p = GFS_PARTICLE(event);  
-  FttCell * cell = gfs_domain_locate(domain, p->pos, -1, NULL);
- 
-  if(cell==NULL){   
-       gts_container_remove(GTS_CONTAINER(GFS_EVENT_LIST(elist)->list),GTS_CONTAINEE(event));    
-       gts_object_destroy(GTS_OBJECT(event));
-  }
- 
-}
-
-void  gfs_collect_objects_in_rank_zero(GfsEventList *l, GfsSimulation *sim)
-{
-#ifdef HAVE_MPI  
-  int rank;
-  MPI_Comm_rank(MPI_COMM_WORLD,&rank);
-  int comm_size;
-  MPI_Comm_size (MPI_COMM_WORLD, &comm_size); 
-  GfsDomain *domain = GFS_DOMAIN(sim);
-  if(rank>0){
-    GfsRequest * request = gfs_send_objects(l->list->items,0);
-    gfs_wait(request);
-  }
-  else{
-    int src;
-    for(src = 1; src < comm_size; src++){
-      GSList *list = gfs_receive_objects (domain, src);
-      while(list){
-	GtsObject * object = (GtsObject *)(list->data);
-	GfsEvent * event = GFS_EVENT (l);
-	gfs_event_set (GFS_EVENT (object),
-		       event->start, event->end, event->step, event->istart, event->iend, event->istep);
-	gts_container_add(GTS_CONTAINER(l->list),GTS_CONTAINEE(object));
-	list = list->next;
-      }
-    }
-  }
-#endif /* HAVE_MPI */
-}
 /**
  * gfs_simulation_union_write:
  * @sim: a #GfsSimulation.
@@ -1456,21 +1406,6 @@ void gfs_simulation_union_write (GfsSimulation * sim,
     gfs_simulation_write (sim, max_depth, fp);
   else {
 #ifdef HAVE_MPI
-    GSList * ilist = sim->events->items;
-    GSList * plist = NULL;
-    while (ilist) {
-      if(GFS_IS_EVENT_LIST (ilist->data)){
-	GfsEventList *el = GFS_EVENT_LIST (ilist->data);
-	GtsObject * object = gts_object_new (el->klass);
-	if(GFS_IS_PARTICLE(object)){ 	
-	  gfs_collect_objects_in_rank_zero(el, sim);
-	  plist = g_slist_append(plist, el); 
-	}
-	gts_object_destroy (object);
-      }
-      ilist = ilist->next;
-    }
-
     int gsize;
     guint * nbox;
 
@@ -1521,15 +1456,6 @@ void gfs_simulation_union_write (GfsSimulation * sim,
     gfs_union_close (fp, domain->pid, &uf);
 
     gts_container_foreach (GTS_CONTAINER (g), (GtsFunc) gts_object_reset_reserved, NULL);
-
-    ilist = plist;
-    while(ilist){
-      GfsEventList *el = GFS_EVENT_LIST (ilist->data);
-      gts_container_foreach (GTS_CONTAINER (el->list), (GtsFunc)gfs_remove_particles_not_in_domain, el);
-      plist = g_slist_remove(plist, el);
-      ilist = ilist->next;
-    }
-    g_slist_free(plist);
 #endif /* HAVE_MPI */
   }
 }
@@ -2414,3 +2340,31 @@ GfsSimulationClass * gfs_axi_class (void)
 }
 
 /** \endobject{GfsAxi} */
+
+/**
+ * The axisymmetric advection solver.
+ * \beginobject{GfsAdvectionAxi}
+ */
+
+GfsSimulationClass * gfs_advection_axi_class (void)
+{
+  static GfsSimulationClass * klass = NULL;
+
+  if (klass == NULL) {
+    GtsObjectClassInfo gfs_advection_axi_info = {
+      "GfsAdvectionAxi",
+      sizeof (GfsSimulation),
+      sizeof (GfsSimulationClass),
+      (GtsObjectClassInitFunc) gfs_advection_class_init,
+      (GtsObjectInitFunc) NULL,
+      (GtsArgSetFunc) NULL,
+      (GtsArgGetFunc) NULL
+    };
+    klass = gts_object_class_new (GTS_OBJECT_CLASS (gfs_axi_class ()),
+				  &gfs_advection_axi_info);
+  }
+
+  return klass;
+}
+
+/** \endobject{GfsAdvectionAxi} */

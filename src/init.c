@@ -30,6 +30,7 @@
 #include "config.h"
 
 #ifdef HAVE_FENV_H
+# define _GNU_SOURCE
 # include <fenv.h>
 # ifdef FE_NOMASK_ENV
 #  ifdef FE_DIVBYZERO
@@ -131,6 +132,7 @@ GtsObjectClass ** gfs_classes (void)
       gfs_poisson_class (),
       gfs_simulation_moving_class (),
       gfs_axi_class (),
+        gfs_advection_axi_class (),
       gfs_wave_class (),
       gfs_river_class (),
     gfs_domain_projection_class (),
@@ -171,10 +173,8 @@ GtsObjectClass ** gfs_classes (void)
           gfs_variable_tracer_vof_height_class (),
       gfs_variable_residual_class (),
       gfs_variable_filtered_class (),
-      gfs_variable_wavelet_class (),
       gfs_variable_diagonal_class (),
       gfs_variable_function_class (),
-      gfs_variable_derivative_class (),
 #if FTT_2D
         gfs_variable_stream_function_class (),
 #endif /* FTT_2D */
@@ -219,7 +219,6 @@ GtsObjectClass ** gfs_classes (void)
       gfs_adapt_thickness_class (),
       gfs_adapt_gradient_class (),
         gfs_adapt_error_class (),
-      gfs_adapt_hessian_extrapolation_class  (),
 
     gfs_event_sum_class (),
       gfs_event_sum_direction_class (),
@@ -276,7 +275,6 @@ GtsObjectClass ** gfs_classes (void)
         gfs_output_scalar_maxima_class (),
         gfs_output_scalar_histogram_class (),
         gfs_output_droplet_sums_class (),
-        gfs_output_interface_class (),
         gfs_output_error_norm_class (),
           gfs_output_correlation_class (),
 	gfs_output_squares_class (),

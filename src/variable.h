@@ -150,26 +150,6 @@ struct _GfsVariableFiltered {
 
 GfsVariableClass * gfs_variable_filtered_class  (void);
 
-/* GfsVariableWavelet: header */
-
-typedef struct _GfsVariableWavelet                GfsVariableWavelet;
-
-struct _GfsVariableWavelet {
-  /*< private >*/
-  GfsVariable parent;
-
-  /*< public >*/
-  GfsVariable * v;
-};
-
-#define GFS_VARIABLE_WAVELET(obj)            GTS_OBJECT_CAST (obj,\
-					           GfsVariableWavelet,\
-					           gfs_variable_wavelet_class ())
-#define GFS_IS_VARIABLE_WAVELET(obj)         (gts_object_is_from_class (obj,\
-					     gfs_variable_wavelet_class ()))
-
-GfsVariableClass * gfs_variable_wavelet_class  (void);
-
 /* GfsVariableDiagonal: Header */
 
 GfsVariableClass * gfs_variable_diagonal_class  (void);
@@ -343,27 +323,6 @@ struct _GfsHydrostaticPressure {
 GfsVariableClass * gfs_hydrostatic_pressure_class  (void);
 void               gfs_hydrostatic_pressure_update (GfsHydrostaticPressure * p, 
 						    GfsFunction * alpha);
-
-/* GfsVariableDerivative: header */
-
-typedef struct _GfsVariableDerivative                GfsVariableDerivative;
-
-struct _GfsVariableDerivative {
-  /*< private >*/
-  GfsVariable parent;
-  GfsVariable * vold;
-
-  /*< public >*/
-  GfsVariable * v;
-};
-
-#define GFS_VARIABLE_DERIVATIVE(obj)            GTS_OBJECT_CAST (obj,\
-                                                   GfsVariableDerivative,\
-                                                   gfs_variable_derivative_class ())
-#define GFS_IS_VARIABLE_DERIVATIVE(obj)         (gts_object_is_from_class (obj,\
-                                             gfs_variable_derivative_class ()))
-
-GfsVariableClass * gfs_variable_derivative_class  (void);
 
 #ifdef __cplusplus
 }

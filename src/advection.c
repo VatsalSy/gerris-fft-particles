@@ -144,12 +144,7 @@ static gdouble interpolate_1D1 (const FttCell * cell,
   dleft = FTT_OPPOSITE_DIRECTION (dright);
   n = ftt_cell_neighbor (cell, dup);
   s = GFS_STATE (cell);
-  gdouble s2;
   if (n && !GFS_CELL_IS_BOUNDARY (n)) {
-    if (FTT_CELL_IS_LEAF (n)) 
-      s2 = GFS_IS_MIXED (n) ? GFS_STATE (n)->solid->s[dleft] : 1.;
-    else
-	s2 = GFS_IS_MIXED (n) ? GFS_STATE (n)->solid->s[dleft]/2. : 0.5;
     gdouble s1 = s->solid ? s->solid->s[dleft] : 1., s2;
     gdouble v1 = s->f[dleft].v, v2;
 
@@ -159,6 +154,7 @@ static gdouble interpolate_1D1 (const FttCell * cell,
 
     if (FTT_CELL_IS_LEAF (n)) {
       v2 = GFS_STATE (n)->f[dleft].v;
+      s2 = GFS_IS_MIXED (n) ? GFS_STATE (n)->solid->s[dleft] : 1.;
     }
     else {
       FttDirection d[FTT_DIMENSION];
@@ -168,6 +164,7 @@ static gdouble interpolate_1D1 (const FttCell * cell,
       n = ftt_cell_child_corner (n, d);
       if (n) {
 	v2 = GFS_STATE (n)->f[dleft].v;
+	s2 = GFS_IS_MIXED (n) ? GFS_STATE (n)->solid->s[dleft]/2. : 0.5;
       }
       else
 	s2 = v2 = 0.;
@@ -417,7 +414,7 @@ void gfs_face_velocity_advection_flux (const FttCellFace * face,
     flux *= gfs_face_upwinded_value (face, par->upwinding, par->u)
       /* pressure correction */
       - gfs_face_interpolated_value (face, par->g[c]->i)*par->dt/2.;
-#endif*/
+#endif
   if (!FTT_FACE_DIRECT (face))
     flux = - flux;
   GFS_VALUE (face->cell, par->fv) -= flux;
@@ -912,8 +909,23 @@ void gfs_advection_params_write (GfsAdvectionParams * par, FILE * fp)
   }
   if (par->moving_order != 1)
     fputs ("  moving_order = 2\n", fp);
-  if (gts_vector_norm (par->sink) > 0.)
-    fprintf (fp, "  vx = %g vy = %g vz = %g\n", par->sink[0], par->sink[1], par->sink[2]);
+  if (par->sink[0]) {
+    fputs ("  vx = ", fp);
+    gfs_function_write (par->sink[0], fp);
+    fputs ("\n", fp);
+  }
+  if (par->sink[1]) {
+    fputs ("  vy = ", fp);
+    gfs_function_write (par->sink[1], fp);
+    fputs ("\n", fp);
+  }
+#if (!FTT_2D)
+  if (par->sink[2]) {
+    fputs ("  vz = ", fp);
+    gfs_function_write (par->sink[2], fp);
+    fputs ("\n", fp);
+  }
+#endif
   if (par->linear)
     fputs ("  linear = 1\n", fp);
   fputc ('}', fp);
@@ -936,7 +948,6 @@ void gfs_advection_params_init (GfsAdvectionParams * par)
   par->gc = TRUE;
   par->update = (GfsMergedTraverseFunc) gfs_advection_update;
   par->moving_order = 1;
-  par->sink[0] = par->sink[1] = par->sink[2] = 0.;
   par->linear = FALSE;
   par->diffusion_solve = gfs_diffusion;
 }
@@ -951,6 +962,17 @@ void gfs_advection_params_read (GfsAdvectionParams * par, GtsFile * fp)
   g_return_if_fail (par != NULL);
   g_return_if_fail (fp != NULL);
 
+  if (par->v) {
+    GfsDomain * domain = par->v->domain;
+    FttComponent c;
+    for( c = 0; c < FTT_DIMENSION; c++)
+      if (!par->sink[c]) {
+	par->sink[c] = gfs_function_new (gfs_function_class (), 0.);
+	gfs_function_set_units (par->sink[c], 1.);
+	gfs_object_simulation_set (par->sink[c], domain);
+      }
+  }
+
   gchar * gradient = NULL, * flux = NULL, * scheme = NULL;
   GtsFileVariable var[] = {
     {GTS_DOUBLE, "cfl",          TRUE, &par->cfl},
@@ -960,14 +982,32 @@ void gfs_advection_params_read (GfsAdvectionParams * par, GtsFile * fp)
     {GTS_INT,    "average",      TRUE, &par->average},
     {GTS_INT,    "gc",           TRUE, &par->gc},
     {GTS_UINT,   "moving_order", TRUE, &par->moving_order},
-    {GTS_DOUBLE, "vx",           TRUE, &par->sink[0]},
-    {GTS_DOUBLE, "vy",           TRUE, &par->sink[1]},
-    {GTS_DOUBLE, "vz",           TRUE, &par->sink[2]},
+    {GTS_OBJ,    "vx",           TRUE, &par->sink[0]},
+    {GTS_OBJ,    "vy",           TRUE, &par->sink[1]},
+#if (!FTT_2D)
+    {GTS_OBJ,    "vz",           TRUE, &par->sink[2]},
+#endif /* 3D */
     {GTS_INT,    "linear",       TRUE, &par->linear},
     {GTS_NONE}
   };
 
   gts_file_assign_variables (fp, var);
+
+  if (par->v) {
+    FttComponent c;
+    for (c = 0; c < FTT_DIMENSION; c++)
+      if (!var[7+c].set) {
+	gts_object_destroy (GTS_OBJECT (par->sink[c]));
+	par->sink[c] = NULL;
+      }
+#if FTT_2D
+    if ((var[7].set + var[8].set) % 2)
+      gts_file_error (fp, "either vx or vy must be set");
+#else
+    if ((var[7].set + var[8].set + var[9].set) % 3)
+      gts_file_error (fp, "either vx, vy or vz must be set");
+#endif
+  }
 
   if (fp->type != GTS_ERROR && par->cfl <= 0.)
     gts_file_variable_error (fp, var, "cfl", "cfl must be strictly positive");

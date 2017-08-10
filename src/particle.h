@@ -15,26 +15,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
- * Edited by Vatsal Sanjay 9/08 @ 22:50 hours
  */
 
 #ifndef __PARTICLE_H__
 #define __PARTICLE_H__
 
-#ifdef __cplusplus // if this is C++ compiler
-extern "C" { // force C compiler
+#ifdef __cplusplus
+extern "C" {
 #endif /* __cplusplus */
 
 #include "event.h"
 
-/* Particle: header -- definitions */
+/* Particle: header */
 
 typedef struct _GfsParticle GfsParticle;
 
 struct _GfsParticle {
   GfsEvent parent;
   FttVector pos;
-  FttVector pos_old;
   guint id;
 };
 
@@ -46,7 +44,7 @@ struct _GfsParticle {
 
 GfsEventClass * gfs_particle_class  (void);
 
-#ifdef __cplusplus /* if this is C++ compiler */
+#ifdef __cplusplus
 }
 #endif /* __cplusplus */
 

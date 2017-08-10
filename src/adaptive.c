@@ -528,8 +528,8 @@ static gboolean gfs_adapt_gradient_event (GfsEvent * event,
       gfs_domain_cell_traverse (GFS_DOMAIN (sim),
 				FTT_POST_ORDER, FTT_TRAVERSE_NON_LEAFS, -1,
 				(FttCellTraverseFunc) a->v->fine_coarse, a->v);
-      gfs_domain_bc (GFS_DOMAIN (sim), FTT_TRAVERSE_ALL, -1, a->v);
     }
+    gfs_domain_bc (GFS_DOMAIN (sim), FTT_TRAVERSE_ALL, -1, a->v);
     return TRUE;
   }
   return FALSE;
@@ -591,46 +591,92 @@ GfsEventClass * gfs_adapt_gradient_class (void)
  * \beginobject{GfsAdaptError}
  */
 
-static gdouble cost_error (FttCell * cell, GfsAdaptGradient * a)
+static void gfs_adapt_error_destroy (GtsObject * o)
 {
-  GfsVariable * v = a->v;
-  if (GFS_VALUE (cell, v) == GFS_NODATA)
-    return 0.;
-  FttCell * parent = ftt_cell_parent (cell);
-  if (!parent)
-    return 1.;
+  if (GFS_ADAPT_ERROR (o)->v != GFS_ADAPT (o)->c)
+    gts_object_destroy (GTS_OBJECT (GFS_ADAPT_ERROR (o)->v));
 
-  /* corner values for @cell and its @parent */
-  guint level = ftt_cell_level (parent);
-  gdouble fp[4*(FTT_DIMENSION - 1) + 1];
-  gfs_cell_corner_values (parent, v, level, fp);
-  gdouble f[4*(FTT_DIMENSION - 1) + 1];
-  gfs_cell_corner_values (cell, v, level + 1, f);
+  (* GTS_OBJECT_CLASS (gfs_adapt_error_class ())->parent_class->destroy) (o);
+}
 
-  /* the "interpolation error" is the maximum over the cell of the
-     difference between values interpolated at the level of @cell and
-     interpolated at the level of its @parent */
-  FttVector p;
-  ftt_cell_pos (cell, &p);
-  /* interpolate at the center of the cell... */
-  gdouble max = fabs (gfs_interpolate_from_corners (parent, p, fp) - GFS_VALUE (cell, v));
-  /* ... and at each corner */
-  gdouble h = ftt_cell_size (cell)/2.;
-#if FTT_2D
-  int k = 0;
-#else /* 3D */
-  for (int k = -1; k <= 1; k += 2)
-#endif /* 3D */
-    for (int i = -1; i <= 1; i += 2)
-      for (int j = -1; j <= 1; j += 2) {
-	FttVector p1 = p;
-	p1.x += h*i; p1.y += h*j; p1.z += h*k;
-	gdouble e = fabs (gfs_interpolate_from_corners (parent, p1, fp) -
-			  gfs_interpolate_from_corners (cell, p1, f));
-	if (e > max) max = e;
-      }
+static void gfs_adapt_error_read (GtsObject ** o, GtsFile * fp)
+{
+  (* GTS_OBJECT_CLASS (gfs_adapt_error_class ())->parent_class->read) (o, fp);
+  if (fp->type == GTS_ERROR)
+    return;
 
-  return a->dimension*max/4.;
+  GFS_ADAPT_ERROR (*o)->v = GFS_ADAPT (*o)->c ? GFS_ADAPT (*o)->c :
+    gfs_temporary_variable (GFS_DOMAIN (gfs_object_simulation (*o)));
+  GFS_ADAPT_ERROR (*o)->v->coarse_fine = none;
+  GFS_ADAPT_ERROR (*o)->v->fine_coarse = none;
+}
+
+static void compute_gradient (FttCell * cell, GfsAdaptError * a)
+{
+  GFS_VALUE (cell, a->dv[a->c]) = gfs_center_regular_gradient (cell, a->c, 
+							       GFS_ADAPT_GRADIENT (a)->v);
+}
+
+static void add_hessian_norm (FttCell * cell, GfsAdaptError * a)
+{
+  /* off-diagonal */
+  FttComponent j;
+  for (j = 0; j < FTT_DIMENSION; j++)
+    if (j != a->c) {
+      gdouble g = gfs_center_regular_gradient (cell, j, a->dv[a->c]);
+      GFS_VALUE (cell, a->v) += g*g;
+    }
+  /* diagonal */
+  gdouble g = gfs_center_regular_2nd_derivative (cell, a->c, GFS_ADAPT_GRADIENT (a)->v);
+  GFS_VALUE (cell, a->v) += g*g;
+}
+
+static void scale (FttCell * cell, GfsAdaptError * a)
+{
+  GFS_VALUE (cell, a->v) = sqrt (GFS_VALUE (cell, a->v))/8.*GFS_ADAPT_GRADIENT (a)->dimension;
+}
+
+static gboolean gfs_adapt_error_event (GfsEvent * event, 
+				       GfsSimulation * sim)
+{
+  if ((* GFS_EVENT_CLASS (GTS_OBJECT_CLASS (gfs_adapt_error_class ())->parent_class)->event) 
+      (event, sim)) {
+    GfsAdaptError * a = GFS_ADAPT_ERROR (event);
+    GfsDomain * domain = GFS_DOMAIN (sim);
+
+    gfs_domain_bc (domain, FTT_TRAVERSE_ALL, -1,  GFS_ADAPT_GRADIENT (a)->v);
+    gfs_domain_cell_traverse (domain, FTT_PRE_ORDER, FTT_TRAVERSE_ALL, -1,
+			      (FttCellTraverseFunc) gfs_cell_reset, a->v);
+    for (a->c = 0; a->c < FTT_DIMENSION; a->c++) {
+      a->dv[a->c] = gfs_temporary_variable (domain);
+      gfs_domain_cell_traverse (domain, FTT_PRE_ORDER, FTT_TRAVERSE_ALL, -1,
+				(FttCellTraverseFunc) compute_gradient, a);
+    }
+    gfs_variable_set_vector (a->dv, FTT_DIMENSION);
+    for (a->c = 0; a->c < FTT_DIMENSION; a->c++) {
+      gfs_domain_bc (domain, FTT_TRAVERSE_ALL, -1, a->dv[a->c]);
+      gfs_domain_cell_traverse (domain, FTT_PRE_ORDER, FTT_TRAVERSE_ALL, -1,
+				(FttCellTraverseFunc) add_hessian_norm, a);
+    }
+    gfs_domain_cell_traverse (domain, FTT_PRE_ORDER, FTT_TRAVERSE_ALL, -1,
+			      (FttCellTraverseFunc) scale, a);
+    for (a->c = 0; a->c < FTT_DIMENSION; a->c++)
+      gts_object_destroy (GTS_OBJECT (a->dv[a->c]));
+    return TRUE;
+  }
+  return FALSE;
+}
+
+static void gfs_adapt_error_class_init (GfsEventClass * klass)
+{
+  GTS_OBJECT_CLASS (klass)->destroy = gfs_adapt_error_destroy;
+  GTS_OBJECT_CLASS (klass)->read = gfs_adapt_error_read;
+  GFS_EVENT_CLASS (klass)->event = gfs_adapt_error_event;
+}
+
+static gdouble cost_error (FttCell * cell, GfsAdaptError * a)
+{
+  return GFS_VALUE (cell, a->v);
 }
 
 static void gfs_adapt_error_init (GfsAdapt * object)
@@ -644,16 +690,17 @@ GfsEventClass * gfs_adapt_error_class (void)
   static GfsEventClass * klass = NULL;
 
   if (klass == NULL) {
-    GtsObjectClassInfo info = {
+    GtsObjectClassInfo gfs_adapt_error_info = {
       "GfsAdaptError",
-      sizeof (GfsAdaptGradient),
+      sizeof (GfsAdaptError),
       sizeof (GfsEventClass),
-      (GtsObjectClassInitFunc) NULL,
+      (GtsObjectClassInitFunc) gfs_adapt_error_class_init,
       (GtsObjectInitFunc) gfs_adapt_error_init,
       (GtsArgSetFunc) NULL,
       (GtsArgGetFunc) NULL
     };
-    klass = gts_object_class_new (GTS_OBJECT_CLASS (gfs_adapt_gradient_class ()), &info);
+    klass = gts_object_class_new (GTS_OBJECT_CLASS (gfs_adapt_gradient_class ()),
+				  &gfs_adapt_error_info);
   }
 
   return klass;
@@ -785,201 +832,6 @@ GfsEventClass * gfs_adapt_thickness_class (void)
 }
 
 /** \endobject{GfsAdaptThickness} */
-
-/**
- * Adapting cells depending on the local hessian_extrapolation.
- * \beginobject{GfsAdaptHessianExtrapolation}
- */
-
-static void gfs_adapt_hessian_extrapolation_destroy (GtsObject * o)
-{
-  if (GFS_ADAPT_HESSIAN_EXTRAPOLATION (o)->v && !gfs_function_get_variable (GFS_ADAPT_FUNCTION (o)->f))
-    gts_object_destroy (GTS_OBJECT (GFS_ADAPT_HESSIAN_EXTRAPOLATION (o)->v));
-
-//  gts_object_destroy (GTS_OBJECT (GFS_ADAPT_HESSIAN_EXTRAPOLATION (o)->error));
-
-  (* GTS_OBJECT_CLASS (gfs_adapt_hessian_extrapolation_class ())->parent_class->destroy) (o);
-}
-
-static void gfs_adapt_hessian_extrapolation_read (GtsObject ** o, GtsFile * fp)
-{
-  (* GTS_OBJECT_CLASS (gfs_adapt_hessian_extrapolation_class ())->parent_class->read) (o, fp);
-  if (fp->type == GTS_ERROR)
-    return;
-
-  GfsAdaptHessianExtrapolation * a = GFS_ADAPT_HESSIAN_EXTRAPOLATION (*o);
-  GfsDomain * domain = GFS_DOMAIN (gfs_object_simulation (*o));
-  a->v = gfs_function_get_variable (GFS_ADAPT_FUNCTION (a)->f);
-  if (a->v == NULL)
-    a->v = gfs_temporary_variable (domain);
-
-  gchar * variable = NULL;
-  GtsFileVariable var[] = {
-    {GTS_STRING, "v",     TRUE, &variable},
-    {GTS_DOUBLE, "norm",  TRUE, &a->norm},
-    {GTS_INT,    "n",     TRUE, &a->np},
-    {GTS_NONE}
-  };
-
-  gts_file_assign_variables (fp, var);
-
-  if (variable)
-     a->error = gfs_domain_get_or_add_variable (domain, variable, "Hessian extrapolation Error");
-  else
-     a->error = gfs_temporary_variable(domain); 
-  a->error->fine_coarse = none;
-  a->error->coarse_fine = none;
-}
-
-static void gfs_adapt_hessian_extrapolation_write (GtsObject * o, FILE * fp)
-{
-  if (GTS_OBJECT_CLASS (gfs_adapt_hessian_extrapolation_class ())->parent_class->write)
-    (* GTS_OBJECT_CLASS (gfs_adapt_hessian_extrapolation_class ())->parent_class->write) 
-      (o, fp);
-  GfsAdaptHessianExtrapolation * a = GFS_ADAPT_HESSIAN_EXTRAPOLATION (o);
-  fprintf (fp, " { n = %i norm = %g ", a->np, a->norm);
-  if (a->error->name == NULL)
-    fputs (" }", fp);
-  else
-    fprintf (fp, " v = %s }", a->error->name);
-}
-
-typedef struct {
-  GfsAdaptHessianExtrapolation * a;
-  gdouble * values;
-} FitErrorData;
-
-static void init_function_vble (FttCell * cell, GfsAdaptHessianExtrapolation * a)
-{
-  GFS_VALUE (cell, a->v) = gfs_function_value ( GFS_ADAPT_FUNCTION(a)->f, cell);
-}
-
-static void fit_error (FttCell * cell, FitErrorData * fed)
-{
-   FttCell * parent = ftt_cell_parent (cell);
-   gint i = 0;
-   FttVector p;
-   ftt_cell_pos (cell, &p);
-   gdouble f[4*(FTT_DIMENSION - 1) + 1];
-   gdouble a,b;
-
-   while (i < fed->a->np && parent) {
-     gfs_cell_corner_values (parent, fed->a->v, ftt_cell_level (parent), f);
-     fed->values[i] = log(fabs(gfs_interpolate_from_corners (parent, p, f) - GFS_VALUE(cell,fed->a->v)) + 1.e-20);
-     parent = ftt_cell_parent (parent);
-     i++;
-   }
-   gint nfits = i;
-
-   if (nfits == 0) {
-      GFS_VALUE(cell,fed->a->error) = 1.;
-      return;
-   }
-   else if (nfits == 1) {
-      b = - 2.*log(2);
-      a = fed->values[0] - b*(ftt_cell_level(cell)-1);
-   }
-   else {
-      /*LSQ fitting*/
-      gdouble xavg = 0., yavg = 0., x2 = 0., xy = 0., xcoord;
-      for (i=0; i < nfits; i++) {
-        xcoord = ftt_cell_level(cell) - i - 1;
-        xavg += xcoord;
-        x2   += pow(xcoord, 2);
-        yavg += fed->values[i];
-        xy   += xcoord*fed->values[i];
-      }
-      xavg /= nfits;
-      yavg /= nfits;
-      b = xy - nfits*xavg*yavg;
-      a = yavg - b*xavg;
-   }
-
-   parent = cell;      
-   while (parent) {
-    GFS_VALUE(parent,fed->a->error) = exp(a + b*ftt_cell_level(parent));
-    parent = ftt_cell_parent (parent);
-   }
-
-}
-
-static gboolean gfs_adapt_hessian_extrapolation_event (GfsEvent * event, 
-					   GfsSimulation * sim)
-{
-  if ((* GFS_EVENT_CLASS (GTS_OBJECT_CLASS (gfs_adapt_hessian_extrapolation_class ())->parent_class)->event) 
-      (event, sim)) {
-    GfsAdaptHessianExtrapolation * a = GFS_ADAPT_HESSIAN_EXTRAPOLATION (event);
-    GfsDomain * domain = GFS_DOMAIN(sim);
-    
-    FitErrorData fed;
-    fed.a = a;
-
-    a->v = gfs_function_get_variable (GFS_ADAPT_FUNCTION (event)->f);
-    if (!a->v) {
-      gfs_catch_floating_point_exceptions ();
-      gfs_domain_cell_traverse (domain,
-          FTT_POST_ORDER, FTT_TRAVERSE_ALL, -1,
-          (FttCellTraverseFunc) init_function_vble, a);
-    } 
-    gfs_domain_bc (domain, FTT_TRAVERSE_ALL, -1, a->v);
-
-    fed.values = g_malloc0 ( a->np * sizeof(gdouble));
-    gfs_domain_cell_traverse (domain,
-        FTT_POST_ORDER, FTT_TRAVERSE_LEAFS, -1,
-        (FttCellTraverseFunc) fit_error, &fed);
-    g_free(fed.values);
-
-    gfs_domain_bc (domain, FTT_TRAVERSE_ALL, -1, a->error);
-
-    
-    return TRUE;
-  }
-  return FALSE;
-}
-
-static void gfs_adapt_hessian_extrapolation_class_init (GfsEventClass * klass)
-{
-  GTS_OBJECT_CLASS (klass)->destroy = gfs_adapt_hessian_extrapolation_destroy;
-  GTS_OBJECT_CLASS (klass)->read = gfs_adapt_hessian_extrapolation_read;
-  GTS_OBJECT_CLASS (klass)->write = gfs_adapt_hessian_extrapolation_write;
-  GFS_EVENT_CLASS (klass)->event = gfs_adapt_hessian_extrapolation_event;
-}
-
-static gdouble cost_hessian_extrapolation (FttCell * cell, GfsAdaptHessianExtrapolation * a)
-{
-  return GFS_VALUE(cell,a->error)*pow(ftt_cell_volume (cell), a->norm);
-}
-
-static void gfs_adapt_hessian_extrapolation_init (GfsAdaptHessianExtrapolation * object)
-{
-  GFS_ADAPT (object)->cost = (GtsKeyFunc) cost_hessian_extrapolation;
-  GFS_ADAPT_HESSIAN_EXTRAPOLATION(object)->np = 1;
-  GFS_ADAPT_HESSIAN_EXTRAPOLATION(object)->norm = 1.;
-}
-
-GfsEventClass * gfs_adapt_hessian_extrapolation_class (void)
-{
-  static GfsEventClass * klass = NULL;
-
-  if (klass == NULL) {
-    GtsObjectClassInfo gfs_adapt_hessian_extrapolation_info = {
-      "GfsAdaptHessianExtrapolation",
-      sizeof (GfsAdaptHessianExtrapolation),
-      sizeof (GfsEventClass),
-      (GtsObjectClassInitFunc) gfs_adapt_hessian_extrapolation_class_init,
-      (GtsObjectInitFunc) gfs_adapt_hessian_extrapolation_init,
-      (GtsArgSetFunc) NULL,
-      (GtsArgGetFunc) NULL
-    };
-    klass = gts_object_class_new (GTS_OBJECT_CLASS (gfs_adapt_function_class ()),
-				  &gfs_adapt_hessian_extrapolation_info);
-  }
-
-  return klass;
-}
-
-/** \endobject{GfsAdaptHessianExtrapolation} */
-
 
 static void refine_cell_corner (FttCell * cell, GfsDomain * domain)
 {

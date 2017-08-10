@@ -133,8 +133,6 @@ gdouble            gfs_function_face_value  (GfsFunction * f,
 					     FttCellFace * fa);
 gdouble            gfs_function_value       (GfsFunction * f,
 					     FttCell * cell);
-gdouble            gfs_function_pos         (GfsFunction * f,
-					     FttVector p);
 void               gfs_function_set_constant_value (GfsFunction * f, 
 						    gdouble val);
 gdouble            gfs_function_get_constant_value (GfsFunction * f);
@@ -256,6 +254,7 @@ gboolean           gfs_read_function_vector (GtsFile * fp,
 					     GfsVariable * vector[FTT_DIMENSION], 
 					     GfsFunction * function[FTT_DIMENSION],
 					     gpointer sim);
+
 /* The code below redefines the g_assert() macros so that they behave
    consistently between Glib versions. In particular, we want to be
    able to add error handlers.  */
