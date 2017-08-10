@@ -1,0 +1,2876 @@
+pristine:0000001946-06f41d656e0bf3b85be025213055cb4979f16cb19270f10245a86b1d40aac02f
+Starting with inventory:
+0000359978-e180b5d6350027fe834c8481b2004c32eccd420be90da71e9d2bb9feb5e12154
+[TAG 2011-02-09
+Stephane Popinet <s.popinet@niwa.co.nz>**20110210051344
+ Ignore-this: f1dc9625a985419611d86968c3ca3b29
+] 
+hash: 0000003075-3288188e41fc37b25744a7e58bef8f68cb44424b3e8184dbb7ba65bf744639d1
+[OutputTime uses a global real and cpu timer
+Stephane Popinet <popinet@users.sf.net>**20110212133942
+ Ignore-this: a32941b3bddd2ad581441f0f9957a107
+] 
+hash: 0000002338-732f9779a7126aaf2913a07f89bb2da195513cf164cc371508d200e29df0d1d5
+[Adaptivity can be used within GfsPoisson
+Stephane Popinet <s.popinet@niwa.co.nz>**20110212134203
+ Ignore-this: 12af77d578e76637d94f4b27714d4b8
+] 
+hash: 0000003249-183e1a0f272f38e8a05445776067491698b91402b774e5308a742f62b3d99519
+[Updated Poisson test cases references
+Stephane Popinet <s.popinet@niwa.co.nz>**20110212143220
+ Ignore-this: 93bd96a90990c2b0b2d7e891ece6655e
+] 
+hash: 0000005823-7805558a0006c6c4c116795a07cf8ec880ab74f9f0db0911838e0b3ea5e557d3
+[gfs_get_poisson_problem() does not construct stencils for boundary values (experimental)
+Stephane Popinet <popinet@users.sf.net>**20110212235530
+ Ignore-this: eb2c8295c741baf7fb9a17f0d3b20133
+ 
+ This reduces the size of the system, increases the minimum degree of
+ each row and leads to better convergence of hypre solvers in all cases
+ tested so far. Including convergence for some previously pathological
+ cases. It also simplifies the code.
+] 
+hash: 0000017379-51642f3ccff76e78670ea5137db447e41aa52880db839fa7532633e43c023280
+[New lis module for Poisson solution
+Stephane Popinet <s.popinet@niwa.co.nz>**20110316082443
+ Ignore-this: 34632b4fb76fad2132828407842f8204
+] 
+hash: 0000006805-cb64941ba0b108e8f0e9d21146f1fbde21152d5fa64f2fd4db65a55645948241
+[New agmg Poisson solver module
+Stephane Popinet <s.popinet@niwa.co.nz>**20110316215816
+ Ignore-this: 109a5c8305a5e5a5a1c6213901a9c570
+] 
+hash: 0000079599-fb511d3c3a3c6839d0b665efa0b2c2258d378cf5fc1fd238bc210ebdc9a42315
+[Removed warning message from AGMG
+Stephane Popinet <s.popinet@niwa.co.nz>**20110316215829
+ Ignore-this: f798be49be60f0664e3ef314e8d08ac2
+] 
+hash: 0000001532-0c50940c41a9027ef72cc5a2797d7a1afe327af595b8a4a80c09329f3590a4a9
+[Added configuration summary
+Stephane Popinet <s.popinet@niwa.co.nz>**20110318222319
+ Ignore-this: b65f28fd8fd19e9a69b04b8d2056ad49
+] 
+hash: 0000040466-8b5f57b6136778ad1ab30e2b2e1a5bdc8ba9348537e678ddd96a2b307d924670
+[Simplified tolerance criterion for hypre, lis and agmg
+Stephane Popinet <s.popinet@niwa.co.nz>**20110318232533
+ Ignore-this: 209fce466808e270ea1fefa60a78f2f6
+] 
+hash: 0000001228-b23b3bef0a80793fe47871f30aadd5893449cf1c982b0bc6e84da3556ce40edd
+[TAG 2011-02-12
+Stephane Popinet <s.popinet@niwa.co.nz>**20110213051327
+ Ignore-this: ac00e72baf5139fe749f5f0c0d52ca49
+] 
+hash: 0000000690-1ad5bd030042ed60e6fc356860d3779a62b79fe006e31c29d337191d94dc59bc
+[New publish target for examples and tests docs
+Stephane Popinet <s.popinet@niwa.co.nz>**20110318221758] 
+hash: 0000000625-b76fae4f5a4f721ae14fa868cdd4d5a13fc69ad72cfc717ba425f74c093c1ba2
+[g_ptr_array_foreach() should not be used for compatibility with old glib
+Stephane Popinet <s.popinet@niwa.co.nz>**20110321201543
+ Ignore-this: f5e57d12550ff6e53270ebbed16245ff
+] 
+hash: 0000000674-64933f29ab29103f834a1ba26756ddc1dc9fe3de98c7007f658bebfe7ed88c48
+[Updated test cases references for 64-bit systems
+Stephane Popinet <s.popinet@niwa.co.nz>**20110318221520] 
+hash: 0000098719-dbfeeeb8cbe90fd2762f8abc027a07fba5b2a01aa09e6b73a4c531444f4e4526
+[Added warning when reading obsolete terrain databases
+Stephane Popinet <popinet@users.sf.net>**20110317101226
+ Ignore-this: 7e7d7b29894aa919bfcfbe6d48e3d5d8
+] 
+hash: 0000000356-f15ec3755624ac41e3539b71930a470d3c51bdfac684e1aff0ea51b8678b9770
+["`%-style pattern rules are a GNU make extension" correction
+Stephane Popinet <popinet@users.sf.net>**20110317101819
+ Ignore-this: a229ed484538291fbc888bf2c31492f9
+] 
+hash: 0000001866-d774f777b6d166268e3e6c1702b1373ce11311e481588929e6ca0cf6e152898f
+[gfs_get_poisson_problem() returns a linear system with a unique solution
+Stephane Popinet <popinet@users.sf.net>**20110321092924
+ Ignore-this: 27031b757e1259e01ca324a9f7359ccf
+ 
+ For Neumann bcs everywhere, the solution of the Poisson problem is
+ defined to within a constant. This causes convergence problems for
+ external linear solvers such as hypre. The solution is to remove the
+ extra degree of freedom by setting the value of the solution in a
+ single row. Note that the check for Neumann bcs assumes a simply
+ connected domain topology.
+] 
+hash: 0000003509-ebbe060a7f2e62344f909642e35f419d4478be8b1c818966cc44ee85f280fa24
+[Bug fix for cost variable in GfsAdapt
+Stephane Popinet <popinet@users.sf.net>**20110321113205
+ Ignore-this: 79a123c949afe9c314791618dffd8d75
+] 
+hash: 0000000631-ffec1b0c30743bbca5519b52c4cc5f67b00979046c0651714079e65f54d3b58a
+[Check for increasing order in CGD files
+Stephane Popinet <popinet@users.sf.net>**20110322144632
+ Ignore-this: 344f38b3b5dafee8a46d59e6be93964a
+] 
+hash: 0000000392-8c96330a0252c7378f55bd13439894eb1e518d1cf7a9e7bd89faaf8a5989020e
+[Support for parallel test suite
+Stephane Popinet <s.popinet@niwa.co.nz>**20110120201310
+ Ignore-this: b6c3373d745cb8f51e0264b1686b6185
+] 
+hash: 0000001145-b915064094053289e422fd2a9f7bf526ed3aa8d4e94cbfeedbf70408213f57b3
+[Support for parallel tests
+Stephane Popinet <s.popinet@niwa.co.nz>**20110318204343] 
+hash: 0000004560-73b9e6a6e5b211abcda353e1142e034d64d8ba8ab596cf295879fb347c62eed9
+[Use doxygen to generate programming reference
+Stephane Popinet <s.popinet@niwa.co.nz>**20110321215539
+ Ignore-this: 73c34c2dbf2c6dcdc62549549b2b082c
+] 
+hash: 0000238914-63666be5a96aa1631b87323f09db9fb9a4d6da477e848fb996f21c8f28f6c6fa
+[Various cosmetics for doc generation
+Stephane Popinet <s.popinet@niwa.co.nz>**20110323122711] 
+hash: 0000002291-5429fd80191fec6254984fa512c3e545197790dacb044dbeccd1072e88a8fe2b
+[darcs2dist also works with straight directories
+Stephane Popinet <s.popinet@niwa.co.nz>**20110323184501] 
+hash: 0000001242-6ac79928277b832436f3ae040caa60ba453197cf61542417128d239e9ec80f6a
+[Temporal object bubbles2 to obtain dbdt at a given time
+Daniel Fuster <dfuster@gmail.com>**20101217180554
+ Ignore-this: 54c0a21f1fe5c4f7692de7b5a4b4bdf9
+] 
+hash: 0000001820-68d0b2e207e686de0cdf24557b7b3d1e01e78372348ec546db93f9664e5c6ae0
+[bug: units in GfsParticulateField
+Daniel Fuster <dfuster@gmail.com>**20110128124617
+ Ignore-this: 248e40a80bb234ab9653d495317d1c3d
+] 
+hash: 0000000202-5635d2d2bfa909fcf161049addf32706c6c6567bc747910e8044131ab20f2a42
+[new macro ftt_vector_dist
+Daniel Fuster <dfuster@gmail.com>**20110129171212
+ Ignore-this: c501fe984fb7962c1f801177f27702b2
+] 
+hash: 0000000575-c37b652815554905223321b3a06840ff1aeaac39aab8f1cd27a9948d32aa8a77
+[bubble concentration field
+Daniel Fuster <dfuster@gmail.com>**20110130195805
+ Ignore-this: fd67726fdb84fdbc4e70f0d5af28eabf
+] 
+hash: 0000006913-b597994c2a78977fb861033459615bb45673781e6b73a39d66272257c99dd5ec
+[bug criteria bubble in cell + problem with L
+Daniel Fuster <fuster@dalembert.upmc.fr>**20110321163142
+ Ignore-this: a705b64a39d3ee35bea57e3776e1c3ed
+] 
+hash: 0000001099-2e67c2d3456baeb4231579cb748083f251a564c3b3ee4ee54b547fc423a83b7b
+[feed particle object
+Daniel Fuster <fuster@dalembert.upmc.fr>**20110321163552
+ Ignore-this: d9d75fb27cc97f55643b63ed04f34750
+] 
+hash: 0000009435-93184128a63d777db304737b377addf07b67ed49e917073f600871d9587b9e80
+[Particulates advect with fluid velocity when no force is specified
+Daniel Fuster <dfuster@gmail.com>**20110322183318
+ Ignore-this: e1f95768469631d76d917ae30e2d924e
+] 
+hash: 0000003006-ded10389b56155953dcc70e0ce24615b2346b9293b689218d20b9180334d9247
+[New objects GfsBubbleFraction, GfsBubbleFractionDt
+Stephane Popinet <popinet@users.sf.net>**20110321143932
+ Ignore-this: 9b91eac13f9e6812ab7058ae6bed0d47
+] 
+hash: 0000011995-1b1b0e1ce4c50ae76cce4fe059f1fbce1a52af473d5b353b2800f2067bb49ece
+[Simplified GfsBubbleFraction implementation
+Stephane Popinet <popinet@users.sf.net>**20110324101313
+ Ignore-this: 9f47649f9d7ea765864580da5b2a3540
+] 
+hash: 0000003245-783d4c707fad6a2ce4e2c6a2c3ae7fce2d8ea345ee48cc827687b46a60553077
+[Corrections in GfsBubbleFractions. The kernel function and projection radius are user defined functions
+Daniel Fuster <dfuster@gmail.com>**20110325123613
+ Ignore-this: fe1ec7468150b05e3b860f3401de481d
+] 
+hash: 0000010035-1dc967c8aae4cbb257a6896e14805f90664ebc89f472816da510a79e4d36f3a5
+[Fix for automake options and missing dep files
+Stephane Popinet <popinet@users.sf.net>**20110324165851
+ Ignore-this: 25bdc170fe062ea6de4e9ab87e90bf16
+] 
+hash: 0000000920-2676517ab198f36a25b8014cc6316d2357c0e5de20edd028d9134eeb379476fd
+[Bug fix for automake version check
+Stephane Popinet <s.popinet@niwa.co.nz>**20110324230629
+ Ignore-this: cddfe424fbaf570229b5bee0d8e7cae3
+] 
+hash: 0000000411-dc1e2c482e461d0dd6ed01f47526ce024b7836af4fcfff648e7ee106dd6abf17
+[Fix for dependencies in tests
+Stephane Popinet <s.popinet@niwa.co.nz>**20110324195904] 
+hash: 0000000790-0bafcfe6f2ab661e16b257d203c815d67398348ed597e9c6b6eff82a80bb9646
+[Fix for summary.sh in parallel test suite
+Stephane Popinet <s.popinet@niwa.co.nz>**20110325091557] 
+hash: 0000000221-cc7e3e374746d73930c3b97d54392f03f5328267f3c884b38b815e81e414c37d
+[New wind-driven lake test case
+Stephane Popinet <popinet@users.sf.net>**20110325132652
+ Ignore-this: e706bf381e8d606aea61ef0e2cfe7990
+] 
+hash: 0000002601-2828cf291b281d409ade4b9628a574d228f77d5a51f6b3301cf7302b253c8469
+[Added JASON-1 profile for tsunami example
+Stephane Popinet <popinet@users.sf.net>**20110317140859
+ Ignore-this: 50c875023fd60478b2737a4187827ebe
+] 
+hash: 0000021055-805ee91a81af34120dba33dc6b1e15ee655c822b3f902b2401239a805b770bb5
+[Turn off rank-deficient fix for GfsPoisson
+Stephane Popinet <s.popinet@niwa.co.nz>**20110325131617
+ 
+ This seemed to degrade convergence for test cases.
+] 
+hash: 0000000467-5b6575dc201262f6690c6043c04bc8d4badb62f983bd0d1729c7bb3ef1b5e018
+[Minor fixes for GfsBubbleFraction
+Stephane Popinet <popinet@users.sf.net>**20110325145110
+ Ignore-this: 5059b09084b95be9d42c772c897a5d84
+] 
+hash: 0000012048-0c0dff93a46043bb1d9867a7a6281b6cc13f0696ed5693091ee022b18795edc2
+[Minor fixes for GfsParticulate
+Stephane Popinet <popinet@users.sf.net>**20110325150001
+ Ignore-this: 2b4cc0be505fe3706057fe0564b7b406
+] 
+hash: 0000003577-a14295ce22bdc7a1922a818ffbe2c7f569c471fa2713824e3f729a1df05eeba7
+[Cosmetics for GfsFeedParticle
+Stephane Popinet <popinet@users.sf.net>**20110328180241
+ Ignore-this: f134c9da514c70691906b5a96ed58b69
+] 
+hash: 0000003042-c4e907097bf30bf3fb98b755685ff5cb84e0e82b6c4886d6f54f756e165f5348
+[destroy object for FeedParticle + np is now a GfsFunction + assign forces
+Daniel Fuster <dfuster@gmail.com>**20110329002547
+ Ignore-this: b6db261707259481d326abe3704f7a2d
+] 
+hash: 0000002287-0a457def0e4b4f1dd9b0ca715c43d72eea2fa8269d1ab70e1d790cd3865bdef8
+[TAG 2011-03-17
+Stephane Popinet <s.popinet@niwa.co.nz>**20110325142433] 
+hash: 0000004441-fcfc94b89b6805d82dec82940d607f90c8d6c7d7ca0b288fd397efeb38a76243
+[TAG 2011-03-25
+Stephane Popinet <s.popinet@niwa.co.nz>**20110326142850] 
+hash: 0000001941-cfc6032296c4e5813ab4481376f6567f639ab9f21ee2984c45ef1072e2bc8e93
+[changed web address in docs
+Stephane Popinet <s.popinet@niwa.co.nz>**20110329121121] 
+hash: 0000000499-90085adbb9e3e1a18ddadacffb8d4f7ec0f8fe2a1867ccd85501980b7cb9a4bf
+[Important fix for Okada module in longitude/latitude coordinates
+Stephane Popinet <popinet@users.sf.net>**20110330203442
+ Ignore-this: e68d8422477cd48e5594abd02dbd20
+] 
+hash: 0000000950-2f78e5d171565ba142cc36da0b221de13c489a7471372006fbdbab5403c42558
+[TAG 2011-03-29
+Stephane Popinet <s.popinet@niwa.co.nz>**20110330091912] 
+hash: 0000000550-8e21dc3167486f70db7e5ddb33c10e84aceb7d989dccee770d66ce2fbebd9408
+[Optimised domain box traversal by caching sorted array.
+Stephane Popinet <s.popinet@niwa.co.nz>**20110328201005
+ Ignore-this: 7c7333909e797c23b38b09a96bb9c53b
+] 
+hash: 0000001649-ea4f55ba87b0093a9fcfdc28a7ce4dfe680f34c33235aa2cef38fd80595ea122
+[Check for location of hypre module
+Stephane Popinet <s.popinet@niwa.co.nz>**20110401090041
+ Ignore-this: ba08a09a3ff443516494cb69e895407e
+] 
+hash: 0000000622-ea41dc5f933b6a20ad33f6a2867e6c2d8e8e8e5725547d22c70d34a5316b6c37
+[Fixed problem with combination of EventBalance and periodic Bcs
+Stephane Popinet <s.popinet@niwa.co.nz>**20110401150511
+ Ignore-this: 299032d6a17851b6d10e7499923514
+] 
+hash: 0000001110-bced9c77cd8e30783d258195ad1b2099e806c7a046c6ae2803f1c49680ac04a9
+[bugs in GfsBubbleFraction and GfsBubbleFractionDt
+Daniel Fuster <dfuster@gmail.com>**20110422172928
+ Ignore-this: aef7032e1d7a3980a59d996dfe8d6ac
+] 
+hash: 0000000917-6db6f815bc677078072e978ee4083d01efcbc79f61dfc4ac40ffbf1c4f822da8
+[GfsParticleToDroplet object
+Daniel Fuster <dfuster@gmail.com>**20110422181046
+ Ignore-this: be755b66152ff7df5c17f434ad6fccca
+] 
+hash: 0000003191-1befcc5003e0b73794b6013c9ed87ae5cfd73b019ff691797c55176b68f1a46c
+[GfsParticleToDroplet Object
+"Gaurav Tomar" <gaurav.tomar03@gmail.com>**20110428125236
+ Ignore-this: a0a28a278938617ec9f2236ccac94624
+] 
+hash: 0000009503-8a30b62fbbdfd86df618f0839ebfc041653c0792163cb8b5817ab103502e2a21
+[Minor Bug Fix GfsParticleToDroplet
+"Gaurav Tomar" <gaurav.tomar03@gmail.com>**20110428132020
+ Ignore-this: 703162d285d8e7b845125d731bfc0fc8
+] 
+hash: 0000000366-a350e4c180993376ee70bec2e9ac6c611ae9b76c68406188b447618315a32776
+[BugFix 2 ParticleToDroplet
+"Gaurav Tomar" <gaurav.tomar03@gmail.com>**20110428135038
+ Ignore-this: 7f38175460511cac9517fa5b501b7d37
+] 
+hash: 0000000261-ba46d97b3faa2052ac10c86fd909ee71cd53c68e5323d4bfe38f4bfd17aa517b
+[minor changes in GfsParticleToDroplet
+Daniel Fuster <dfuster@gmail.com>**20110428143122
+ Ignore-this: fd187a90cc578a390b350fbd619a5f3b
+] 
+hash: 0000000764-33fd7fa71fa3aa5664a32ef7cb0c985d0c9030a648a63387270c20117d7b3d8d
+[GfsBubbleInteractions object
+Daniel Fuster <dfuster@gmail.com>**20110426142622
+ Ignore-this: 49ad96e8738c53d3fadd4be6417e3958
+] 
+hash: 0000013756-54b73eb001a85beb550b35a3803f3311cf94f0d4619132f4de3e9349d69c2bec
+[bugs in GfsBubbleFraction and GfsBubbleFractionDt
+Daniel Fuster <dfuster@gmail.com>**20110422182827
+ Ignore-this: 49253a0f51604666c74904f0d5ccb568
+] 
+hash: 0000001700-27a13dfcd63d685a1d845e5de40d87d4970b5aa7a85c9a35d20fe2c02f98ace5
+[tagging bubbles.mod
+Daniel Fuster <dfuster@gmail.com>**20110428171022
+ Ignore-this: 38058092c1717ba6c569e7b85193b373
+] 
+hash: 0000000388-7341ce24422bfef13227125311929226ad438a91430227289d46abf4d15eae44
+[Initial implementation of the skew symmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20110521141730
+ Ignore-this: cc650971b5b06788acfa6f3bf7640569
+] 
+hash: 0000019068-2d6ddba98dc5ad827360a32d1cec7958f67e8e553260790f36bfe36760a12101
+[Fixed scaling of tx,ty,tz in GfsSurface
+Stephane Popinet <s.popinet@niwa.co.nz>**20110405170228
+ Ignore-this: a7eec6bf514e206783d03d79edd5a60e
+] 
+hash: 0000000490-0bd43dd613e56935043230aab272ae680313a81d5807c1dddfbde7e167502f18
+[Bug fix for partitioning with the optimised array traversal
+Stephane Popinet <popinet@users.sf.net>**20110426150143
+ Ignore-this: ca870e0e4e0ba217ddb9cba68d20830e
+] 
+hash: 0000001510-8cc7509b04d5af8627dbb764f02164428969c935e55db53b656f5f2d396e57f3
+[Rollback of partitioning fix 
+Stephane Popinet <popinet@users.sf.net>**20110428081735
+ Ignore-this: 11f83a554560c4186a1f1119fcc1c7d
+] 
+hash: 0000001377-73349f4bd004de9bbe1a5290a52627a928a5c2d5a188c64bc92004521bd20041
+[Proper (hopefully) fix for optimised domain traversal
+Stephane Popinet <popinet@users.sf.net>**20110428152622
+ Ignore-this: 1945f852851c49c1477335df61fc670c
+] 
+hash: 0000001038-ddcbc42d75a2b9ee57a37d542458d6451aa2bc91300729c9ecdf593d8b8afc9d
+[TAG 2011-04-28
+Stephane Popinet <s.popinet@niwa.co.nz>**20110428185113] 
+hash: 0000001406-d431fa0e767441289185ab2ea433cd1699384d1ad6c3268425b5669755ded2a9
+[Fix for preloaded modules in parallel
+Stephane Popinet <s.popinet@niwa.co.nz>**20110428183549
+ Ignore-this: 92c197171d8e98f017fbb881ed3c1282
+] 
+hash: 0000001244-2939832730c048fcbfb39bc8441a3297239e33d7788293e583744ff23a422174
+[TAG 2011-04-28
+Stephane Popinet <s.popinet@niwa.co.nz>**20110429190151] 
+hash: 0000000296-291bc031f96bf708c0b5205a4700d3de6bc637629e0df7bcf930716f12ab5517
+[Fixed assertion for function_compile()
+Stephane Popinet <s.popinet@niwa.co.nz>**20110505085145
+ Ignore-this: 5b844c975e5616a27bd42635beaed531
+] 
+hash: 0000000404-47806b7dfde778f9534cfb9149c8be604959d6633988f8d437ef35694f1095fb
+[Partial fix for units in gfscompare
+Stephane Popinet <s.popinet@niwa.co.nz>**20110505090755
+ Ignore-this: d41298264fc3c4bd94b7fbb8e6976220
+] 
+hash: 0000001347-68a3359fe4166f21b44c738b11db5b0c461dc0f979d9f91bff5a9bbfbfa3ea4b
+[TAG 2011-05-05
+Stephane Popinet <s.popinet@niwa.co.nz>**20110506184311] 
+hash: 0000000440-1187bfca5ef83a20b0ecba2db04b07e2b6dc07a40cf6f7d95e8cc7e91e496bfd
+[0th order extrapolation for AMR in the skew-symetric formulation
+Daniel Fuster <dfuster@gmail.com>**20110523144943
+ Ignore-this: 9dfb7a72b7de950b694711da7bd834de
+] 
+hash: 0000002944-c07b8a40b6cb65046c4cf554556640cf4084fbde612649bdce20fc8eb831d54e
+[AMR implementation for the skew-symmetric module
+Daniel Fuster <dfuster@gmail.com>**20110526151254
+ Ignore-this: b54d9d6156d87dc8a90d472635b9cba2
+] 
+hash: 0000014506-4d032bbb7005ca882564eb907cccebd239dda5209b801da464bf2c150ecddec7
+[Skew symmetric formulation with all the possible combinations (I will decide the good ones later)
+Daniel Fuster <dfuster@gmail.com>**20110531165920
+ Ignore-this: f4405451d216f5977d713300c76c8922
+] 
+hash: 0000016867-0e044f46352e9816b602b79f931f33737e59470d42c824d0ffd7d8fa7981d68f
+[Cleaning skewsymmetric module
+Daniel Fuster <dfuster@gmail.com>**20110708171228
+ Ignore-this: 382defde754f7c79f40443b74932bb20
+] 
+hash: 0000004511-26d9ced4fbe9517c72964b616e1a3d4322028f9abf62e7af8795e42bf7bde197
+[skewsymmetric.mod: Remove useless macros
+Daniel Fuster <dfuster@gmail.com>**20110708195048
+ Ignore-this: dea217c86c612f87d4a2fc56bb7c103
+] 
+hash: 0000000760-e837e3019a7e0005c9d7ce9036a2952e22d27cadb4918b8e8aced024617a6ccc
+[For GfsAxi the minimum radius of curvature is now limited to the grid size.
+Stephane Popinet <popinet@users.sf.net>**20110523201805
+ Ignore-this: bb2119b0a16ec65fdfe9b0970e172f91
+] 
+hash: 0000000817-89b3555f0846cd61b180dbf928564f13954ad9702e2eab2fe008c82d5a800c6c
+[Cosmetics
+Stephane Popinet <popinet@users.sf.net>**20110524075503
+ Ignore-this: 5ea181d9123d44cab65ea0a2d0a71937
+] 
+hash: 0000000369-99dc065ad7996dd3686e01434a22f400135a20a88b27736745df31193127419a
+[For GfsAxi the minimum radius is _half_ the grid size
+Stephane Popinet <popinet@users.sf.net>**20110524084107
+ Ignore-this: 44440f965c9044166f012990869f5cdf
+] 
+hash: 0000000534-311be7abf37e35a0425baab1e6ba06e8a2186f6bc2e07d65b06d5a37a90bb6cf
+[Added option to remove bubbles using RemoveDroplets
+Stephane Popinet <popinet@users.sf.net>**20110524105028
+ Ignore-this: 5093a23b2396e3277609e47d6b27801f
+] 
+hash: 0000001785-49d280a6c90cf79ea67452251f79cfc60d55f67dca1cdb03a8c171f94b9d8cf3
+[TAG 2011-05-24
+Stephane Popinet <s.popinet@niwa.co.nz>**20110524131500] 
+hash: 0000000771-e60780c8406574e11bb7e35d828fed0168f45a0be105c5b8585aeae939fdb8c2
+["dV" now takes the metric into account
+Stephane Popinet <popinet@users.sf.net>**20110526132327
+ Ignore-this: 1d3721f974839d0a5653eb30392584ac
+] 
+hash: 0000000380-c6a29fd300054f6ad2648001210535e5541ac004380b68c38086d1fc86ca2bb2
+[Updated daily script for move to gerris.dalembert
+Stephane Popinet <popinet@users.sf.net>**20110526125334] 
+hash: 0000009834-8d173a7f28a629ff6008ff8e5878c16ce343a16b6f392fe0af75915813a58b32
+[TAG 2011-05-26
+Release**20110526143205] 
+hash: 0000000374-69aba5b78c319f869c64cbcb96935f9db551717c7a552829c2ec6ac6b53bfd47
+[Added corner definitions for isolines in isocube.h
+Stephane Popinet <popinet@users.sf.net>**20110526230111
+ Ignore-this: 563e5308abc2cf484878ee25be701b64
+] 
+hash: 0000002506-cb9c9828f20ec3ad78762efaf21847378d34376002830d0a35c3652c27296428
+[TAG 2011-05-26
+Release**20110527003028] 
+hash: 0000000245-7ceb403a1912f7cb76ab065085c1c725c1773eb648d46e8985533257ddfc09ec
+[Bug fix for scaling being ignored in AdaptGradient when restarting
+Stephane Popinet <s.popinet@niwa.co.nz>**20110608145215
+ Ignore-this: 19d00b97b5f6e506f1d1cce24b1f257
+] 
+hash: 0000000768-3e21e7d81dae7d67b61fd368e63c4f4dd2581f4a8a2cd3d6a54d7251dc57cc88
+[New object GfsVariablePoisson for vorticity/streamfunction formulation
+Stephane Popinet <s.popinet@niwa.co.nz>**20110610212856
+ Ignore-this: b8c67ac06e5510f2e6af53be33688e15
+] 
+hash: 0000005675-496eb5e7fc081725e4430c59b7f6b86536649328043ebcb483464722f70653c1
+[New reynolds test case with streamfunction/vorticity formulation
+Stephane Popinet <s.popinet@niwa.co.nz>**20110610213135
+ Ignore-this: fc1db8d9ba4e791d9b9059a3abb064cb
+] 
+hash: 0000047879-1a170672da70305fac330754a7d940ce75b7c094b8805e6ab65592277d6b44c0
+[Added reference to Lopez et al for electro test cases
+Stephane Popinet <popinet@users.sf.net>**20110611071135] 
+hash: 0000001193-9898e41b87d86cb3e1c0a24510b3df25b48ce836fdd62cf4c6e17f7556cd4266
+[TAG 2011-06-11
+Release**20110611090346] 
+hash: 0000000723-77889616072f5ccb03654ed27ec65be71b27179deb692c30c04faf5c9a53db0d
+[Fixed RPM spec file for Fedora 15
+Stephane Popinet <s.popinet@niwa.co.nz>**20110625185504
+ Ignore-this: 32e8b080539ea1c2bbed244e4b114e0c
+] 
+hash: 0000000226-ea48c5d20a2cfcf089937e4cfcf0e257353802da1aa2a152e662cf253f0a9b15
+[Removed 'fix' for implicit function intersection
+Stephane Popinet <s.popinet@niwa.co.nz>**20110626011345
+ Ignore-this: c1f2fc0c99b9437e3787775657fc6d40
+] 
+hash: 0000000382-2c660b027f3d8c13477f418280e7db1a477ce726e4ed2fc7a1cb9dc53894c0a8
+[Fixed surface/solid marginal cases
+Stephane Popinet <popinet@users.sf.net>**20110630210543] 
+hash: 0000010038-fafbd8a14458a809b66d509c04521459b110e7802bc7e5c3c2e01c8677fcec60
+[Updated test cases references
+Stephane Popinet <popinet@users.sf.net>**20110701053431] 
+hash: 0000001090-1192a333f270c28ad30f354b6f66f000cf2d0b18c5a17806c8ad414dcf67a254
+[TAG 2011-07-01
+Release**20110701072758] 
+hash: 0000000567-5d452d9c82cf5a838cc935302d8871778c62f7d985828b3c4a06ace6d7e3f085
+[Starting vortex example
+G. D. McBain <gdmcbain@freeshell.org>**20110708155458] 
+hash: 0000006102-de2f43465378db204904305352414051e09e61fd70a5d45d2e3a6977f703b87e
+[Wingtip example
+G. D. McBain <gdmcbain@freeshell.org>**20110708161340] 
+hash: 0000006657-cbbdf3542dc98cec67485761d0d8d73a777971aca0035322c47422296c1decf9
+[Extension of gfs_cell_coarse_fine for 3D metric
+Sebastien Delaux <s.delaux@niwa.co.nz>**20110517045602
+ Ignore-this: e38b1eb372640d5fac70bd328c9c6994
+] 
+hash: 0000001068-ba8e826f7b5099d858a2b5c894bea0ebc9e449d4f80a7f9088af32ac439535e1
+[New topics module for submarine landslides and more
+Sebastien Delaux <s.delaux@niwa.co.nz>**20110517045147
+ Ignore-this: 4ca43e26f258827ff9501357390bb1db
+] 
+hash: 0000045970-a0be8af54cd308b4dd9274e8fe86d914b68d2255e1da150aa5d645311c10c8e7
+[Cosmetics
+Stephane Popinet <s.popinet@niwa.co.nz>**20110708134800
+ Ignore-this: add7cecaa81faa1ce71fe3ec2a209c91
+] 
+hash: 0000005267-7d0d93cf3a2eec5cd2ae96408dc877acc51318d0b3412e80aaf00e4f5c94e61d
+[Fixed references in wingtip and starting examples
+Stephane Popinet <popinet@users.sf.net>**20110708195254] 
+hash: 0000003615-dd0630df4a233460b948847a4025cd349c633705d492e7a898c7004bf181a68e
+[TAG 2011-07-08
+Release**20110708212840] 
+hash: 0000000779-a41a74e7fcc5bb9bd4f1bc9c28fad609f3fd7a3d3d79830af40449d0406a0e92
+[Cosmetics for skew-symmetric solver
+Stephane Popinet <s.popinet@niwa.co.nz>**20110708204935
+ Ignore-this: 1f0e92815df7d9e44634a7de353ab915
+] 
+hash: 0000013678-4ccf19a04ad41ec5d61161f158ad9aaa808174bb90ef3d51cf62cb53b8ba7a76
+[Fix for conflicts with new skew symmetric solver
+Stephane Popinet <s.popinet@niwa.co.nz>**20110708205012
+ Ignore-this: 81d20efb20c6095c379792aa42c5c59e
+] 
+hash: 0000001037-d8bed8cb040ede8a4985db66daa3e1b553fc0edfba4960cacacbba36832e43f3
+[TAG 2011-07-08
+Release**20110708232944] 
+hash: 0000001331-1f8eeda2c9144cd53bc80e81eaf2bacbd547d9e8c09372980887bf39cbff9168
+[new example for the skewsymmetric module
+Daniel Fuster <dfuster@gmail.com>**20110710144224
+ Ignore-this: d5e02202069a3170ad71a14b71f156eb
+] 
+hash: 0000048828-6b8ff14d3dd42650747f6f682d8cd8c081d45a0d53149176b1c6f208fdf75007
+[surface tension implementation in skewsymmetric module
+Daniel Fuster <dfuster@gmail.com>**20110723172019
+ Ignore-this: 9c7b2ec1c34873d2e5490714409ad296
+] 
+hash: 0000001509-633a9af4626f077ca1de95912e66e93173f29fdb6fdf3aee7a206fc35544df87
+[bug in the skewsymmetric example
+Daniel Fuster <dfuster@gmail.com>**20110729185543
+ Ignore-this: 7d25108836b3bbbd2661289348ea094d
+] 
+hash: 0000002940-435689b9e20f42e169adcfbcb19be956a2a1e1cca7332ab6b79e3e71dbde4a32
+[accuracy plot in reynolds test
+Daniel Fuster <dfuster@gmail.com>**20110801084850
+ Ignore-this: 39ed5c7ff26f88b922f92addaa2be727
+] 
+hash: 0000001991-584ca1c753501d894133e36b9ec603d72fcf3d801429a7cb934662e69486ac71
+[minor changes example
+Daniel Fuster <dfuster@gmail.com>**20110801134033
+ Ignore-this: 629a1aa608ff98e98b420713de435538
+] 
+hash: 0000008993-8b0ef648cef3f1ffa4e3baab23f5244d3687efc856d422197246c8e08df8d248
+[minor changes example
+Daniel Fuster <dfuster@gmail.com>**20110801084737
+ Ignore-this: fa5f1b5d711de03f0071f6471704fbbe
+] 
+hash: 0000000995-e4df0601057dff6ea49e4118e511e979505646a486b100689052593750549926
+[variable density in skew symmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20110801085546
+ Ignore-this: 35d6ce978f24d603ec3c84f891ea929
+] 
+hash: 0000001599-1f3b8af782973403d22a90e59e69ecd528d824a074674cb734dcdfeb04ebfaba
+[new scheme implementation based on the skew-symmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20110807152330
+ Ignore-this: 19bf6fb018dc5e0642b269ee3ded9c1f
+] 
+hash: 0000003194-64bd59f1c02c43abbc93956b2210cfd84e5330a6c3679b47b150f19533ebb477
+[diffusion coefficients can be now evaluated using gfs_function_face_value
+jose.lopez.herrera.s@gmail.com**20110808234246
+ Ignore-this: 2806129c49418d1be96857a84a350727
+] 
+hash: 0000000596-6a21735fb1532f4a63ee7955698b3e2fee30c0f0fa930cf38986c999149916db
+[Cosmetics
+Stephane Popinet <s.popinet@niwa.co.nz>**20110829232049
+ Ignore-this: c8d75b3a90cd5e56b658508ec8d0fdda
+] 
+hash: 0000001966-441597520a5ef0b1228f39137af6f345fa6aba096f8113147007fe1836d3e9b5
+[TAG 2011-08-29
+Release**20110830023038] 
+hash: 0000000376-7a8b3b08bbe697f9800e2082ab106f7484251b29df537185a0a20152872bd567
+[Properly exported gfs_velocity_face_sources()
+Stephane Popinet <popinet@users.sf.net>**20110830051751
+ Ignore-this: 425b55327d820b7fb453c6fb73866475
+] 
+hash: 0000002400-2dd5b5d5761da9f19fcba9fee84784853c09e13a50ea5d8d8c5670d31870c218
+[Various fixes for reynolds test case
+Stephane Popinet <popinet@users.sf.net>**20110830055925
+ Ignore-this: 6a6cec088734dd1b2fa949d1041fa44f
+] 
+hash: 0000004076-6a472ff309eb2abcaff137151d0a536d7068793267cfe4c17d8a0eb7a063f0c9
+[TAG 2011-08-30
+Release**20110830092403] 
+hash: 0000001071-18e437ca05ca9177158f836bc84efd66c873dec6e1e0e1eb5ecc13ceca5522ae
+[Preliminary implementation of new height-function algorithm
+Stephane Popinet <s.popinet@niwa.co.nz>**20110902032404
+ Ignore-this: 2145c66b5f345f631ad9d16a72a4d1a8
+] 
+hash: 0000005186-666fad5b697758461674b7d9ecf843096a3c22f3dce786b488016ce731851928
+[Bug fix for gfscompare and field with NODATA values
+Stephane Popinet <s.popinet@niwa.co.nz>**20110905212322
+ Ignore-this: 30ee234eaf0a03dccb98e10f7232effc
+] 
+hash: 0000002525-96a80d903e4d65cd7c0ff101c158caa4f1d5a9059c73275aaa7619a6457777d4
+[New test case for height-function in parallel
+Stephane Popinet <s.popinet@niwa.co.nz>**20110906010600
+ Ignore-this: e14530da2c0bc92e5358fa1d426c89b3
+] 
+hash: 0000003834-a07e62d90a9c9220e97ec073bdc1f15a2dbadf340b4452bd000d3dd8e512907c
+[New height function implementation "GfsVariableTracerVOFHeight"
+Stephane Popinet <s.popinet@niwa.co.nz>**20110906012208
+ Ignore-this: 2268dafd3af32b8dddb064927a59d46d
+] 
+hash: 0000031303-4d9348593a2f1b656b6aa27780a0a73dacd7f4d6d6a9778777c5cb4f716224a3
+[New utility function gfs_cell_message()
+Stephane Popinet <s.popinet@gmail.com>**20110908225512
+ Ignore-this: 362b7ed04fd69a173e23b87ed261dea9
+] 
+hash: 0000000990-882ab518e4e027058a9dc3f08f7e107f1a177378aa6c16aaa5830bb7b26e2e59
+[bug fix in skew-symmetric module (dt pointer)
+Daniel Fuster <dfuster@gmail.com>**20110907083358
+ Ignore-this: 7c8a0adefe2bd31aa3e939874dce673c
+] 
+hash: 0000000795-2e4dc10eaabef4e7ea451ebc598738436029a91df54e5b356a69133d893a51d7
+[New contact angle boundary condition GfsBcAngle
+Stephane Popinet <s.popinet@gmail.com>**20110909003916
+ Ignore-this: 43890ca34e3554ae8fcddfb8fd57769e
+] 
+hash: 0000001635-53a0b1099d22eb876805a9a1686420b1b6f10ba80746c7a1aef6f3d345d8587e
+[New sessile drop test case
+Stephane Popinet <s.popinet@gmail.com>**20110913025533
+ Ignore-this: 58fe68f6c739ee13cbe6ee3b9264675c
+] 
+hash: 0000006109-d943fa725f382013ed2d9f0426ae7690d8b555841e2adf348e9d7a6a01202a9b
+[Contact angle implementation for VariableTracerVOFHeight
+Stephane Popinet <s.popinet@gmail.com>**20110913050307
+ Ignore-this: 7c782a8a28d737c29749d76000536cff
+] 
+hash: 0000021256-1fb203b372446b31976c050de6757e03236046349ef201578fa9df13a1a951ed
+[A few test cases now use GfsVariableTracerVOFHeight
+Stephane Popinet <s.popinet@gmail.com>**20110913050602
+ Ignore-this: 5f3b6fba3530ab3d6f93ade68b843c85
+] 
+hash: 0000001840-eff29acf42f43a6206810650ecc7ecf52f09240f84e25f18a0c0c7805068e81b
+[TAG 2011-09-13
+Release**20110913075822] 
+hash: 0000001638-4f1e1b059ed5c12512924a069ba7c16e2ccf647b42ea74c62f4764fb80707447
+[Optimisation for VariableTracerVOFHeight.
+Stephane Popinet <s.popinet@gmail.com>**20110913224137
+ Ignore-this: 6dc36f279104d98082cc62cb50ea3b32
+ 
+ Also fixes regression for VariableTracerVOF.
+] 
+hash: 0000006712-2301c74d040bb72f9afd6a27a6423dd8f4e11911d9b40abbc6c3dfbe89593df8
+[TAG 2011-09-13
+Release**20110914043103] 
+hash: 0000000283-2ac6b22d27de8d4aaf0aa14bb32cee9993ba7c75d2ad1869db85156d1da93c68
+[gfs_height_curvature_new() tries to find equally-spaced columns.
+Stephane Popinet <popinet@users.sf.net>**20110914064438
+ Ignore-this: 75863b679245740a4881b2967f065f77
+] 
+hash: 0000002299-2da397e2a8fa2044205b25147818f464343c02f317f59ebd02fe6a3b0339cdeb
+[New implementation of curvature from height-functions
+Stephane Popinet <s.popinet@gmail.com>**20110916021129
+ Ignore-this: 73ab2724496d96e4ba6097cf219ef44f
+ 
+ Gives priority to HF defined on equally-spaced columns.
+] 
+hash: 0000019540-72a9495ab35ad1f48ddcec2d8582f59c5ed55ec84447537db2eb0a281573e097
+[TAG 2011-09-16
+Release**20110916043008] 
+hash: 0000000478-1eea6d604ff30920d3ed3aba104203797daf9176d7527de4de7542feffb0ec13
+[New test case: sheared straight interface
+Stephane Popinet <popinet@users.sf.net>**20110920070007
+ Ignore-this: bb0e0e9c9a4bfde7b1c977fca6b98d42
+] 
+hash: 0000004398-a8d13a16431f8d4d358cdcd00aa182eb9b5f75a73b799c060bf0ec2735a29734
+[Cosmetics
+Stephane Popinet <popinet@users.sf.net>**20110920082932
+ Ignore-this: bef550eb1403a0684981cb8dc6164c86
+] 
+hash: 0000001664-8e0408705c8257491f6b2bd859df10cd42f09dd6e41709ad189aa2951466be45
+[TAG 2011-09-20
+Release**20110920113213] 
+hash: 0000000353-5ae6c30a9be7ac34d01ccfbbb84d6f912f5093a605df8265a066bdfdc4615c40
+[For GfsAdvection fixed order of tracer advection and adaptivity
+Stephane Popinet <s.popinet@gmail.com>**20110920222401
+ Ignore-this: fc0f41ddc7aebd96747dca25db64b052
+] 
+hash: 0000001577-4343416c906d31c461e18358f32ae6b15bb68aefbdee23f43573b0ca00d6fbd9
+[Coarse cells can use HF information on finer neighbours
+Stephane Popinet <s.popinet@gmail.com>**20110920222747
+ Ignore-this: 35b80f107184accebb8b1b32fe990f3d
+] 
+hash: 0000001525-28dfbd28add4ac931936f0d619d005a53abba8b067cc0a081673fcbed8ffb2af
+[Coarse cells can use HF on finer interfacial cells
+Stephane Popinet <s.popinet@gmail.com>**20110920223217
+ Ignore-this: aa0a2b738ae9b94333c564fa41e056da
+] 
+hash: 0000001336-620d37fdb06a8b3a99bc16cbf4e237fa2ec9332b8db24327ea560427af078b00
+[Added levelset to 'rotate' test case
+Stephane Popinet <s.popinet@gmail.com>**20110920230250
+ Ignore-this: f464275f54f2e9ce9a7024dc3e22b23a
+] 
+hash: 0000002139-743889899547b315e3ae1c7c6abbec56a085f14169ed0d8b43ff1db88b0f7151
+[Only consider central-HF values close enough to the cell
+Stephane Popinet <s.popinet@gmail.com>**20110920231749
+ Ignore-this: 300855e735765bedf31fc08e72e75a6e
+] 
+hash: 0000001123-8d744b41176f630500b319773abe351c7d0d81ea884545032f08a91b95cf6743
+[TAG 2011-09-20
+Release**20110921023111] 
+hash: 0000000882-1394a4ea61f35a096129ec28e96c53c1ecbd533b90ceec5dd49ffc06651103dd
+[new GfsOutputSpectra object
+Daniel Fuster <dfuster@gmail.com>**20110923101253
+ Ignore-this: 2ac2ec967da97bd8b1ba161d3df9d32f
+] 
+hash: 0000012347-fd60628967389ed656aaec6a23cba051de7eccb5344e851cb6c5e7a1f5924268
+[Several improvements in the GfsOutputSpectra module
+Daniel Fuster <dfuster@gmail.com>**20110926184716
+ Ignore-this: dc021df7bfb08ac4998432a491233601
+] 
+hash: 0000013178-e7473b91ba933d981908707d0bc26c063ca478b1d883a4b7c0fd03175f9192ea
+[Fixed units for BcAngle
+Stephane Popinet <s.popinet@gmail.com>**20110922023602
+ Ignore-this: 959ccfb1e44c7c4a6bb08a7443507eee
+] 
+hash: 0000000210-d1dd616b42a96397196cb264ae41df985af415bc653c90ae2043ec0ecf37ea13
+[Bug fix for error message in topics.mod
+Stephane Popinet <s.popinet@gmail.com>**20110921203837
+ Ignore-this: a74ed87b54986941da6a1ec06a1e79e
+] 
+hash: 0000000221-cffc6809ce0ef88f8bc364e8b422277966bb5dc1806514de88a6e0b42a70b954
+["Multiband" VOF advection
+Stephane Popinet <s.popinet@gmail.com>**20110923051056
+ Ignore-this: 61e98eeca73df8d8054c45968aefeaa2
+] 
+hash: 0000032006-edcaf8aeda733d31fc305c17442baa07a9570d57a8d68b3a5693dc044aa7f82b
+[Changed defaults to beta = 1 and gc = 1
+Stephane Popinet <s.popinet@gmail.com>**20110925211934
+ Ignore-this: 647294b73246c6e30929a56a50a708ce
+] 
+hash: 0000005230-7441b3da1deb2aa1402e540dc27a810f8d488cd315affab4e6f2463b0c79fde7
+[New object GfsAdaptThickness
+Stephane Popinet <s.popinet@gmail.com>**20110926074316
+ Ignore-this: db6049567841e499a088441db1a3c6e8
+] 
+hash: 0000007659-526346d7464fc0cef5eca8f3f0df2e1c3edb3e108ed6dce140f5f469a451b20e
+[Important fix for fine -> coarse VOF refinement and metric
+Stephane Popinet <s.popinet@gmail.com>**20110926093619
+ Ignore-this: 650670e7ed48dda46dac4e2527fb7d27
+ 
+ In particular this should impact axisymmetric VOF simulations.
+] 
+hash: 0000001681-31b49942e0121d9e58ee48581f9187df8df5830f80c29096f5f3531d0a1073ef
+[Redefined g_assert macros for consistent error logging
+Stephane Popinet <s.popinet@gmail.com>**20110926224613
+ Ignore-this: ac247cde8790a623da91f2067befb8ae
+] 
+hash: 0000002173-727aba3da9a4d1160eb1f7838f735afe6677fb5563ef67bd8133c428108042ff
+[Limit the minimum axisymmetric radius for HF curvature
+Stephane Popinet <s.popinet@gmail.com>**20110927001731
+ Ignore-this: 6db572a62e12f53372efdd365c4526f5
+] 
+hash: 0000000503-eb8aa6f49f4021fcc1a8f932e43716fc498bf7f817d88eeb160ac12d79eadb91
+[Various fixes for fft module
+Stephane Popinet <s.popinet@gmail.com>**20110927230336
+ Ignore-this: 4537d8f6838a3cc331d009f091fa2ca5
+] 
+hash: 0000013753-251e3fef53439f6aceba7c1b90704e71f1adc329a0212e31a21070fc3e5b7a03
+[minor corrections in GfsOutputSpectra
+Daniel Fuster<dfuster@gmail.com>**20110928081841] 
+hash: 0000000403-90e1890bd3fb9fde69db3aa588fcc95262e7ed28bd824ec9e339437de25ded9c
+[bug writting 3D spectra
+Daniel Fuster<dfuster@gmail.com>**20110928084348] 
+hash: 0000000952-39c497e21d56885e1257ac043c639b113682711ed387473d69e7234aacc5bc63
+[TAG 2011-09-23
+Release**20110923072422] 
+hash: 0000000494-18f8dd01143aed2c73a8e7ffb19ebeffcbe0fa87941c154b6ec12eeb0faca6c4
+[TAG 2011-09-27
+Release**20110927033155] 
+hash: 0000000921-a609c631bb4e606ee286eba38ef15ca92cda462b8df37c5640eaac4730b51bdd
+[New "format" option for OutputScalar
+Stephane Popinet <s.popinet@gmail.com>**20110928053008
+ Ignore-this: 77c06f824b17f21a0be2efc2e82bfdf3
+] 
+hash: 0000003413-819f8e881995edf2ddab80684da0bfd73f45465757713e71edc896882a18e45c
+[New 'plateau' test case
+Stephane Popinet <s.popinet@gmail.com>**20110928053202
+ Ignore-this: 661b0bc7305937bfe1da1f9559910b76
+] 
+hash: 0000010255-b7fd503cc5db347f5b6e7232a44c7f661a8b8ea5196b1014e5615a7cac4725f2
+[Fix for typo in bibtex file
+Stephane Popinet <popinet@users.sf.net>**20110928092418] 
+hash: 0000000175-8cf313f6433b70827316dbc1d946485dd8e0d275cb023f6fd7ba6eb75a587f03
+[Added rotations to GfsMapTransform
+Stephane Popinet <popinet@users.sf.net>**20110929074909
+ Ignore-this: ff61ec7b0618125941991b68e259b2a0
+] 
+hash: 0000003769-72c03be19fab665637aca3cd1107eae6b6cd341826980d62976059c57bd052b0
+[Cosmetics for fft module
+Stephane Popinet <s.popinet@gmail.com>**20110928212019
+ Ignore-this: 70f6cfa5df9211c249fbd4ba59b815cd
+] 
+hash: 0000000670-4d31c858eaa62cd78d6c4298a95b87573d40077f3694606f52079b9fe460daff
+[Distribute "multimedia" files also for test cases
+Stephane Popinet <s.popinet@gmail.com>**20110928213133
+ Ignore-this: b2aad38c26b7f9856447a4370e977369
+] 
+hash: 0000000571-7d2f6d0028d6ce7c774444af5c807fdbea6f7fa055ff4cde5f1ee7ccbbe33814
+[Added checks for gfs_domain_locate()
+Stephane Popinet <s.popinet@gmail.com>**20110928215436
+ Ignore-this: 946fb7aa8d4be57438af79a7dbaa4bde
+] 
+hash: 0000000401-d5bd28f5d76a58d2ad6246f7989905101a650e153aa9aa2e68e22578d220bcb9
+[The dimension of the fft is now defined inside the structure of the object
+Daniel Fuster <dfuster@gmail.com>**20110929232706
+ Ignore-this: 60683d8f25d358c8f18af11a4876b7f2
+] 
+hash: 0000000598-bebc1bd548bfcd4ba8bad39777fa9a6c08617c5119df17cdcc9841f22f60da25
+[TAG 2011-09-28
+Release**20110928104203] 
+hash: 0000000864-1da5c5d8daff4b541f7ef3e0b7289ce4800fff9f4e9d4ad95eb5d7d7a6a0f5bb
+[TAG 2011-09-28
+Release**20110929104013] 
+hash: 0000000825-600f0c548a20b9b3ff16eeb50589fd2f42d917dfb9405a69b89d451966acc09a
+[Portability improvements and removal of obsolete "static modules" support
+Stephane Popinet <popinet@users.sf.net>**20111002101619
+ Ignore-this: 75bf13ff7a20d65380a8d2f9e09ab2d4
+] 
+hash: 0000018568-17c224860bf4095eb8bd2c20ff60c24fbcae76220a0546cf18fe9e060a29c834
+[GfsFunction should now support libtool compilation
+Stephane Popinet <popinet@users.sf.net>**20111002102043
+ Ignore-this: d1990b82f2f7ce3c37b3c475cbcc13df
+] 
+hash: 0000012450-a9ff10185ff24761f16565151e6ad638b6bcc439eb67e0a32c7a98f8cbda0d80
+[Macros should now work also with standard awk and m4
+Stephane Popinet <s.popinet@gmail.com>**20111003045844
+ Ignore-this: 745db077c55b9a4c1cadae575295f1a4
+] 
+hash: 0000002628-a76c84abfc9801e0fe1cfb28f891cbe97e7810c22adef45afb5a2dff4338bf23
+[Bug fix for --with-suffix configure option
+Stephane Popinet <s.popinet@gmail.com>**20111003045939
+ Ignore-this: 4d4704140af0d15402799f5633de6f83
+] 
+hash: 0000000699-a3ec77356712a1c84eb4422b2b095a6361c5ee800b858cd20f486de5635194dd
+[Made pointer conversion explicit for buggy C libraries (AIX)
+Stephane Popinet <s.popinet@gmail.com>**20111003050052
+ Ignore-this: f771f0e71f8708e03c98c4ad7e344d99
+] 
+hash: 0000001222-9728ed6209da3ca1a386d2159c8a184420e3c76b70d737ddc508be22f4464c88
+[Fix for configure and mpicc
+Stephane Popinet <popinet@users.sf.net>**20111003074946
+ Ignore-this: e23b006815dee91e83450ac5dc4e0ddc
+] 
+hash: 0000000387-ab7306619b30cd915eb1c323d77b4baf34f5d7abb75d58ff39892c75e45c0174
+[TAG 2011-10-03
+Release**20111003104050] 
+hash: 0000001036-5aaf9b2addfb855be5bb3e650d9a62cb9bcb360105e7ad719745cbc9007043cc
+[Fix for obsolete gfsconfig.h
+Stephane Popinet <s.popinet@gmail.com>**20111003202612
+ Ignore-this: 7d858e27bb87eb1e0daa1f8dda927096
+] 
+hash: 0000000233-c64c475d07f80eaa4c1db990c76ec0871102052880b6f835bd526526533054ef
+[TAG 2011-10-03
+Release**20111003233904] 
+hash: 0000000222-0ee59075ebdd127879fbc34b295043290eccff6633724bf54ccda0e74df93bfd
+[New time-reversed 'concentration' test case
+Stephane Popinet <popinet@users.sf.net>**20111004232315
+ Ignore-this: b1c7d27c7b797fa27724eb5d691e568f
+] 
+hash: 0000008486-2761cd501ed01b4ec705a71a0f85e05f5d9015f5d7db867ea56dd21661562a71
+[New object GfsVariableVOFConcentration
+Stephane Popinet <popinet@users.sf.net>**20111004234609
+ Ignore-this: 1ab0272e1a553a92a097eaecdff60aed
+] 
+hash: 0000011528-d892ad7d36234921a31d4ab9db1526d7e4c180d959b20926a4e07670948535d8
+[Fixed F77 wrappers configure check
+Stephane Popinet <popinet@users.sf.net>**20111005001208
+ Ignore-this: 31026cbca30f98cd587e3193dc12cc3f
+] 
+hash: 0000000366-78ac4328b6acc39757bcd27f3f537529ef987b37c08d0784ba3b9c87d179d577
+[Return to the original skew symmetric formulation + user defined value of beta
+Daniel Fuster <dfuster@gmail.com>**20111006085256
+ Ignore-this: 797482276c4c94729e667aea17fc287f
+] 
+hash: 0000006308-0d3eb2245668561bb65bcac8a0463597fc486c5992aa91e2f3b5d3019a25f599
+[3D implementation of viscosity in skew-symmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20111009195116
+ Ignore-this: 9bc1a4046e14f820f8035bfe6dfc78a0
+] 
+hash: 0000002384-b1761713afb2597a4df181f66ebe17dd9ef60cbd9bd9cc09d5c3a569109cda66
+[Proper initialization and stockage of face velocities in skew-symmetric module
+Daniel Fuster<dfuster@gmail.com>**20111011090332] 
+hash: 0000003844-6d2292c457f7d554d9a2261941478bfd0288b944c0076a508c2178769a85f3bf
+[New 'shore' test case
+Stephane Popinet <s.popinet@gmail.com>**20111005204333
+ Ignore-this: cd575b3aef4d3439444e32cdb2721035
+] 
+hash: 0000030724-a7210eeba56248867d4b186770234d2b9fd06e86e0d68bd3f1866643c66a9168
+[Fix for destroyed boundaries and gfs_domain_boundary_locate()
+Stephane Popinet <s.popinet@gmail.com>**20111005220904
+ Ignore-this: bd24b6165d3bf5d1705cda5732ea9334
+] 
+hash: 0000001343-dc7d0bb1419cce48eb3a78f2e2b779af5701a1d60362947f2fb50cf5b2d8d18e
+[Hypre module should now work also for diffusion problems
+Stephane Popinet <s.popinet@gmail.com>**20111006213638
+ Ignore-this: 3684444da686ecf803341948aa96c4cb
+] 
+hash: 0000012285-3597473530eff1c3515056bcd88380ee6b30af8c99ecd08fc9d290889b61014f
+[Fix for gfs_domain_forget_boundary()
+Stephane Popinet <s.popinet@gmail.com>**20111007041353
+ Ignore-this: d2a19117b7e66d23005d6a641d6237c1
+] 
+hash: 0000000561-272fcfc650a772c32459db99ea175d6360d1acbc25d70753a72d06e1c1de4d32
+[Debian/Ubuntu packages now include the hypre module
+Stephane Popinet <s.popinet@gmail.com>**20111007042619
+ Ignore-this: 1a94672fb48212a4f6ae1c92c87b5ae5
+] 
+hash: 0000000450-71f505aa7bcff4f37349358c4d3f3d02160cf250fef0d7b63ce22632affd6a12
+[TAG 2011-10-05
+Release**20111005014205] 
+hash: 0000000702-89d0f746f83b6b522c34c25bfaa9cf151a485d8f0293295bdf87cbd5367e527b
+[Another fix for gfs_domain_forget_boundary()
+Stephane Popinet <s.popinet@gmail.com>**20111007072836
+ Ignore-this: 9ef5ba93b90f97e27c55bb47e6290a0c
+] 
+hash: 0000000198-2fa16f7ac1c0a7092b6befb4eac17386f8f818144522cc5288b3c81e54fb4c20
+[Doc fix
+Stephane Popinet <s.popinet@gmail.com>**20111007073447
+ Ignore-this: f7e91dd7be0aedfab61a0649dc67997e
+] 
+hash: 0000000233-55a0e4941f1ff84770184558eb05fe76515a982636d3dc9178f99f5762914b84
+[TAG 2011-10-07
+Release**20111007094154] 
+hash: 0000001112-fc27903c07661e5536b45b1ef2628693f6077c2033d9ebad4bd4fae3f3eb8eea
+[Bug fix in EHD forces
+J.M. Lopez-Herrera <jose.lopez.herrera.s@gmail.com>**20111010161330
+ Ignore-this: f9f98b6eb15631f91405386fb1a3fb49
+] 
+hash: 0000000309-18d9e71b4f937d2fce4d6111c7873f29ff5b3be9f9c34a379c554f80266a9548
+[Various cosmetic improvements
+Stephane Popinet <s.popinet@gmail.com>**20111013212555
+ Ignore-this: 1aa61668655c1bde9c910f951bd02c57
+] 
+hash: 0000004355-595459442a73d6a697bd3f550642e565d3cae7d56db5a95958ffc347415a8ff7
+[Fix for "debugging leftovers" of skewsymmetric module
+Stephane Popinet <s.popinet@gmail.com>**20111013225303
+ Ignore-this: 4be5ba5f63635a31df55b2ec1c373f67
+] 
+hash: 0000001388-60139c9bf18292f8f92548f138866e7015412ff08411afad3e0e884883c22fb9
+[Initialization of the "old" velocity is skew-symmetric module + other minor changes
+Daniel Fuster <dfuster@gmail.com>**20111014071539
+ Ignore-this: 64da462ece97a71aa0c908fc156f70d0
+] 
+hash: 0000002866-8811ba0e2e7eba5c25ab41b2503e02b89776cb2d83a9a61e111fb825312e5730
+[kinetics test for the skew-symmetric module
+Daniel Fuster<dfuster@gmail.com>**20111018130736] 
+hash: 0000002837-529cd01ecafc5491345973573dc1c316b8f0c724db44e715d8094652d756fc42
+[New syntax for GfsOutputSpectra
+Daniel Fuster<dfuster@gmail.com>**20111019105118] 
+hash: 0000008051-125f9d6a505b587475eb66c2c6a65db931fb4dc4f9587497855b62f92bfbccda
+[Fixes for RPM specfile
+Stephane Popinet <s.popinet@gmail.com>**20111008031125
+ Ignore-this: 7c464ab74e256ef990afbe91830dff62
+] 
+hash: 0000000341-87960b485e90478291d4cac97a2f1720d8cc03b8f3dc3003086f80d62b37641d
+[The Coriolis test now uses the stretch metric
+Sebastien Delaux <s.delaux@niwa.co.nz>**20110113212618
+ Ignore-this: b166be19d84339f7c24b4b8338816f2b
+] 
+hash: 0000000372-741d2027a1160360f614d60fe2f722c3d65ac106c68cae2ddec4e82b83a230ea
+[New GfsGenericMetric and GfsMetric objects
+Stephane Popinet <s.popinet@niwa.co.nz>**20110209202607
+ Ignore-this: eb47c3e7ec3aeb34848946ee9d27178e
+] 
+hash: 0000018163-4e2889f38b5aff2a014fdab6b4a6d5a87a4cf798fe11992f10adbbc0128525c8
+[Simplified MapFunction
+Stephane Popinet <s.popinet@niwa.co.nz>**20110328184330
+ Ignore-this: f09eafdb33d927743d8eb9d6c028b0da
+] 
+hash: 0000005413-59cae5a6754247934c199854b5a79e53760af7bfd977917217d3a1a09c0869f9
+[GfsGenericMetric is now truly generic.
+Stephane Popinet <s.popinet@niwa.co.nz>**20110328185504
+ Ignore-this: 5db342b98bd793e591c40a71e2d2573c
+] 
+hash: 0000044002-09056822cd3dfd65b93978f8a0ea5fc9eb24ff13d1d8a92029d7dc79b46dd562
+[Updated documentation format for new GfsMetric objects
+Stephane Popinet <s.popinet@niwa.co.nz>**20110328190825
+ Ignore-this: 26dbbf62c2334ce4c5587b06001ceffa
+] 
+hash: 0000017679-35c456c922144f98800d36fa586c422eeef246646318a3d376c75d149c18502a
+[Commented out GSL use in metric.c
+Stephane Popinet <s.popinet@niwa.co.nz>**20110328193708
+ Ignore-this: b95244357af7ca3d3c044e58b673ee97
+] 
+hash: 0000000534-b1414e2c07b1b779367629ae2bc71288fcf1a66577d4efa987ce0e4aa030f43e
+[Changed the ordering of mapping/scaling transforms
+Stephane Popinet <s.popinet@niwa.co.nz>**20110329193354
+ Ignore-this: 11ce7f9949afdfd33b932be18d06a068
+] 
+hash: 0000003218-8f4e5411dda4bf75f229ec5dc389129c933df27f405017f7d398cc1e496dacbd
+[New Poiseuille with metric test case
+Stephane Popinet <s.popinet@niwa.co.nz>**20111024212903
+ Ignore-this: 89e695303c9e55495116a2d2e33ea5a0
+] 
+hash: 0000002116-2ee58964a38ba3d27d0c710b8bb19d721511a12fb360a7c7b1cc761d1a78ef2d
+[New non-uniform-stretching lid example
+Stephane Popinet <s.popinet@niwa.co.nz>**20111024233010
+ Ignore-this: c3bfeede7720ff000dbbed87874dc67a
+] 
+hash: 0000010092-3520074a94f4ea6bbf42d44dbc29f2f5ac266a2d4865cd2541cd4ae772b30726
+[DischargeElevation is not an "Init" event
+Stephane Popinet <s.popinet@gmail.com>**20111025010014
+ Ignore-this: 3ef73d9fbb949087511ec3c37013c426
+] 
+hash: 0000000233-9fe3abab40ba0eefee0e6f1f026c6f33e84ccd00b9fe30af4c35c5ab57e5fd05
+[GfsMap uses Newton iterations to compute inverse mapping
+Stephane Popinet <s.popinet@niwa.co.nz>**20111025030818
+ Ignore-this: 82efe31cf6db92d0d146d516a3d2906
+] 
+hash: 0000003783-0ae2fb785a349e99e73592695681e9c683ef385edb6f4b4238a25af9d2333b4e
+[TAG 2011-10-14
+Release**20111018044259] 
+hash: 0000001496-ffe8a85dc7ea58085beda6f21ee2625e21e1766167fd6427e5a589cfc2341c28
+[TAG 2011-10-08
+Release**20111021033540] 
+hash: 0000000216-6efc19e03bb44fbfa5a98869d052ba6830cd2b0a387235d519e1e76189240133
+[Moved darcs gts to dalembert
+Stephane Popinet <popinet@users.sf.net>**20111025053603] 
+hash: 0000001321-de90bbd0d12dd40d9eaaf88c72e8f75bf3bd0dff4292f1a2c1ba203ec8208412
+[Parallel version of the fft
+Daniel Fuster<dfuster@gmail.com>**20111026164501] 
+hash: 0000034637-88c043235368ed2392adcc7068ce6599baef2a64d403fb33a8de38f65b754885
+[Several improvements in the fft module
+Daniel Fuster <dfuster@gmail.com>**20111015163616
+ Ignore-this: 15d909fc7213333126f1ffd8f3b9ab42
+] 
+hash: 0000038473-f7da72f9e6df9f632fcb549d64cd7541250cf24525849c969b91400c1fe391f5
+[Parallel implementation of the GfsOutputSpectra
+Daniel Fuster <dfuster@gmail.com>**20111026171527] 
+hash: 0000744671-a761be320fd34a95a3dd59f95e30fcdf496bbba5334db6dea6f7f93dc60b7a17
+[Several improvements in the structure of the fft module
+Daniel Fuster <dfuster@gmail.com>**20111030175452] 
+hash: 0004063828-34e0931bc8a479dc74ae05cc58aec76d7a8e3002413a11c3ffcf8a959a7de19c
+[fft module accounts for the length of the box
+Daniel Fuster <dfuster@gmail.com>**20111102182448] 
+hash: 0000731554-fc68e7fbda51234fcfdb43efd6151d0317a40b989edeb030d1e27c4a85b2f565
+[New module for GfsInitSpectra
+Daniel Fuster <dfuster@gmail.com>**20111102205422] 
+hash: 0000027576-079163a6a0a96f22c8141fa4cd0322c60aaceb4b6c2ff3a23d2e68ac17dd89b7
+[correction of structures in fft module to correct problems of memory allocation in parallel
+Daniel Fuster <dfuster@gmail.com>**20111105131456
+ Ignore-this: c88e4dfe6b724fe9ce06c4e194624a94
+] 
+hash: 0000024130-c1a4dff84091730f7eab439cb142f61867c52eb9ebc6bc8c97556a4cf1c72512
+[changes in turbulence module to match changes in fft modeule
+Daniel Fuster <dfuster@gmail.com>**20111105132042
+ Ignore-this: df12eedde4ed56c80f3b8e856c4f3820
+] 
+hash: 0000017260-07ab4192bf84bc2e2383c1f771fb13b9dd7935b4c0664b3eabf47e4cc388e860
+[update in the structures
+Daniel Fuster <dfuster@gmail.com>**20111109150606
+ Ignore-this: 57ff84437c8637c9733dbd49498123c7
+] 
+hash: 0000018603-68c74f250d20f4d3e818b9a8b7f23f5dbe0472cc805eada6545be3b5ec3cd251
+[new objects for turbulent viscosity in the new format
+Daniel Fuster <dfuster@gmail.com>**20111110202645
+ Ignore-this: eee30c3b2d8400cc8b1bdacf4ffe6617
+] 
+hash: 0000015266-175d01f507e8befc0d3743aa26284010220b568956cde912e25bee25909a38ed
+[Several fits in turbulence and fft module
+Daniel Fuster <dfuster@gmail.com>**20111129170614
+ Ignore-this: 4abd7694bf5305d76e75b6613e61ac4c
+] 
+hash: 0000016942-5fc5bf2027710923b8cdbb07f7115a83532245a546cb592557f3e17c39e77527
+[TAG 2011-10-25
+Release**20111025074046] 
+hash: 0000001815-95ef97446b5b455b27e13c47b8760f623a8602792ee47d2a601338cdfbe26f51
+[First implementation of metric terms for viscosity
+Stephane Popinet <s.popinet@niwa.co.nz>**20111028040526
+ Ignore-this: fea1d0218b13c327aba91cb52653961f
+] 
+hash: 0000020160-48060d760d9f988e0177a214b55530f40ad953a295cbd4101e0ce289d25b2726
+[Improved cloneubuntu
+Stephane Popinet <s.popinet@niwa.co.nz>**20111030101329
+ Ignore-this: bcf24457a8a3b916c0185a4ef8ce9cd1
+] 
+hash: 0000000362-4c1f73e86541ead04964cb2cd01d54dca61a140fd66d1ea1d0640041c2366e15
+[Fixed m4 options configure test
+Stephane Popinet <s.popinet@gmail.com>**20111102203627
+ Ignore-this: e39fc0647dfacf50a3dcfcd576f55424
+] 
+hash: 0000000473-831736cfc0778b5f1993c6323ed35a2d7bd4c45005eced7acec9b6600f921410
+[Updated conflicting debian packages
+Stephane Popinet <s.popinet@gmail.com>**20111105054850
+ Ignore-this: a3250daac74a104a97837f8dd36ee3ec
+] 
+hash: 0000000303-7d18cb5845e0494a22b051bebba9b4aa0d2882bcda08b58a718cef513b53e846
+[New vector mapping functions
+Stephane Popinet <s.popinet@niwa.co.nz>**20111106235459
+ Ignore-this: 46da9198c57367845a633e6b0dacbe4d
+] 
+hash: 0000004922-54a0874d3a8acc16a25f2d5f50f77b365089e48cfcf5da13bb536d017fcc0735
+[GfsSource takes into account mapping for vector quantities
+Stephane Popinet <s.popinet@niwa.co.nz>**20111107000008
+ Ignore-this: 1d6b6c08f5a632e8d4161a8788644b3a
+] 
+hash: 0000008696-d1aca607f2e793b130a6e2911318390bced9d58be13bbcc235c09c105200c7ac
+[New annulus test case
+Stephane Popinet <s.popinet@niwa.co.nz>**20111107002352
+ Ignore-this: d57444791e46d21d8eaf16946a8745b6
+] 
+hash: 0000004825-76c4f3ad4836e4b3d96dd97fb253850e29c43769f7cac6f4eb8407ebffbf634a
+[Axi solver is now just another metric
+Stephane Popinet <s.popinet@gmail.com>**20111107201434
+ Ignore-this: 71baad19a1b320d02a27e0438f8bd32d
+] 
+hash: 0000035210-017f8bcfb5699df82b7d8e495207d845aef22bb48ddc7b85c9db143729255618
+[Cosmetics
+Stephane Popinet <s.popinet@niwa.co.nz>**20111109092907
+ Ignore-this: 9933fa91eaf2ce7a1007bc1490991e36
+] 
+hash: 0000000590-582261c81d99c65d1438d7bbfefe2c7b0f17e71ca767ec2dbc7c6b39dc17d5ae
+[New wannier test case
+Stephane Popinet <s.popinet@niwa.co.nz>**20111109213234
+ Ignore-this: d7b6ebf9883cc85329b58941539a51b5
+] 
+hash: 0000007823-eac76428c347129e13110ea5ea24f881815bf217089811ed4ea53bd019ecc74c
+[New wannier/bipolar test case
+Stephane Popinet <s.popinet@gmail.com>**20111109221653
+ Ignore-this: d524a35bbb4e3d30c9eac89c2c716c1d
+] 
+hash: 0000007344-59a82c9da8ebac6f166a2688d0087972a8ddb70b5e738058af055d29588aa09e
+[GfsGlobal can include files from working directory
+Stephane Popinet <s.popinet@gmail.com>**20111109221815
+ Ignore-this: 3c0f35954d95dfe608963d8020650938
+] 
+hash: 0000001236-3c8df08088588f5c0753657d4cee516126f05dd0f962f3c28dd760a5df1f5a12
+[Removed (hopefully) obsolete check on interface curvature
+Stephane Popinet <s.popinet@gmail.com>**20111110031237
+ Ignore-this: ef534e2a5b3dc2bbb0069d167941631a
+] 
+hash: 0000000449-ef63ebec3d4974415af92c1f724379739c1a1d4e55d2deb7bac98f1d2e40af23
+[Updated test case references for new unified axi solver
+Stephane Popinet <popinet@users.sf.net>**20111110064344] 
+hash: 0000001206-5961148d71a6bb487460e37ba333e37481fd90be8a4d15eb637f013cc6b7d5de
+[TAG 2011-11-10
+Release**20111110084820] 
+hash: 0000002046-691d4b9117e937ea8b7e62feaedc208f399e4eca5846195f1d8f35486dacb37f
+[Fix for MapProjection and inversion of mapping transforms
+Stephane Popinet <s.popinet@gmail.com>**20111115010658
+ Ignore-this: 62f2a0a8cc9334745b75404444bd5c61
+] 
+hash: 0000001321-0d861f8a217e5c9d1f805b9076e6b4f791c08ebe67bdacd18e5303d45d080868
+[Important fix for SurfaceBc and Neumann conditions
+Stephane Popinet <s.popinet@gmail.com>**20111115010946
+ Ignore-this: eb1536ad793895c8464c91c77f1615c1
+ 
+ They were completely wrong for values different from zero.
+] 
+hash: 0000001904-6b4d3a53d2a57af45c8d8a810a3347b2b9767474855f9bb32b0a96577084a265
+[TAG 2011-11-15
+Release**20111115024731] 
+hash: 0000000470-a9227e99eb5aa9d2fb1bc7e0067c983498a3e146add7d7c4df4866e03107af2a
+[New --debug option for gerris2D/3D
+Stephane Popinet <s.popinet@gmail.com>**20111118015651
+ Ignore-this: b22f8781d4205fa355350a36234b66c2
+] 
+hash: 0000002126-583875f40fa7e0b544c5872e46f14a785ea9e7ab97d33a8e068e030086fc4f16
+[Bump test also compares the implicit vs explicit charge scheme
+J.M. Lopez-Herrera <jose.lopez.herrera.s@gmail.com>**20111122054925
+ Ignore-this: 87431726a9ab805a0720e5c4a51ffaf9
+] 
+hash: 0000009940-973d0029aeac52b85809a765f1b85a1ce01fb2588095c26e26d87ba8b2ef0bde
+[Electrokinetic test: Gouy-Chapman Debye layer
+J.M. Lopez-Herrera <jose.lopez.herrera.s@gmail.com>**20111122202821
+ Ignore-this: 4a059e2c998edcdb9e7223e77a6601cc
+] 
+hash: 0000012046-b2cecbd9b47c8b009bf959c0049e47b17c47daf3498a12496c2436c36d6e2153
+[Implicit treatment of the charge density equation for electrohydro
+J.M. Lopez-Herrera <jose.lopez.herrera.s@gmail.com>**20111122202841
+ Ignore-this: 13bcb7d11eb08bdb2234d4acb6c09328
+ 
+ Charge volume density is now user-defined by means of the function 'charge'.
+] 
+hash: 0000014243-0f60e7ffe4721f55764829e238712ecd8cee5c04ed8b9aecbcc63e0adbba7c99
+[More fixes for map module and inverted transforms
+Stephane Popinet <s.popinet@gmail.com>**20111122203227
+ Ignore-this: 68cb82ff40ccc27a176dc93fdda2cab2
+] 
+hash: 0000001780-d3820f252e30d604f1ceb71a178e5c26d6d92deeef66a7e8b1b0c096c489931f
+[Removed obsolete GfsSourceCharge
+Stephane Popinet <s.popinet@gmail.com>**20111122203349
+ Ignore-this: 9ebab9f5d1dc8ebfd40e1393ae03c211
+] 
+hash: 0000004360-61f4881d3ab752f893a4aa37dd40a3bb136790b63725909ed70e22d998c91804
+[Bug fix for charge in electrohydro
+Stephane Popinet <s.popinet@gmail.com>**20111122225702
+ Ignore-this: 547fef060f9dd5f8000ec31f1f2e167a
+] 
+hash: 0000000228-ab3a84bf7463d41f8c286c44ffa63ddbc78804cd8afd511a46fcb981512c33fe
+[Implementing gfs_domain_write_tecplot_surface
+Vladimir Kolobov <vik@cfdrc.com>**20111115221255
+ Ignore-this: 3e6604a274fdb0e293d3b6e5fba91ced
+ 
+ Adding capability of outputing Gerris surfaces (either gts or implicitly specified) into Tecplot files
+ 
+] 
+hash: 0000008166-9e5ed308cc0604c58f4ca36ad845d050ec5aa1612011d55986fe80df5f0d9bf0
+[Cosmetics
+Stephane Popinet <s.popinet@gmail.com>**20111123001109
+ Ignore-this: fd1ae6eb70f5a9fcac631eb344c51dd9
+] 
+hash: 0000002226-c1649aa0887d87f599573df7fbca189393d3eb6215c7af7a0fe9521dc1ff48ed
+[TAG 2011-11-23
+Release**20111123014627] 
+hash: 0000001647-2a0bcd6f695738f77b8399c05e6906967c5d09768867d773fe575a65aa91a2ff
+[(dirty patch) changes in fft module
+Daniel Fuster <dfuster@gmail.com>**20111209153026
+ Ignore-this: 575fe4f3f625902dd22a1b119382f899
+] 
+hash: 0000003090-07d9211ea8e1a2eac57fe1398ebe432cdd56342dc480169e396f056d8cd6fdcc
+[(Dirty patch) changes in skewsymmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20111209153318
+ Ignore-this: 6ef2a9b01dfaedd306bb0695927998f3
+] 
+hash: 0000008080-5c05487c53e9b88cfbb80cc5366ba56b7d1370512f8a9122cea92654f31eea4b
+[(Dirty patch) changes in turbulence module
+Daniel Fuster <dfuster@gmail.com>**20111209153434
+ Ignore-this: f25400b03216708af47d42f8aa552067
+] 
+hash: 0000001810-dbae1161f9c1e3a1a5116b0da552c4080bc3018ac77a0ed6ff6cd0d25c2ebe9a
+[new function gfs_function_pos
+Daniel Fuster <dfuster@gmail.com>**20111209153510
+ Ignore-this: 12c3f8630c3cb3568a52eff9e4b133d
+] 
+hash: 0000001506-38f4a69ecb4d10380d49a5c310f2bf135b72907fe95aab15e64a81bf86f89a0c
+[more changes in fft
+Daniel Fuster <dfuster@gmail.com>**20111211211914
+ Ignore-this: 777792c2a0023a4f0cdd52adcfbeb8f8
+] 
+hash: 0000002862-75e8d1367671ae7b8a7743c8c03dbe34b870f625d498e9a1e8a638a5d37af1fa
+[Cosmetics in fft and turbulence module
+Daniel Fuster <dfuster@gmail.com>**20111216150137
+ Ignore-this: 2ed56ece5bdda745ce17eb9ae6493d56
+] 
+hash: 0000003379-d2c6e960429f0b69041671b1f00e59c06101ce35e67bed0b9dc93e4582902d9b
+[kcut in GfsInitSpectra
+Daniel Fuster <dfuster@gmail.com>**20111216150329
+ Ignore-this: 51cf23db80dc095af21ea33fec917c5c
+] 
+hash: 0000001074-33ea096351be2cce37820a6f0775ac9242b7c95c41a32136cbc604f0a95a15b8
+[Several improvements for AMR in skew symmetric module
+Daniel Fuster <dfuster@gmail.com>**20111219102638
+ Ignore-this: 3cd9f18af52b6c8c361be8b77dcb0c8
+] 
+hash: 0000005678-0afd28abb08293e628c1d333e2abe94fd2bd966badeb468766ddd79f974caec2
+[New approach for AMR in skew symmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20111219142451
+ Ignore-this: f263f32d9246208f9d5c10348d7bcd37
+] 
+hash: 0000003809-daec42f612428baa1f5608fcfb4ba00247515a5220ea9b43c6a00c03f1f89412
+[New GfsInitFaceValues object
+Daniel Fuster <dfuster@gmail.com>**20111220143117
+ Ignore-this: 20e57b8262d8c0b9cf600bc37566d5e4
+] 
+hash: 0000003498-e3cc55e015b6279b5eb0786fe49e3df6579cb4990b1995718e012afe101d3c96
+[InitSpectra allows to initialize an inviscid turbulent spectra if no Re number is given
+Daniel Fuster <dfuster@gmail.com>**20111220143215
+ Ignore-this: e03168be542357f0a9c9e526decf1d2e
+] 
+hash: 0000000594-3821c9498753d7cba575680d47fd0380f40b96404e39b4b05572bce542f149b5
+[bug in sigma turbulence model
+Daniel Fuster <dfuster@gmail.com>**20111220143706
+ Ignore-this: abce1b4c1044b97a5ee30c8f27441375
+] 
+hash: 0000000645-cffb53702b934d1b8490cff3ca3f9f7b53ecce3255c254bb85933d353a1340ff
+[Store Prev Position of the particle for BCs
+"Gaurav Tomar" <gaurav.tomar03@gmail.com>**20110501120653
+ Ignore-this: 6068d3ca8d233dfc3061c9e671cbd1cb
+] 
+hash: 0000000249-a9e6df3ef96e0e497941922cc290d674ec6ffe6c78e7e3f33ffd0eb0f2dde281
+[fix turbulence patch
+Daniel Fuster <dfuster@gmail.com>**20111220145105
+ Ignore-this: 3802ac6fd8a57148841a0ca187c2db25
+] 
+hash: 0000000239-88b10b3254230710f604b4e9246dd730d3539f34ac13ab7eece682ac300b4a85
+[Periodic BCs for Particles
+"Gaurav Tomar" <gaurav.tomar03@gmail.com>**20110503064059
+ Ignore-this: 1c30394b36fb4f69c9600624773749f8
+] 
+hash: 0000014387-27a21e448220f8c4331c13c1e10c5622adfaa0a8cea1b1b1aa40e4d3f4a9d0f0
+[bug fix boundary periodic particles
+"Gaurav Tomar" <gaurav.tomar03@gmail.com>**20110503101046
+ Ignore-this: 90bcabac203403d64a2d8f9f63d3b50d
+] 
+hash: 0000000326-86b684d5bd42569ae9d348848a294ec037de0351c511cf32253b83f4ad46e8b9
+[Modified particle periodic bc
+"Gaurav Tomar" <gaurav.tomar03@gmail.com>**20110506035342
+ Ignore-this: 3986ed8aa42b9d8e1bb9bfe6b7d984e3
+] 
+hash: 0000005724-16c56ae5f8b3d95c12e1481426c4c2dad236948e6b2159ff28f75420a8b270fe
+[ParticleToDroplet proximity based
+"Gaurav Tomar" <gaurav.tomar03@gmail.com>**20110510123435
+ Ignore-this: cb11b3aac86810c5c8ed2d7fa37eaaae
+] 
+hash: 0000001308-db7bf3e6ecb88f16f616844c17476f6cf2f0764eef7381003a18028bd533b9dd
+[Boundary Conditions Periodic and MPI
+"Gaurav Tomar" <gaurav.tomar03@gmail.com>**20110513212604
+ Ignore-this: b24b74769d91f934265948b6ab49cf9d
+] 
+hash: 0000014385-86fd040455736233a78f1ee395a0e6bc0d9259b45b9c07721ad40073e898a464
+[Some small bug fixes for particulates
+Daniel Fuster <dfuster@gmail.com>**20110513213534
+ Ignore-this: 11fc30920307de404dd03190cff1e80c
+] 
+hash: 0000003387-6ffb4137e83d69f1663e245232eee8230e07ce037eabc54bb3ad45fe582e4dfc
+[Modifications in Particle MPI
+Gaurav Tomar <gaurav.tomar03@gmail.com>**20110517124155
+ Ignore-this: eedf7c72b51f3b74edba2c330e7296f4
+] 
+hash: 0000008076-0b5cbe5084178b7a56137d47dd0b7e2a638579b58203e7948ac15d8df5f62b29
+[new GfsDropletToParticle object
+Daniel Fuster <dfuster@gmail.com>**20110615224136
+ Ignore-this: 442f3f836a9c1971ffb76e9b3e88d73
+] 
+hash: 0000003721-0b2612d802ee246d5ed2e09bd986fb060dc8ee20e5653af933ed9b7935556628
+[New GfsFeedParticle object
+Daniel Fuster <dfuster@gmail.com>**20110617095855
+ Ignore-this: b0b118c9d6153081825c746cf88ef827
+] 
+hash: 0000002163-84ddf373a83530d27abbb79e38c808cc4b58a2b8466109e36aab256ab4a75f72
+[New add particle function for clearer code syntax
+Daniel Fuster <dfuster@gmail.com>**20110618130349
+ Ignore-this: 8e455500e145ca1e7baa9bb123e1686
+] 
+hash: 0000005812-ca24e61bdeb8d3986e5ab08eb1d0d498b8bb55ef2233a3990a2a7245e7d23043
+[particle_id function 
+Daniel Fuster <dfuster@gmail.com>**20110618133415
+ Ignore-this: 593f07ee08a7e0d50db82cff9ed80237
+ 
+ it needs to be generalized to parallel jobs
+ 
+] 
+hash: 0000000384-9639c946b92a762b0a612b14a18cb8992247ef2f7b165ebe106b2ed4e8557748
+[ParticulateObjectParallelBug
+Gaurav Tomar <gaurav.tomar03@gmail.com>**20110622044914
+ Ignore-this: a4fbe4bb36a05c25a608b575030e4ab1
+] 
+hash: 0000000261-d9f8d92abcf2b336b3500d922093a4ebe3b1a696346b88582ef66ecca878a8ac
+[dimension fix for particule volume
+Daniel Fuster <dfuster@gmail.com>**20110701180909
+ Ignore-this: c9b3877840b3637b549066991cac2cd8
+] 
+hash: 0000000356-9648f2c1ed78b50eff669e6015e7219b2b01df9bc4db4ca9f1570fe1c409f4a0
+[fix particule volume writing
+Daniel Fuster <dfuster@gmail.com>**20110701181408
+ Ignore-this: bdffac6717cac8cf2f524c022b24a615
+] 
+hash: 0000000431-b75256fc10bfad6cdfa710a82d31d0ded7631c2541fae9cc0a9506c8826dabb8
+[GfsSourceParticulate Object
+Daniel Fuster <dfuster@gmail.com>**20110702181713
+ Ignore-this: b5d9079d2ff9145382f18d29f1c76bcd
+] 
+hash: 0000011651-0dcf3e002d4a085bb18d0088945d512b540fa7f94c173a97bef15451231a2279
+[bug fix in particulate read
+Daniel Fuster <dfuster@gmail.com>**20110718175956
+ Ignore-this: c033abc3f0432e7270c61694d3c64e52
+] 
+hash: 0000000559-08132cc40056fac388abf12f0756d88868a9d5a7c0985758d747c6cb70156430
+[fixes for AMR in the skewsymmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20111221165628
+ Ignore-this: 30a138638ae3a33f8327ec52bfbb5216
+] 
+hash: 0000009300-813687542be576c9399e8795b591c95def529f844fc2a3b2456eac2fb83d596a
+[symmetric boundary conditions in skewsymmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20111229123626
+ Ignore-this: dc00bdbd9ab3669bf4ddc58c09e8f44f
+] 
+hash: 0000000919-0b8f199cd960b30a678325aea9e48b870717e4d793f9c5b3c02199c32e62786f
+[Fix in the face velocities used for VOF advection in skewsymmetric module
+Daniel Fuster <dfuster@gmail.com>**20111231114935
+ Ignore-this: 86680964fad0cdf47435d81abe7cd3ad
+] 
+hash: 0000002725-caf33da73700a7db98965fa69e52c03456883abd6ea1279f200a44a7dc33abb9
+[remove sold from previous implementation
+Daniel Fuster <dfuster@gmail.com>**20120106224430
+ Ignore-this: 32daf0f4fbd0a474505ec57654a45104
+] 
+hash: 0000001691-fda67fa4f1e6192956b23860c73b63c86669563e32d15ce14e5b28dd45b05dde
+[Correct initialization of the old face velocity
+Daniel Fuster <dfuster@gmail.com>**20120106224832
+ Ignore-this: 103cc2447b2de4193c72d721e3092ca0
+] 
+hash: 0000000726-2b1cee37165cb9bc2081e4fec10a852cfb831edb8c80530b3864606a1a01727c
+[fix memory allocation init_spectra in parallel
+Daniel Fuster <dfuster@gmail.com>**20120106224943
+ Ignore-this: fe4b252b1f88b931c29ebfe359a7d88d
+] 
+hash: 0000000316-00d61070b4718478d996bb1c0fcae31a88bc625e10cf7e4877449c43dff72322
+[fixes in skew and turbulece modules
+Daniel Fuster <dfuster@gmail.com>**20120108024112
+ Ignore-this: 1c89e388d13f9f0157f88f24a8de291a
+] 
+hash: 0000001022-afb144ac62f7643cc6902be1ec7201b521c54bb6bce06bbc46010e7b50df53ff
+[important fixes for the parallel version of the fft
+Daniel Fuster <dfuster@gmail.com>**20120108035914
+ Ignore-this: a55751b767dfb65ea618111d6c61ee4f
+] 
+hash: 0000006625-61804d13cf4f762e64e5edaad9c492c7712c3e6927bbfb937e4bbc9a31b97751
+[map_inverse_in_read_write_of_particle
+Gaurav Tomar<gaurav.tomar03@gmail.com>**20120110152900
+ Ignore-this: 97afcf6de7147a66c0fc0b8cd56093aa
+] 
+hash: 0000000537-2103cb93f83ab60c2060ddbc9d650954bb1c8cdc86e41f8e4ade306c9b173d23
+[simulation_map_particulates_and_other_bug_fix
+Gaurav Tomar<gaurav.tomar03@gmail.com>**20120110170226
+ Ignore-this: 97601a4f84e5f271ead9d68089610dd
+] 
+hash: 0000002682-b2361d2e093f079b4b4423e86fb80f9bcc54d233ec893956301a5580ede71a70
+[bug in skewsymmetric module and AMR
+Daniel Fuster <dfuster@gmail.com>**20120111090258
+ Ignore-this: abcc708d8574fab9a6c80341304b5094
+] 
+hash: 0000000358-de18cfad979c776a8e5b821653ace22108e51d8887cb68e599c213d3eeeecad3
+[Simplified box_split()
+Stephane Popinet <s.popinet@gmail.com>**20120130013745
+ Ignore-this: fdc12aae6a418d635e3e25370956c03
+] 
+hash: 0000000521-bd217c5c1a010d4d191ed80c6a07fcbe1d6565adb965292941f4fab0cb425739
+[All GfsModules are kept until the simulation is destroyed
+Stephane Popinet <s.popinet@gmail.com>**20120130014359
+ Ignore-this: c895c029e22462a4cd41478557e7d31d
+ 
+ This means that in parallel no recompilation of GfsModules should be
+ necessary for GfsFunctions appearing in the boundary conditions of
+ GfsBoxes (when exchanging boxes between PEs for load balancing).
+ 
+ This should allow to circumvent the dodgy fork() limitation of
+ openfabrics/infiniband.
+] 
+hash: 0000001469-ffc34bd571fe99c0f549c0f5ac33bdff09cc3e4aa59195245797456e4ab8f1cb
+[gfs_send_objects() and gfs_union_open() use fread() rather than mmap()
+Stephane Popinet <s.popinet@niwa.co.nz>**20120127054412
+ Ignore-this: 5983165a4ed982d8505cf1cad3d37d04
+ 
+ Openfabrics/infiniband/OpenMPI somehow does not like mmap().
+] 
+hash: 0000002388-f17ae519a0dc07b2d1a95ea8d68b42b68efda4c4499603686ccc9266bca348bd
+[New object GfsHydrostaticPressure
+Stephane Popinet <s.popinet@gmail.com>**20120130044350
+ Ignore-this: 5bd90c32300e50e13e0230a152825517
+] 
+hash: 0000005696-bbe3642394263e3afc7ae4aeeac2604e59bfe16678a8e2f6f17da4469e59f699
+[Consistent use of GFS_VALUE() and GFS_VARIABLE()
+Stephane Popinet <s.popinet@niwa.co.nz>**20120130044724
+ Ignore-this: 781bf1fd9f42c3769dd620e35cc001eb
+] 
+hash: 0000036796-663e27ee04abee687e42e29bfff0cc4f42a2614168dcc14f87366e615a3f5162
+[Changed quotes for TecPlot files
+Stephane Popinet <s.popinet@gmail.com>**20111124221047
+ Ignore-this: e164b60bcb1cddb485c03feb7cd29272
+] 
+hash: 0000000469-34d5cacfbcfaea2b737c4df3196b61b94d6dbce06157e6cde25114dc04e92973
+[Do not call boundary_tree on boundaries with no root cell
+Stephane Zaleski <stephane.zaleski@upmc.fr>**20120130214007
+ Ignore-this: a0c2de64c741395f862d5027159cf170
+] 
+hash: 0000000357-187765d7e9699b940f44219d751ada6baca7c9d0c57ebfe70b8b4e2ebf710504
+[Fixed typo
+Stephane Popinet <s.popinet@gmail.com>**20120130233751
+ Ignore-this: 3bc395ec87c4c0293570694fff7001c2
+] 
+hash: 0000000310-b664c1d1b79dfda0aca1cf6b9565fbd7d74a8867e8cd9949f4f774fb836598b6
+[Unified WEBROOT for docs
+Stephane Popinet <s.popinet@gmail.com>**20120131025545
+ Ignore-this: 7367c289052146e70f42ecfd685c005f
+] 
+hash: 0000000600-5b25e7aaf9ed7a72a1550ca9ac70888cc8d26d574667f0a6cf91a58c51391518
+[TAG 2012-01-31
+Release**20120131044628] 
+hash: 0000001770-f56ffc6737fd8ef6ffa37a27445d69b17fb80a76f1204de068248841dae744bd
+[added missed gfs_domain_surface_bc in electrohydro.c
+"Jose Lopez-Herrera Sanchez" <jose.lopez.herrera.s@gmail.com>"**20120201140612
+ Ignore-this: b2eddd84176b8d4185c7b6902a2bb9f0
+] 
+hash: 0000000315-2b94f73105b83cf1dd234475b92c7da4f42851454a0e3f082b78c9c7b1a6b553
+[Timestep CFL only takes accelerations into account when velocity is zero
+Stephane Popinet <s.popinet@gmail.com>**20120207213655
+ Ignore-this: cf59d86f16fb3866d14955738090e54b
+] 
+hash: 0000001099-ebdac794b7aea58a70c87cbdd27211dd07fc9d923d5513aed530aae0af81d1e3
+[Minor warning fix for gfs_velocity_face_sources
+Stephane Popinet <s.popinet@gmail.com>**20120207213752
+ Ignore-this: 4d51c3af472e6d041910af6b37393805
+] 
+hash: 0000000211-414059790afedd182a78ab0e2e414c24f96465b348cac0ed2b97e176047b327e
+[GfsPoisson takes Dirichlet conditions into account for compatibility
+Stephane Popinet <s.popinet@gmail.com>**20120207220002
+ Ignore-this: cb88ef0f68718bd96cfc19ba169f197c
+] 
+hash: 0000002229-5e768a2354d61834f78911b927d6fd38cb44ba071c5a73c2abed023bb0e44f96
+[Hydrostatic pressure needs to be updated when the mesh is adapted
+Stephane Popinet <s.popinet@gmail.com>**20120209201936
+ Ignore-this: 9e6e4db5e2b6abf7af99b6da64221c86
+] 
+hash: 0000004670-ebaa784c7eb6c2793f913d082b1c6d3c91eb0f4a64edc1de3128d6defd5f0efa
+[GfsInit can initialise vector fields with metric
+Stephane Popinet <s.popinet@gmail.com>**20120215224404
+ Ignore-this: 4908cf33df1e464f3f2db58c82ce27d3
+] 
+hash: 0000012477-145374dae44701cbe47be1be3ee1219a2f679416a3d6626e0cd65c8669d84475
+[Added vector transformations to cubed sphere mapping
+Stephane Popinet <s.popinet@gmail.com>**20120217021512
+ Ignore-this: 4d675d9c060a2baaea33a1909ed4ab95
+] 
+hash: 0000003356-845f072f574d978d38b0e4ce6ba2edd4bb1b97d08bad7078926f217a4424f283
+[Metric terms for advection of velocity
+Stephane Popinet <s.popinet@gmail.com>**20120217021647
+ Ignore-this: 704cc617fe0e7e7bd68474abc1882c19
+] 
+hash: 0000019046-8a4d4d9a5a7f7c48f40d6747357428c20953081d10270b41ce22e20dc181aa4a
+[Bug fix for gfs_get_poisson_problem() with periodic boundary conditions
+Stephane Popinet <s.popinet@gmail.com>**20120217020451
+ Ignore-this: 643e18e98aa492466da088ec67e15853
+] 
+hash: 0000001057-25891a61a32cddfbe2f9d615b7b01ea8cab5363ff731637d38a7d10fdb33906a
+[Acceleration-based CFL rollback
+Stephane Popinet <s.popinet@gmail.com>**20120220224338
+ Ignore-this: 69a52d28b98ab51d6a300902814d9edf
+] 
+hash: 0000001058-da98c8e5b739fdc9287e76ea491c527c0869e582ba697691b1a00ac75a5364a2
+[Minor bug fix for Coriolis terms
+Stephane Popinet <s.popinet@gmail.com>**20120220225744
+ Ignore-this: cf5b1ce6b52191934cd1f4de7448efca
+] 
+hash: 0000000273-9432b600797fd781fe2672a3e164d68db4234550df202ff6c80b94dcf8bf5f63
+[Fix in viscous terms in the skew-symmetric module + several minor fixes
+Daniel Fuster <dfuster@gmail.com>**20120125181211
+ Ignore-this: 7d2098cce55d6bde3b1c62a61addf18c
+] 
+hash: 0000059105-9c44eacc27789285b47a9e9b92361677014304c05e530fc048c1f157fc7dab36
+[New object GfsInitFaceValues in the skew-symmetric module
+Daniel Fuster <dfuster@gmail.com>**20120125181715
+ Ignore-this: 2dc8c1293c7c253fc7d5fb99a4f853e6
+] 
+hash: 0000007047-9f06e1b6787b00c0f61a80307b421698d8e401e16288974b60b01a0b7df50544
+[Fixes for AMR in the skew-symmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20120125182233
+ Ignore-this: f179b8a89d190504737a584e5cf8c7ed
+] 
+hash: 0000014310-079f9ad7329f014685b47f25ad775577b04ef6d458956844c61893c7dfd3fc17
+[Cosmetics for skewsymmetric module
+Stephane Popinet <s.popinet@gmail.com>**20120220230736
+ Ignore-this: 171c9dae726738a76bfe2880c8692455
+] 
+hash: 0000329177-126c27a6b57db72364f820b02cd33fb930e5e430616f789e670ea23522bb3d10
+[Bug fix for GfsInitFaceValues
+Stephane Popinet <s.popinet@gmail.com>**20120220233514
+ Ignore-this: 18710dc5e964636458f48df07bbce653
+] 
+hash: 0000777361-f869b1201cc6f80c10fa019ec75170402d5a728692bb29f3d35425373bedbfb6
+[TAG 2012-02-20
+Release**20120221025025] 
+hash: 0000002622-62b6b64226de096d2f1da36204c56533867f4a4ae8219b3879b01281ca7be220
+[VariablePoisson takes an optional multilevel parameter block
+Stephane Popinet <s.popinet@gmail.com>**20120221224700
+ Ignore-this: 36672da39e1db8b3dd3d5c06fda2025f
+] 
+hash: 0000002035-b00feeb3593e1cc4b2132bce0bbd03b2d73a0cb53369bb50dac073a1391ef6ec
+[Bias of residual now correctly reflects the compatibility condition
+Stephane Popinet <s.popinet@gmail.com>**20120222001234
+ Ignore-this: 5223a932ab6ad45fc9feb7cb698c5880
+] 
+hash: 0000001600-90399a9176db1bd1b64a476736b808e1f2546bf56512331247cd27749d6b10b7
+[Adaptation needs to occur at the right time for GfsAdvection
+Stephane Popinet <s.popinet@gmail.com>**20120222204500
+ Ignore-this: b2f6e4c053c640c10ba6e97aa37552
+ 
+ In particular so that the streamfunction is defined correctly after
+ adaptation for streamfunction/vorticity formulations.
+] 
+hash: 0000001911-30b6a60f60b72be5716186d226b2f94c9d3871e663b1b57aea582df2346e1b96
+[Hypre module now works also for VariablePoisson
+Stephane Popinet <s.popinet@gmail.com>**20120223021304
+ Ignore-this: 7d16f705a92d810dbd67135bdc1dcbb6
+] 
+hash: 0000000857-b3e400df26e9f4364c15ef4e7899691ee10beb3a0753d430582f23c415cb37fc
+[Fix for VariableStreamfunction and degenerate metrics (e.g. lon-lat)
+Stephane Popinet <s.popinet@gmail.com>**20120223021419
+ Ignore-this: bb3925df104d8a9b455c2e8614e14ba
+] 
+hash: 0000002367-a17744a9641c16dbd3ff6e486f03c665375fb48c0dcf470307c8f3993a5b617f
+[Removed crappy "deferred compilation" stuff
+Stephane Popinet <s.popinet@gmail.com>**20120224054137
+ Ignore-this: cae4f449e9340e87e66655843cde62e2
+ 
+ This has been replaced by a generic global function cache.
+] 
+hash: 0000008460-87a5965a570cb4d0283fa5314f593555c7857b290394f2fe69ba0e366fdd4f09
+[Support for metric and embedded boundaries
+Stephane Popinet <s.popinet@gmail.com>**20120227232215
+ Ignore-this: fedf688e9a72333f607bdaffce87b734
+] 
+hash: 0000006933-4b36120240c6bcc3468c73503633dcff6921f108348b0452a2162f5ede74c7a6
+[Updated reference for shear/curvature test case
+Stephane Popinet <s.popinet@gmail.com>**20120227233131
+ Ignore-this: 724838bfe1d7974860d9bb275d988666
+] 
+hash: 0000000358-d91ed5ae102d57f702012dc4e1db42cf9b5b3a4f5860e959450a96ce99c3d33d
+[New test case for AMR with the skew-symmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20120228221020
+ Ignore-this: 27c91ebe38cd27a87a48799a2d4ef535
+] 
+hash: 0000003670-ded35bf6badee8a6a853cd810ed00974932895fad35cb4687c602600199fd716
+[Fixed version info for skew_box test case
+Stephane Popinet <s.popinet@gmail.com>**20120229014137
+ Ignore-this: ccf5055034690a3f526946310fd7f741
+] 
+hash: 0000000352-f34f8a1117b2bd89f4e6dc17949b354be474a6e50cdbc8d2f0fd2b426b2ca9e3
+[New test case wannier/stretch
+Stephane Popinet <s.popinet@gmail.com>**20120229021006
+ Ignore-this: d168988b98da65e20b2052b34796d130
+] 
+hash: 0000003754-6357799ad109948d7fb08a830d6fbf4fa4114877c4bb4814050016550395e03e
+[Latex does not like underscores in test case names
+Stephane Popinet <s.popinet@gmail.com>**20120229055147
+ Ignore-this: 1500ff105f52a2d810d298cf6ccf9796
+] 
+hash: 0000000512-1e662e0f44116a0e7ee1bb9d72600d7f9a6af30d402c37def9aade408c567b0c
+[TAG 2012-02-29
+Release**20120229075733] 
+hash: 0000002162-83bfb372daf72a5490a5383a9d74ca8a654aa80376237eebd9c00be83cd49cb1
+[Fix for refinement of mixed cells containing a VOF interface
+Stephane Popinet <s.popinet@gmail.com>**20120229212912
+ Ignore-this: fc6f12e8c8656a52556901189d4b67f9
+ 
+ Note that this is not mass conserving.
+] 
+hash: 0000006358-245d098440ae6ef86dc88f068f490783d2fb2e967d0028b06350254561ef4380
+[Fix for GfsGlobal and function cache
+Stephane Popinet <s.popinet@gmail.com>**20120301214817
+ Ignore-this: 580a637995b63440176f3fc850d2e2a5
+] 
+hash: 0000002177-492a2272e1076e4451186dcb3b13ccb69a184b188adc7cd465863bf47f05a3de
+[Fix for incorrect use of gfs_face_interpolated_value() in GfsDiffusion
+Stephane Popinet <s.popinet@gmail.com>**20120301215011
+ Ignore-this: 2b0c79bd2c7dee0a18b8069c128027f9
+] 
+hash: 0000002087-940f93f2d904b858b86e5acba777d56763695daca62085ffdf7b3f740958b905
+[TAG 2012-03-01
+Release**20120302015856] 
+hash: 0000000616-7aca8f7f42361ace44ff037dcaef44e9405001a0bd410e0b5e39cd493088110c
+[Fixed gfs_variable_read_vector() input checking
+Stephane Popinet <s.popinet@gmail.com>**20120308210019
+ Ignore-this: a992b66a980dbc19c4290c751e7dd3bd
+] 
+hash: 0000000285-3a0ae8b54363830cb950e4d9643ad82a2a9638ba34e9f935edde0c3fcf2991d8
+[Fixes for automake and install dirs for scripts
+Stephane Popinet <s.popinet@gmail.com>**20120318000852
+ Ignore-this: 2e3365983df53a89ec0dbde0345d6506
+] 
+hash: 0000001444-656c0989550fe7a2849c282085df8b826adbf2a753226236dbef98c5bf0089aa
+[Removed support for obsolete 'gts-config' and 'gfs-config'
+Stephane Popinet <s.popinet@gmail.com>**20120318001123
+ Ignore-this: ab8fd3e6198a056d63059d5a4f077084
+] 
+hash: 0000003921-cf8e00b7fc7c5f8fc924b539a82eb22b02e4ea87dfae9ee3c305fcabb834e6ab
+[TAG 2012-03-18
+Release**20120318215802] 
+hash: 0000000560-ad90c152db2a3ac303e31c41d21e2a9246126a8247677a24c171a9fb9df08014
+[Cut cells for GfsRiver
+Hyunuk An <hanlight20@hotmail.com>**20120319000242
+ Ignore-this: 240572adda8ea499c65346201df9761a
+] 
+hash: 0000010656-d0205e9bfe6e2e16ff0cd6cd48c49b30676ed42aab8bfd59fcddf702ae15da9d
+[New 'shock' example
+Stephane Popinet <s.popinet@gmail.com>**20120321203404
+ Ignore-this: e9ba7e98e3a37398faea39b47c83e579
+] 
+hash: 0000003959-b548ed336c7eeafaf00b8d00fb06de4ca44622d5428191c5072166f8db90c0be
+[Fixes for gradients and metric in GfsRiver (due to cut cell implementation)
+Stephane Popinet <s.popinet@gmail.com>**20120321214535
+ Ignore-this: 4fe1c83d0a63b577322900f9b24cfed5
+] 
+hash: 0000017972-30c0fa71e6b9fe0354de2201d58f7677c86945b89a2a67bf7183862f7849bd26
+[Swirl test case
+"Jose Lopez-Herrera Sanchez" <jose.lopez.herrera.s@gmail.com>"**20120109145256
+ Ignore-this: 411b9e2bd5984fdb23e87a151a05ffb9
+] 
+hash: 0000009473-5e0cdd8142318c2cb4327af2e6785c149e9f7cb7ce80f6e29833e4fef1426453
+[Unified bibliographies for examples and tests
+Stephane Popinet <s.popinet@gmail.com>**20120321203947
+ Ignore-this: 5f560dd58ec3aa3f19031ff5ca645db0
+] 
+hash: 0000007947-c2e2e1c9d92ed3cbc22342379b72490ed0dc49fe5555396e508f0c1b9ac31d37
+[Fix for libparticulates and libbubbles linking
+Stephane Popinet <s.popinet@gmail.com>**20120322015203
+ Ignore-this: c5a0589855d120fba932dc91dfa8814c
+] 
+hash: 0000041078-808b5a7e728b2e357ece484ecca1fbc36a89ba077e1d390f72f27d1278791dcc
+[Swirl test case uses the new formulation
+Stephane Popinet <s.popinet@niwa.co.nz>**20120323055434
+ Ignore-this: 15b500cf5136fbc0e52b8bc4a4d07a10
+] 
+hash: 0000004915-0f250541bd17f44298f8f5ca5a64d148d63030c1fa215d8785e1f39514ed1be8
+['W' can be used to define an azimuthal velocity in GfsAxi
+Stephane Popinet <s.popinet@niwa.co.nz>**20120323073522
+ Ignore-this: 97ba54fbfc52cb8eb1e28688729d5d69
+] 
+hash: 0000003413-d326f8e30e975583ff9014af7eb9e19540732c0917d5bc3b66edd0c56b012599
+[New 'still' test case for cut cells and Saint-Venant
+Stephane Popinet <s.popinet@gmail.com>**20120313232203
+ Ignore-this: bf0cd7048c7f1a40dd7959c05208266a
+] 
+hash: 0000003566-6e08f98f9adb361be8619d13cc82358539eefe7b00528c207a15de79dc072e2b
+[New test case: parabolic container with solid boundaries
+Stephane Popinet <s.popinet@gmail.com>**20120318224951
+ Ignore-this: d468b8814e56973848c944ddb170ae7e
+] 
+hash: 0000005276-49bf918a97fb417e9aa9170d388e3cdbf6142052d75bc1d3642f2a617f875a38
+[New test case 'still/bipolar'
+Stephane Popinet <s.popinet@gmail.com>**20120320221821
+ Ignore-this: 1218f32923376019b7b8d51b1b67be2c
+] 
+hash: 0000004335-608759a40f3a97a5383dd67a70dd6301c97058124216d812e8c04b5c0f975ac4
+[Tests and examples lists are created automatically from template.tex
+Stephane Popinet <s.popinet@gmail.com>**20120323224921
+ Ignore-this: 3f6825675bb45b6584f91cbd9274e6f
+] 
+hash: 0000009082-bea1e2342c4630053e657eede1b7a69d7820c26bb8f60727a19fd1d526f47e2f
+[Fix for gfsview snapshot tarballs
+Stephane Popinet <s.popinet@gmail.com>**20120324001119
+ Ignore-this: a05e4406c4f162cef65484fa15430bfe
+] 
+hash: 0000002317-c764e9c224552b9d76a09f1eecac5d07eacb1d7954695608ca8dd210ccd3046a
+[Fix for bibtex path
+Stephane Popinet <popinet@users.sf.net>**20120324074134] 
+hash: 0000000464-44209b33f82d85ddea29e387668435ef300019c516e9907e07dc034af28c21e3
+[Need to use gfs_face_interpolated_value_generic() when face is not simply oriented
+Stephane Popinet <s.popinet@niwa.co.nz>**20120324074309
+ Ignore-this: 9ae2dd92ef6986ccc814cb68e94997fe
+] 
+hash: 0000001279-34984452a30cab12d81abb3c52e06b51c89687181194e5968c338bee7c3bf344
+[Updated reference for electro test case
+Stephane Popinet <s.popinet@gmail.com>**20120324225204
+ Ignore-this: 3b5c3055a6de92f7450e9af2c99d52e6
+] 
+hash: 0000000396-e08f6c1b7d6b76481f371487e518a5f333e9f36742d3b104437aa1ba039000ff
+[TAG 2012-03-24
+Release**20120325003503] 
+hash: 0000002471-2a6ef53eef5f3dd1f63194a10bcba1cfb1063b6e595a972692032d906b5b174a
+[RPM fixes for Fedora 16 and CentOS 6
+Stephane Popinet <s.popinet@niwa.co.nz>**20120325055134
+ Ignore-this: a7e4ec4f6d10e3c6a32e0faf44fff1f6
+] 
+hash: 0000000485-52274ebb8fd53f967340ac01e07783bdc1fc65758ef25d2c5e18cc6823761902
+[Cleanup of swirl test case
+Stephane Popinet <s.popinet@gmail.com>**20120325200509
+ Ignore-this: e3f6204d024e30c096ee496c85c8df68
+] 
+hash: 0000001156-2b533c3f1c9ab76ff0c9d3d52fe5ba08d5ef14a1978e84992bfbd400baaf44c2
+[New SourcePipe object
+Stephane Popinet <s.popinet@gmail.com>**20120326034128
+ Ignore-this: 4686b2189add64021e20e94738c9189
+] 
+hash: 0000007869-c0f50d342d23b9a090e3667677116dcde89fdbfaf89e1d7b0d1c02a8f77b8100
+[TAG 2012-03-26
+Release**20120326053207] 
+hash: 0000000491-93997c47ef8074ebf7590deb042acd3cede4ac9f216d98429861160fefcd7504
+[Different changes to make the version compatible with current gerris stable release from 03/04/2012
+Daniel Fuster <dfuster@gmail.com>**20120403150931
+ Ignore-this: 85739f99158951bb18ec2c8266534db2
+] 
+hash: 0000029416-fc48635b4092539d2bf7f90b830618e631b31e61c93d918149fe1f8e7684b90d
+[New GfsDirichletSkew boundary condition + naive implementation of solids in the skew symmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20120416152831
+ Ignore-this: 8d4a397012e9a93226b8af9d75f492a0
+] 
+hash: 0000006866-df7f2c22782478e4da6dde129c55c2bc42805a4e978b1f5fc5c89469082f866a
+[Much improved kdt implementation
+Stephane Popinet <s.popinet@gmail.com>**20120402231631
+ Ignore-this: 4365996b92e468829ae71f02ededf512
+] 
+hash: 0000030729-0b760f5d43b1f2b6fba3f00bcb5dc10ab34c46eb11b75303a4338908a3543521
+[Reuses buffers
+Stephane Popinet <s.popinet@gmail.com>**20120403032155
+ Ignore-this: e51ecb2b55f1f9aa8692074ed3bf0c42
+] 
+hash: 0000002545-a9c0860295daa415ec4036cab3c1be18531ba4936ff65c092890ff7c1a8e466a
+[Kdt optimises use of temporary files
+Stephane Popinet <s.popinet@gmail.com>**20120404004252
+ Ignore-this: 9bb271d605f7fe0025ab7443f0d1f112
+] 
+hash: 0000009820-5ee69e62947cc8a1cd47d15ecd9d43ad71542ee110024f23c0b8af9aa0e143fb
+[Electrohydro and Poisson/Helmholtz solvers allow negative coefficients
+Stephane Popinet <s.popinet@gmail.com>**20120405022710
+ Ignore-this: 7c62582b0f7863e1ce08223751e9c270
+] 
+hash: 0000001863-d4fb077ebd651c7fb7d5daf3e69f316984924f7428b852113d939ee0be670ae2
+[Terrain module now only supports the KDT format
+Stephane Popinet <s.popinet@gmail.com>**20120420044542
+ Ignore-this: bdf028c6fa9f61c8ac15b74e34ec5dae
+] 
+hash: 0000005587-e1cd7c3e67a6f3bce6f00fd30b98a3781afe3d6c2bce2bdb1c6ed148dc209ac2
+[Fix for VOFHeight Bcs when used together with Solid
+Stephane Popinet <s.popinet@gmail.com>**20120424063732
+ Ignore-this: 1fe0b2e9f25813358e4e6862e30238c7
+] 
+hash: 0000000272-549f299074a4d15c94fcb465891bde7f9147fd2ea735b8474ae584cbb4b26084
+[gfs_interpolate() uses 5 points interpolation.
+Stephane Popinet <s.popinet@gmail.com>**20120426010732
+ Ignore-this: 7aeb604d4bf5815de57308354a8900a5
+ 
+ This doesn't smooth as much as 4 points interpolation. Note that the
+ size of the array filled by gfs_cell_corner_values() as grown by one
+ element as a result of this change. It is imperative to adjust the
+ size of the array for all calls made to gfs_cell_corner_values().
+] 
+hash: 0000002994-76ff2acc8566f6c0e76d1d7dddb97c5963f3b7e466cea79df7e57d2a1c84d840
+[New 'terrain' test case
+Stephane Popinet <s.popinet@gmail.com>**20120426010747
+ Ignore-this: 5fe05ddda961e1bca498da2c1be80a37
+] 
+hash: 0000007323-0c296622b3507d2b2751747473c4ec7c7a43a66103974e2cbcfaef09a816a219
+[Fix for okada module and lonlat coordinates
+Stephane Popinet <s.popinet@gmail.com>**20120426011008
+ Ignore-this: f88962e643f2191db6534effbc3e9d01
+] 
+hash: 0000000531-b9026f57219bae9d641014b55ddd780c82b13714ea9feb3ad9c75bcf410f1085
+[New utility kdt2kdt for conversion between versions
+Stephane Popinet <s.popinet@gmail.com>**20120426034916
+ Ignore-this: 95f16454d7b3032b9dc591294a22ea2b
+] 
+hash: 0000005524-a1a91f38b653938b2f0038fcd598ab292ce942747c029bec080cd4323f74f998
+[New rsurface2kdt conversion utility
+Stephane Popinet <s.popinet@gmail.com>**20120426040053
+ Ignore-this: 28d90f90ca13e7ab126e9338a6890971
+ 
+ Old-style R-tree terrain databases are now unsupported but can still
+ be converted to the KDT format using this utility.
+] 
+hash: 0000030692-a62cd178aa0ba8aae54536412f62d37c0857bbe7a9dcd5e632a148d618b40b8e
+[KDT defines better bounds for nodes
+Stephane Popinet <s.popinet@gmail.com>**20120426045151
+ Ignore-this: 2f04a1a560da0051d72cd4f8a006e657
+] 
+hash: 0000015774-071b01f3990b20cbf81d950040643dd5aa0290237e1ce43221ac09b6e79ae642
+[Updated test case references
+Stephane Popinet <popinet@users.sf.net>**20120426065432] 
+hash: 0000001004-31bab6ef1d78aaeea55b2de6787602e4324eec866a2c2131c328e45b284492c6
+[TAG 2012-04-26
+Release**20120426093001] 
+hash: 0000002343-595640201abdcb503ff94375700fd913b70e6eebdf8016d5f4cbe3a4c80e4031
+[Fixes to let autogen.sh work on MacOS X - Darwin
+stephane.zaleski@gmail.com**20111219073123
+ Ignore-this: 4899bc46d7bf7d9cee5f70daf7001e4e
+] 
+hash: 0000001054-6e8da065a50bd94b053c5b0fad09be3dc94bd1a33f443e13bb47b7a7fa61f35f
+[Fix for compilation flags on Mac OSX
+Stephane Popinet <s.popinet@gmail.com>**20120426214843
+ Ignore-this: ab12052ed5490cd4b11dd8a0316be995
+] 
+hash: 0000001615-b2c88576f003f33006af4f202725b8094fd04d6eca16f720036722d9e70871d2
+[Fixed libmath and mergesort() conflicts in kdt.c
+Stephane Popinet <s.popinet@gmail.com>**20120426224044
+ Ignore-this: 9a2eec4143c9e0e83107f67c184e6af9
+] 
+hash: 0000001884-2abe68e1b4cfbe721c74b2d2e7ffc97fc24495207ebcaa1462929fa1d039a135
+[Bug fix for parallel restarts
+Stephane Popinet <s.popinet@gmail.com>**20120427044735
+ Ignore-this: 379b636b0f2e3d48975183d60b128727
+] 
+hash: 0000000492-d8d82515913ff39ffe49779f6b0a369ffce8377ac31504becf41bd45a7462241
+[TAG 2012-04-27
+Release**20120427082930] 
+hash: 0000000664-fbcee6c0a0665d8767f8b28d4771fad341d94cf72cbee2cf1871a4161ec88e06
+[dirichlet condition for the skew symmetric formulation
+Daniel Fuster <dfuster@gmail.com>**20120502071940
+ Ignore-this: abfb5259b1ce4c62bf50ba6660b5a0ca
+] 
+hash: 0000001713-e689f3c3fb3fcb16c5d256ca7e7649ffe48b9ad44f869804e8ea672e52e37fd9
+[skew symmetric tracers
+Daniel Fuster <dfuster@gmail.com>**20120502072042
+ Ignore-this: a07f68caad0f67fa1e91fa7e5d10093b
+] 
+hash: 0000004809-b2d284b2d6507326556ff95ed7c5b013012e0401b84bb897eb897f99b2377c60
+[Activating read write of GfsParticle object name
+Gaurav Tomar <gaurav.tomar03@gmail.com>**20120509094011
+ Ignore-this: db4d8c8a4ae5364c389c6420dffe073c
+] 
+hash: 0000000636-17c8ac896fa67f005719bb11795270485179ba4508b84ae32d8c575833f45fb9
+[Gfsparticulate parallel uses gfs_rcv_objects
+Gaurav Tomar <gaurav.tomar03@gmail.com>**20120509101037
+ Ignore-this: fc075bae345ae9c91d1b80105c102e8f
+] 
+hash: 0000002117-ff2f0953e8daeb332a82627eed44e6145b9b93fa6d33809bb9a6635bdaeeae16
+[Small but important fixes for particular cases
+Daniel Fuster <dfuster@gmail.com>**20120514085822
+ Ignore-this: eb4401c6a8825e53de3685c267853a8e
+] 
+hash: 0000000558-7884d09b539c7bdb845aa54124b0a6cea52ce12fcc5d118c4a693a81e32ca59a
+[Small bug fixes And No conversion of Drops at MPI boundaries
+Gaurav Tomar <gaurav.tomar03@gmail.com>**20120515085637
+ Ignore-this: 984b43ccb3061ff1c105d7274071ac50
+] 
+hash: 0000004667-c8f470a968174e99a601765728408e764e0403db4f1ba4103a3f3a3a7aee468f
+[GfsParticulate Inertial and AddedMass force (also small correction in GfsLiftForce)
+Gaurav Tomar <gaurav.tomar03@gmail.com>**20120515154806
+ Ignore-this: 7fdf275247f390bf7f6cbf5884adc529
+] 
+hash: 0000008507-c50d726877ca9652a6091af6abf2f77694f591b25e88c7bc705f3acf2399c201
+[Numbering of Particles in Parallel
+Gaurav Tomar <gaurav.tomar03@gmail.com>**20120516135637
+ Ignore-this: ec6add095b7c02c5b7d1f72f57510616
+] 
+hash: 0000003682-8ce2ed1e60f8ade906a1c5b3401d29ab29c8443b67f6c04f60c19f9bc9ac95e8
+[debugged mpi particle numbering
+Gaurav Tomar <gaurav.tomar03@gmail.com>**20120516145228
+ Ignore-this: 759283efcc96ada55a1013ba08a1adea
+] 
+hash: 0000000842-2a7cc9141b14998f1363de6713b1e3ea0ac78d8abd42cb7dbfc9f858d920e412
+[gfs_simulation_union_write modified for particle write in parallel
+Gaurav Tomar <gaurav.tomar03@gmail.com>**20120516070537
+ Ignore-this: 6bf100e8ae978b9a999a5f59a412f780
+] 
+hash: 0000002413-c091a66572ce8d05467eb5a314ec80d75b2113336f2a6f8dae99e88070a30380
+[Bugfix for ParticleToDroplet write method
+Gaurav Tomar <gaurav.tomar03@gmail.com>**20120521065531
+ Ignore-this: 9d52404c2d5613fb5285f7605bcfb8fc
+] 
+hash: 0000000402-91703ae6dee1cad729e416670222a7cd2dfa977bc6bb10eca923c69217e6b3bd
+[New object GfsDomainProjection
+Stephane Popinet <s.popinet@gmail.com>**20120207214013
+ Ignore-this: a634f5621548c185357154ad485a74e3
+] 
+hash: 0000009020-1335c24fe3801896a643ccbab2271ec4d61d891864523680999c3fcee5f9619b
+[gfs_domain_face_bc() now works also for "rotated" edges
+Stephane Popinet <s.popinet@gmail.com>**20120217021539
+ Ignore-this: 6baff89bee95af950fd53addd288276e
+] 
+hash: 0000004664-bb19a41a73a8290f8f48363ed8a1e862c0998c8fe9461d26b941b65e2e30381a
+[Vorticity is computed consistently from circulation (2D only for now)
+Stephane Popinet <s.popinet@niwa.co.nz>**20120222055929
+ Ignore-this: 8fac3fed9e6bef2aad03b1a3170633f0
+] 
+hash: 0000003080-24fc29db049088a8d5f045dde8e15038c3d0a70477f843540a4f3c49377e044f
+[New object GfsVariableAverage
+Stephane Popinet <s.popinet@gmail.com>**20120228212814
+ Ignore-this: 5dc9da02988ec3a293f3505b12300e45
+] 
+hash: 0000005361-8911f356834d934a25fe3328ef94fd64f187ad2b944a0d8cb40581216215d7ae
+[New 'layered' module for 2.5D hydrostatic solver
+Stephane Popinet <s.popinet@gmail.com>**20120308205848
+ Ignore-this: 54b2530569eadb2100f2bc9b485fa54f
+] 
+hash: 0000037384-232e33ee5dadb6bbe19a6eefe566ccf0f66c455b7f5d71b61697253e9245a3b9
+[Norm of residual takes metric into account
+Stephane Popinet <s.popinet@gmail.com>**20120321203804
+ Ignore-this: 66e6c918efe1174545a5d2d15dc638
+] 
+hash: 0000000453-6d10afa05da87a6d176080d6ab39e34b12362f890da19815a62e7bbb76100e41
+[build_function_gcc uses '$CC' rather than just 'gcc'
+Stephane Popinet <s.popinet@gmail.com>**20120430212432
+ Ignore-this: aae16e30983d455fc0f85c9e5545ed4a
+] 
+hash: 0000000612-18e5b8b98968d838dab4d762dcc369634b46b80d8c07a47944706f5f5d0df466
+[New 'culvert' module
+Stephane Popinet <s.popinet@gmail.com>**20120502213442
+ Ignore-this: 271186896f74536e07e508d2fd8ee629
+] 
+hash: 0000019744-f7b4d2c6fb3843ce880dc9b3b0cb0168778473bec4f243017edcfe378d960b19
+[A warning for correct use of EHD implicit scheme
+"Jose Lopez-Herrera Sanchez" <jose.lopez.herrera.s@gmail.com>"**20120503110240
+ Ignore-this: ab31e247309b2b4f967982269f65a33e
+] 
+hash: 0000001656-a10b6d9db4fbacb89bf6a89bae24684aaa7a435ae44f1ad44d54eb28d6d0797f
+[Fix for electro module warning
+Stephane Popinet <s.popinet@gmail.com>**20120503204504
+ Ignore-this: 383b941b1edb8e263e0dee1dea03d903
+] 
+hash: 0000000882-8e8adc4672a3b68243e3ec46efcf98a7d27a1692f6119f26088188dfb3e29017
+[New object GfsVariableLaplacian
+Stephane Popinet <s.popinet@gmail.com>**20120504065936
+ Ignore-this: 5d7e1caaf5e2af5c8631fb76ec1b0574
+] 
+hash: 0000003700-b6f0021b066626b4e9b772c38ef80cf913e1eba011825c7aee175a65c46ab03d
+[New derived variable "Orthogonality"
+Stephane Popinet <s.popinet@gmail.com>**20120508011047
+ Ignore-this: fa9b65551f5afc0f759e42c9ad14dca9
+] 
+hash: 0000000968-7c5834f7ec66b7aeae68bbcc0489c85cfe52f27d98c6a41e6da87739114fe100
+[New object GfsMetricLaplace
+Stephane Popinet <s.popinet@gmail.com>**20120515212846
+ Ignore-this: 43e14890bf1bb2d0e210c7c9b3177264
+] 
+hash: 0000007521-99b7497e1b17e4356141b163f6a989b88e3931387710f79e97d97ec93ab22a06
+[Conformal and spherical options for MetricLaplace
+Stephane Popinet <s.popinet@gmail.com>**20120516084025
+ Ignore-this: 70822b8587d58e003926116715b42758
+] 
+hash: 0000008003-66b6b3c256396687be7d1f149551ba75840bc39d3b404544a1a923e0712f291d
+[Orthogonality is the deviation from orthogonality
+Stephane Popinet <s.popinet@gmail.com>**20120516084239
+ Ignore-this: d444e0ddbe22b66ab3f72d1da3c41e64
+] 
+hash: 0000001415-3510e85047663f82f4738a83b2023b83ebef9497c735ca73e0b28755aafd92c9
+[CGD files now understand "rx,ry,rz"
+Stephane Popinet <s.popinet@gmail.com>**20120517232125
+ Ignore-this: daf2e576edfe2d1a4ab323be76ceb582
+ 
+ This is useful for defining coordinate transformations numerically.
+] 
+hash: 0000001691-869553c83f15341684172c0224f0bd51b38a9d8e14c5d63165683360ca107c5f
+[LocateArray was not updated when entirely solid boxes were destroyed
+Stephane Popinet <s.popinet@gmail.com>**20120520214045
+ Ignore-this: ffa69d1586adf94c325ada81006c408a
+] 
+hash: 0000004254-dfc16e65fd36e551c11e6f0c2a901a76edf9a8a0feecb94f5ee46b9c4e12da86
+[The TMPDIR environment variable is taken into account
+Stephane Popinet <s.popinet@gmail.com>**20120520221202
+ Ignore-this: 284af363266e4f8a5c88b075974c9bb8
+] 
+hash: 0000000790-efec3df09c91c9c124a3539756ce1a7aec5556eadc92014ce05844afbdee4d9f
+[Removed netcdf from RPM dependencies
+Stephane Popinet <s.popinet@gmail.com>**20120525044052
+ Ignore-this: 82f5d655c342b81b10c954231bc18114
+] 
+hash: 0000000971-13473ef5680241df9e025507a5a17d4885fe337353bf0bd0234d296174026ffa
+[New function gfs_cartesian_grid_read()
+Stephane Popinet <s.popinet@gmail.com>**20120525045701
+ Ignore-this: 9af85e4dcd1761ec311cc5ee8c110cc0
+] 
+hash: 0000003953-9ff426c24388f4071626b19bbeeb8d159bfacbecb62acf72c75eaf53692a1ada
+[New utility functions dx2(), dy2(), dz2()
+Stephane Popinet <s.popinet@gmail.com>**20120525045931
+ Ignore-this: 5d06f3590483fcce01f7dfde824efe1e
+] 
+hash: 0000001081-4eb11b522484f0e323123d3fd0cf3285dbda03f5e7807f9bf2b971410d9330f3
+[Fix for interpolation close to domain corners.
+Stephane Popinet <s.popinet@gmail.com>**20120525050617
+ Ignore-this: a008bd187c1469e8f6292ae20ec106c6
+] 
+hash: 0000001356-3c92739256822b45dbff09b026a37414521abf3e6c1ac9b53028bbc9397d18e0
+[gfs_divergence() and gfs_vorticity() take metric into account
+Stephane Popinet <s.popinet@gmail.com>**20120525051359
+ Ignore-this: efe0480c1e76697e4b4efa67fa0775c0
+] 
+hash: 0000004228-9350da7a3f3dbadac242285b730c1e682aef43e6867a7e7634c0ce42e42838dc
+[Switched cubed sphere coefficients back to Rancic et al
+Stephane Popinet <s.popinet@gmail.com>**20120525060828
+ Ignore-this: bee560ac7f39884c930a6da20c54fa3b
+] 
+hash: 0000001504-f4163c100b76452640fef3720566f358d521d1bf1cd0e041ec6b6c45c732df95
+[Cosmetics
+Stephane Popinet <s.popinet@gmail.com>**20120525061300
+ Ignore-this: 3bd035c28de8f9f324154415c7af3b09
+] 
+hash: 0000000911-a30f72a453c36b00a1b24803ba225169302ff2d3a0e973ff0ecd1f5b337c4f5f
+[AdaptError now works on cubed sphere
+Stephane Popinet <s.popinet@gmail.com>**20120528034856
+ Ignore-this: 1b13306326a25cdf763101e6d29284f9
+] 
+hash: 0000001651-ba48d20f1040a86bd97a1402302cb35a745106565b2d1ce4d59a45faf10265ed
+[inverse_vector() method for MetricCubed
+Stephane Popinet <s.popinet@gmail.com>**20120528035145
+ Ignore-this: aaf9cba5938b71012b2cca2a1e8c6567
+] 
+hash: 0000000946-e6c62d45ba785f746bd3d062218cd59d50d5ac6c68a125be99a340de8f755639
+[New object GfsMetricVariable
+Stephane Popinet <s.popinet@gmail.com>**20120528035415
+ Ignore-this: 5c1197db3a3417512e767bb39f3dac92
+] 
+hash: 0000012112-de88f0ab3260a1157d5a8c03deca2bf5c52d01e200a21f0634e6e06becf1cd87
+[Various fixes for layered module
+Stephane Popinet <s.popinet@gmail.com>**20120528040810
+ Ignore-this: 98ba30fc942dff173b615de4c5d8432d
+] 
+hash: 0000011873-602c43bca7d0e18bf06d4db25bb6e1419f8f32e02ff8deff298ae858385b2273
+[Support for rotated MPI boundaries
+Stephane Popinet <s.popinet@gmail.com>**20120529000015
+ Ignore-this: a5e2d0b5a5f76db8018763dde0595499
+] 
+hash: 0000007315-e9791353513dd17e3c52a1a7b9f7453909aa5c02490de3a0ef5528c77df990c3
+[Added evolution of error with time for cosine bell test case
+Stephane Popinet <s.popinet@gmail.com>**20120530230932
+ Ignore-this: 4bf050f14f14ce7f111c7865ca3c6106
+] 
+hash: 0000004332-c29f117483e15a2560518128c0e132d4c9f4eace843e0ed5ffd8cc02b3a91732
+[New Rossby-Haurwitz wave test case
+Stephane Popinet <s.popinet@gmail.com>**20120530234405
+ Ignore-this: 3269b68bb68db14a91c3918cbb833b25
+] 
+hash: 0000181563-e37ab903be79082f3f27141d3aac83339dbef3cbd3b6d1b6a2ac431a2702ad6b
+[gfs_divergence() uses a finite-volume approximation
+Stephane Popinet <s.popinet@gmail.com>**20120601012930
+ Ignore-this: 2a8e44a86f681ea50ad32cbb8120a8c5
+] 
+hash: 0000001049-89f9caaae83056a3fa040c180c6bd78918b3a01e5f4a1dc4f8b1064a2fd968fa
+[OutputGRD uses physical coordinates
+Stephane Popinet <s.popinet@gmail.com>**20120611235849
+ Ignore-this: 9c0ae393c8496f8c2664408f92501a95
+] 
+hash: 0000007389-95155b57b6eb14de616557674a825c8ba42c1ab2674f2a47b37b67736930f863
+[Fix for Dirichlet bcs in VariablePoisson
+Stephane Popinet <s.popinet@gmail.com>**20120612001328
+ Ignore-this: 540fd5f4736158ae841d32b93d470e2a
+] 
+hash: 0000000471-2014d005727611b4c9780d2c71dc9e0f4a6f500e257cdfc164dcea7393d11b55
+[New "overlaps()" utility function
+Stephane Popinet <s.popinet@gmail.com>**20120612014654
+ Ignore-this: 8d3670ad1279505197ef73a72b44a0a5
+] 
+hash: 0000000905-5874d7a008dcacc74eaf47e9e0420d137c235e489e7436c09181698a5a8ab71d
+[Updated test cases references
+Stephane Popinet <popinet@users.sf.net>**20120612234727
+ Ignore-this: 5079007b4664539114713ab833c2d951
+] 
+hash: 0000214433-e34db541cd9518b7b16f062983217f453a9746026271062d10f7a2d323f308bb
+[Fix for 'layered' bug in moving.c
+Stephane Popinet <s.popinet@gmail.com>**20120612234754
+ Ignore-this: 7b1086a64894f29a2900791fd01c0650
+] 
+hash: 0000000467-b13ef42ea6a1f0d8b0de851dfb131aaae927830542b697cae3a71d39abc3336a
+[Fix for treatment of thin solids
+Stephane Popinet <s.popinet@gmail.com>**20120612234840
+ Ignore-this: 14acd993944fdbf00d1f7a21685bd2ee
+] 
+hash: 0000000380-42aad8e8b4a73b91941c9e5542420c306fd6f942045143be228cbf10932b6b34
+[Added missing classes to gfs_classes()
+Stephane Popinet <s.popinet@gmail.com>**20120613031838
+ Ignore-this: 4a89d5b2612c5f2283653022e0bbcd93
+] 
+hash: 0000000740-226d06568e20ea3f986dbe5842e0f0c3edcbadd3dad6b3c96df7a83c70b581f4
+[TAG 2012-06-13
+Release**20120613053137] 
+hash: 0000006073-5e83b99c4cac9e22a3581dbee41446f129c2432de6740b720055209cb1c14f29
+[Removing particles that are not in domain
+Daniel Fuster <dfuster@gmail.com>**20120704131049
+ Ignore-this: 64f9fbe7ec56292aa9f22d79f3e17256
+] 
+hash: 0000000439-5fd368141113e3a349639b7e1fabb3796ece015ce8a595ae8e971bfab4e6d1d2
+[OutputEnergySpectra should work now in 2D
+Daniel Fuster <dfuster@gmail.com>**20120927201723
+ Ignore-this: c17b523d1ada3f3f60238882d020b625
+] 
+hash: 0000001343-a1ca98153f994b6bfaf675d4f7e7f428e7b90610f542e6fb78057b3aacce9b0d
+[checked for MPI support in FFTW3
+mcbain@dalembert.upmc.fr**20120925150259
+ Ignore-this: 45ba71b338dd5b2a740780e3abfdf817
+] 
+hash: 0000000463-b59cdad9497d24b847dc3407eee6c8524374d682432b37fd7b557fcc25ac065f
+[bug in tag droplets in parallel
+Daniel Fuster <dfuster@gmail.com>**20121008231617
+ Ignore-this: be9bf2be48ed0db125630e2edd4f57f1
+] 
+hash: 0000000271-d4803a943cfb083704d9cce5d133bd505478db66c41da98efc49f622351ebe2d
+[Kinetic Riemann solver for GfsRiver
+Stephane Popinet <popinet@users.sf.net>**20120617070527
+ Ignore-this: e033bffc302d27d24bd63fab881392a3
+] 
+hash: 0000001965-dea0f98d81f407349b6bc81a3a79976dd04db5634914ba2ccaa8117850f50934
+[New utility 'gfsplot'
+Stephane Popinet <popinet@users.sf.net>**20120622113009
+ Ignore-this: ae483d43e6921960b00b0defcff1dc1d
+ 
+ For coupling gnuplot with OutputSimulation (text format). There is an
+ example in doc/examples/dam.
+] 
+hash: 0000003445-c6d336daf5715ace3f59d03964699058ebe946398f80e8929265296d4467eb55
+[Debian packages needs mpi-default-dev also at runtime
+Stephane Popinet <s.popinet@gmail.com>**20120628021501
+ Ignore-this: dbacf3ee08b168090176b8edaa5f0658
+] 
+hash: 0000000279-f6f690cf11501c597a9dc3d2f80ab4e1a6dfe70a667dd239bdb5a1bbac2675ab
+[TAG 2012-06-28
+Release**20120703103221] 
+hash: 0000000622-2c1deb57b90bdf730aa961a8a967133457e90ea093d318a6329888fd4a550901
+[Fix for distribution of test suite in tarballs
+Stephane Popinet <popinet@users.sf.net>**20120706094009
+ Ignore-this: d347171e9c0d3778a90c38634482dc15
+] 
+hash: 0000000452-c6811ebcac03410dd68ba3b6cce8c8522daec7e8f86bd0302132c9e15c4f14e8
+[TAG 2012-07-06
+Release**20120706112703] 
+hash: 0000000241-66f0480c0f1f4d74bf46ca2546792c836c888e4ce5dba0cbecf9c5176cf72df1
+[New function gfs_domain_cell_traverse_new()
+Stephane Popinet <s.popinet@gmail.com>**20120614010003
+ Ignore-this: 73e31761a2a4086be14e99b853c39950
+] 
+hash: 0000001425-71d2c54a8d739703b404b79fd348caf30f066f107e220e6efcd0356b9df5f26d
+[Multilayer Saint-Venant solver
+Stephane Popinet <popinet@users.sf.net>**20120619101525
+ Ignore-this: b80593ed958969494fa77ef5d2342743
+] 
+hash: 0000025738-0c58ae7d5dca3916cf5595e877c44527433bff5d583195af172bc3c80bba1cd5
+[Vertical viscosity for multilayer Saint-Venant
+Stephane Popinet <popinet@users.sf.net>**20120620050859
+ Ignore-this: dc154ad25c87748dbd83457353a79b6f
+] 
+hash: 0000009357-9ccab21e667d301c9513d905ae84aa0c630208900b789cb7abcfcde9c73a0b28
+[New Poiseuille test case for multilayer Saint-Venant
+Stephane Popinet <popinet@users.sf.net>**20120620102354
+ Ignore-this: 8ab4011704ec1e30085ae1533e3e3b07
+] 
+hash: 0000005142-96e98257ca07ede48e3eb54b4bd7e06a825c4e1f39a3fef90cd8b745e41c6e8d
+[New GfsLayers object
+Stephane Popinet <popinet@users.sf.net>**20120621233757
+ Ignore-this: 36f8486e2a4f0bcfe67b3f34957d62c5
+] 
+hash: 0000012428-8aa2c58b3033331a5a08968b54f731e834dd10c7be66c5f1056184e4ae4942e7
+[Tracer advection for GfsRiver
+Stephane Popinet <popinet@users.sf.net>**20120624101959
+ Ignore-this: e1b87fdb1d1edcc97926f484dc705dd4
+] 
+hash: 0000008140-b49d02929f7e61164bcab501d4a8d2be306b866442c7ef331e1bdfc1a2fcece2
+[New example 'viscmix'
+Jesse Robertson <jesse.robertson@csiro.au>**20120713050259
+ Ignore-this: 7bce985f0b01bdf595fbb940d2636665
+] 
+hash: 0000007528-7bdd1568e0c8469d7e804b04548c106e67eb770bc6ff488e53a224ef2354a88b
+[Fix for poiseuille/river test case
+Stephane Popinet <s.popinet@gmail.com>**20120717024658
+ Ignore-this: 940ccde1cc02bff3c8c05fbd067f152e
+] 
+hash: 0000000534-d675830aa24e1a642429a6e2efa613abb0d7715906c4cb20c51fefbd7000bf3a
+[Bug fixes for multilayer Saint-Venant
+Stephane Popinet <s.popinet@gmail.com>**20120719011336
+ Ignore-this: 4c4e63eb794b6818271a5aafd4060c1f
+] 
+hash: 0000001408-044c7d82f2538b26d1b82b7d2632595dff9c6ed3af95d5dc9f08f441a5d64e3d
+[New lake test case for multilayer Saint-Venant
+Stephane Popinet <s.popinet@gmail.com>**20120719034445
+ Ignore-this: 34c5c6ff3e4fa2caca2d981c17d9e9c2
+] 
+hash: 0000007846-cc63394de26b0f2975d291eeaa8d2b04fcbdee670a7e26ed857be8f3d4c67c8a
+[New test case for transcritical flow over a bump
+Stephane Popinet <s.popinet@gmail.com>**20120719053358
+ Ignore-this: aa861ce30f576466e2e6171cc7bbaed2
+] 
+hash: 0000085427-6bdeb4a1919431eec5ec820da137f7c1b73833014658093e6dc164c5504da5d4
+[Boundary conditions for multilayer Saint-Venant
+Stephane Popinet <s.popinet@gmail.com>**20120720051154
+ Ignore-this: c888daba2339c54977afdab047048fc7
+] 
+hash: 0000002499-053b1467a12ae977bf07a15fa2014f1e2d5617029587c0fd52335c286311aa8c
+[Bottom friction for multilayer Saint-Venant
+Stephane Popinet <s.popinet@gmail.com>**20120722235233
+ Ignore-this: 7076105204344c04202f59318fa3ab9d
+] 
+hash: 0000007643-2c9b196cc1d12b53f705ecfb8db33f06da676e97f43bfc66fbd1c756378888e2
+[New layered transcritical flow test case
+Stephane Popinet <s.popinet@gmail.com>**20120724225801
+ Ignore-this: 7bd9005ea81f291a5c291a2bfda8bcd2
+] 
+hash: 0000012334-8345d4db75651be75d569fc4a7b3030de7411d2c0a7a732bbc57ecd2aaa74ad5
+[Second-order vertical advection for GfsRiver
+Stephane Popinet <s.popinet@gmail.com>**20120725030047
+ Ignore-this: a960d5b10aab97148529b7d51861d16a
+] 
+hash: 0000002886-4c4f8c3667723bdeb741b823ef03baf27171a1f7d9dd228ff30a014e900e4b00
+[Mass fluxes are not necessary for a single layer
+Stephane Popinet <s.popinet@gmail.com>**20120731024518
+ Ignore-this: 848945dbddc0fc2974327a91031fc645
+] 
+hash: 0000001984-938a5b5a5700302d4015773feebdadbd5aa836bcb698d2192239e7c7fa3734b2
+[Fix for layered shock test case
+Stephane Popinet <s.popinet@gmail.com>**20120731052132
+ Ignore-this: 285a2da8b1fc7982e4629cdf456cdc24
+] 
+hash: 0000000887-cedb830f722817423191db3e162bbe123fac994441c1ae1130551979c6d1b774
+[TAG 2012-07-31
+Release**20120731073248] 
+hash: 0000002574-b028e85cc6481770fb02f47186c25ff69dc56d0509d85992a5e856b08b2d12e0
+[New Rossby-Haurwitz waves Saint-Venant test case
+Stephane Popinet <s.popinet@gmail.com>**20120812052228
+ Ignore-this: 7386f3a6b01f2f26c89e11645bd39910
+] 
+hash: 0000784263-10c02c1ebfe5fee0d077059bf6aa931a7c1a8b7fdb73de67e3a187d6cfb2f87a
+[New test case, shock wave on cubed sphere
+Stephane Popinet <s.popinet@gmail.com>**20120812073957
+ Ignore-this: 66df9d440c2a71cb89de19800b246cbd
+] 
+hash: 0000005419-19a2b7d088f688dec8c76eda8e0f4fcbf0a5ed762764a095447bd0f255628c57
+[Fixes for metric in GfsOcean
+Stephane Popinet <s.popinet@gmail.com>**20120614052605
+ Ignore-this: d633ee49f37b15eda05917a685eb487
+] 
+hash: 0000002849-dc48901166b54bd953f0c76b2fb02bd4bcbad42c2b3671348a46f62620bb276e
+[New free surface Rossby-Haurwitz test case
+Stephane Popinet <s.popinet@gmail.com>**20120615004823
+ Ignore-this: de1fae82d6705c9b3fe8881a54bb8e57
+] 
+hash: 0000180867-ad1a36b921c72d6eb0197c00ee352a2880f6bfcf7c47b66e03ca0b10697784da
+[test solving groundwater flow by projection
+gdmcbain@freeshell.org**20120731141623
+ Ignore-this: 1a19d2cfb66df6097d045f0b062a73fe
+] 
+hash: 0000007201-bf72a95e87e5bcca0de86751daf33b8814509b72c62decb3ec9b12df38f6f127
+[groundwater test with spatial step in permeability
+gdmcbain@freeshell.org**20120731151412
+ Ignore-this: 13c10dc74eb8d9f0ece6a2ad6f597cc8
+] 
+hash: 0000005493-7ea102ee191a7dbc1fd774e7ccf1634196b708440230d22a6ef53386b4287978
+[Cosmetics for groundwater test case
+Stephane Popinet <s.popinet@gmail.com>**20120801004811
+ Ignore-this: a11f444136886dc921c652d8ebe00e55
+] 
+hash: 0000005759-8d4fefcd12995de49a89bb5bef0e7161771053fdbd177283492872670d357532
+[Option for non-linear free-surface in GfsOcean
+Stephane Popinet <s.popinet@gmail.com>**20120812212504
+ Ignore-this: f0d3ff510c7c39acc85e36aa11b9864
+] 
+hash: 0000000962-7023dbf95ca7dab346c82df6cca82b3f2b74009ac6f51f7c97168371f19f55a9
+[Fix for layered shock test case
+Stephane Popinet <s.popinet@gmail.com>**20120813232916
+ Ignore-this: 4a0198a2d95a3233c3cc44dfb60002b
+] 
+hash: 0000000497-f603f5f09f4a5519ae9ebf1ac20932ff7c54bd148699842264cde527fa951fec
+[New test case 'nonlinear geostrophic adjustment'
+Stephane Popinet <s.popinet@gmail.com>**20120813234835
+ Ignore-this: bf36091ea51ad0cbe264d7ac2cb5d358
+] 
+hash: 0000163941-bcada86e06c038e530552aed62b5ee98112cf1b625989234604d6a7d82981972
+[Fix for vector GfsSources
+Stephane Popinet <popinet@users.sf.net>**20120816214025
+ Ignore-this: 36bebff4ab744464414a4679951d2edf
+] 
+hash: 0000000383-45c1e8edb1e082ea3021bbc60703fc5b898a50007cbda7bfef5ab40e9b9ec24a
+[Added missing outputs for GfsRiver
+Stephane Popinet <popinet@users.sf.net>**20120816214103
+ Ignore-this: 5544bf57b54f87e8044fa2ca5fecb390
+] 
+hash: 0000000350-5fe44e8a8de08bd9e051bd6584f4abbb60243a9284497daaa6628695053c9980
+[New utility discharge_table for culvert module
+George Gerber <george.gerber@gmail.com>**20120816225110
+ Ignore-this: 677a91b6444fd73c777084a8fdb758dc
+] 
+hash: 0000001451-3ee97d74c3a4a61255f4315ba08c589ae5fcc0a526f73a8cfb9f31d3649bc234
+[Fixes for convergence of outlet control iteration
+George Gerber <george.gerber@gmail.com>**20120816225125
+ Ignore-this: 925630e7c47e437ae42636d8dd99ec3
+] 
+hash: 0000005088-bdd29db0ef3e30a8879d15a15ee05abefe4eaab6e2192e23fa3519de9905c2b9
+[Fixes for rotated boundaries in 2nd-order GfsRiver
+Stephane Popinet <s.popinet@gmail.com>**20120812051650
+ Ignore-this: 50ad1a54926170a69f5d144db1578532
+] 
+hash: 0000003784-d03f8238ae956c5acc9226cb10764d85ee8bfcdba5186737db6335e9194eea41
+[Fix for symmetry conditions of tensors
+Stephane Popinet <popinet@users.sf.net>**20120905141229] 
+hash: 0000000790-59e9e214ab80885e9c295e1eb385857319fc304013736677385b08bb544671f4
+[Minor test suite fixes
+Stephane Popinet <popinet@users.sf.net>**20120906094826] 
+hash: 0000127093-6174df9c00703342c326da9a71f3ce6cd01f2798662c0191090ebe16a08146ab
+[TAG 2012-09-06
+Release**20120906115400] 
+hash: 0000002456-c5d9cdabfb0db12752c58ffc21829f3896916f11614c715d7f338839128b1114
+[Second-order vertical advection for layered module
+Stephane Popinet <popinet@users.sf.net>**20121002150509
+ Ignore-this: 17f50b6309660acf594b0eb7f15eedc6
+] 
+hash: 0000000303-57da6c7d27ff3979b6db0a24b7678d0631b9eadd7ddb095658fc9c3e5ae6f30a
+[Fixed mapping of cubed sphere coordinates
+Stephane Popinet <popinet@users.sf.net>**20121003120628
+ Ignore-this: fa83a4c2eb73d65bcf88b355ba1a54d4
+] 
+hash: 0000001568-523d567fcbbba64dc39961437d437acc313dbb864aa4cfc36ad1d12e7567aa29
+[New vector mapping functions mapvx(), mapvy()
+Stephane Popinet <popinet@users.sf.net>**20121008121135
+ Ignore-this: 613dcabf68ea82b6ab0bba863b5d6759
+] 
+hash: 0000000569-fa33c84246c7c7770f0de8b78f26faeb6ce02330b9d2092abef7c76027db5302
+[Fix for TracerVOFHeight with periodic/parallel BCs
+Stephane Popinet <popinet@users.sf.net>**20121020161321
+ Ignore-this: aae7cc1bbf3677ecfa7e7a5f49de8757
+] 
+hash: 0000001954-ee44ccadf73d4fc46a24f6d913c4c80b51177dbf0b939f9a468320278dfd6450
+[Additional test case for TracerVOFHeight on 4 procs
+Stephane Popinet <popinet@users.sf.net>**20121020170937
+ Ignore-this: f25cd68b76ea2e1c904945ca86c5f9d1
+] 
+hash: 0000001393-fc3be0b4434074c34fa6b8ead7fcbc207cc6540842b5b7641f27fe41755c005c
+[Updated reference for rotate test case
+Stephane Popinet <popinet@users.sf.net>**20121021140629
+ Ignore-this: 3194998d4a95cc2d5658025a367c870
+] 
+hash: 0000005455-96f7377c6988103003f60192834c3fd96a9777b0cb22e6aaface6614e93ed0d0
+[TAG 2012-10-21
+Release**20121021165115] 
+hash: 0000001009-80a12467646f7dde0dfe955aab0a740f09ea7c4fed82ce79ebf70851dba341f3
+[Debian packages depend on libproj-dev rather than proj (obsolete)
+Stephane Popinet <s.popinet@gmail.com>**20121112044011
+ Ignore-this: db936bb10eee5acca2168b9a8538c3d1
+] 
+hash: 0000000315-b350e3be09f964e6f1e08a2e8cd13d112355b70bf8163cb00ee4735ada555e9a
+[Updated cloneubuntu to 12.10
+Stephane Popinet <s.popinet@gmail.com>**20121112044035
+ Ignore-this: b97dee4fb663c472150e41139282c951
+] 
+hash: 0000000232-ef70a4243dd1cd52a2afcf84418861b548f7bebd280bac2c24e90d1434767a40
+[TAG 2012-11-12
+Release**20121112065338] 
+hash: 0000000394-b906fdd518cf273078e2f6d1d5429d473da9c600d6a93810be6a70060764f7e4
+[Possible fix for gfs_domain_tag_droplets() in parallel
+Stephane Popinet <s.popinet@gmail.com>**20121114000528
+ Ignore-this: fdf19f8bce4df520f9abdff99c5315b0
+] 
+hash: 0000000451-53ddc1c7b5ea51d30bcccd4e7d87d6fe9cd61c5db6bc3c2a0b7a4345a6ec4cbe
+[Fix for GfsFunction and directories with spaces
+Stephane Popinet <s.popinet@gmail.com>**20121114001854
+ Ignore-this: ce67bb4e01668ae4d45c17b24a8a241
+] 
+hash: 0000000747-701031ce2b793057802435ba9d1a5ec2e7f3d47ee98aafc10ec8b7ef04178c04
+[GfsInit allows for a physical end time
+Daniel Fuster <dfuster@gmail.com>**20120917101747
+ Ignore-this: d600c8b0d3f96bd936c7bd98882e3505
+] 
+hash: 0000000334-6ea148f8add50299e8ae3fa49d245865d7f166985dc84989f2823f3359668a6d
+[Fix for uninitialised kmax in gfs_height_curvature()
+Stephane Popinet <popinet@users.sf.net>**20121021194904
+ Ignore-this: 2e5c99eddaef8a782fa9dbb54f9c559
+] 
+hash: 0000000388-1002fdfa9df64dfb8a80b32afc685d7cac9a908bab1a8039bff9f9007c919539
+[some small fixes
+Daniel Fuster <dfuster@gmail.com>**20130124091446
+ Ignore-this: 649456247e06d03d5a200f32926a2158
+] 
+hash: 0000001821-64e8b521975d4461bc6c89e29193dec536d3f93aa2009f7a7614b3642c9668a7
+[GfsOutputSpectraInterface should work now in parallel
+Daniel Fuster <dfuster@gmail.com>**20130128113748
+ Ignore-this: 657fbb503be3e27dd87e33b286557e75
+] 
+hash: 0000022851-f239881055605375bafe9a92862d17058070e6b801b70b667fcdf22e4e0146a1
+[Cosmetics.
+Stephane Popinet <popinet@users.sf.net>**20121114212637
+ Ignore-this: da8faa5c9905654f7543511a5b3c09e5
+] 
+hash: 0000000451-63cbe5434e0265482c4dc133c056b0292965003d1b6f4826d744255ec4d90408
+[Added profiling info for compilation of GfsFunctions
+Stephane Popinet <s.popinet@gmail.com>**20121121055537
+ Ignore-this: 6a0f15ad681fd776972c1efaa2053c4d
+] 
+hash: 0000000623-8059d922b8175df1eaa41f7c1f844a678be79ed689c98e8256514fb0a5a65c97
+[GfsFunctions are compiled as a "batch"
+Stephane Popinet <popinet@users.sf.net>**20121124051733
+ Ignore-this: 1c0cbd341ff00919e2a99b47e8b9c8ef
+ 
+ This means that usually only one compilation/linking is required for
+ the entire simulation rather than one compile/link for each
+ GfsFunction. On systems with slow fork/system() calls this can make a
+ large difference in initialisation time.
+] 
+hash: 0000025534-8803a7b87e19594a0dbbbc766111bd0a3511ccc5540ef3428f5131071cfbe499
+[Fix for gfs_vorticity() with GfsAxi
+Stephane Popinet <s.popinet@gmail.com>**20121125231230
+ Ignore-this: dab36f2d98ff4ab7c31eeec060b6292d
+ 
+ The generalised metric calculation for vorticity somehow does not work
+ for the axisymmetric metric.
+] 
+hash: 0000000353-33119a1832e74c6b242f170647d11f0df543afc5c98c6ac78666cc5f0fba66bf
+[Fixes for GfsGlobals and GfsFunctionConstant
+Stephane Popinet <s.popinet@gmail.com>**20121126215223
+ Ignore-this: 60089f059f86688b7c65d537a74076a
+] 
+hash: 0000004217-e9c5b8060ea31970679a666edd33fc46d2a63f26abbc32b38ef45592302415aa
+[Pre-compiled GfsFunctions are always cached
+Stephane Popinet <s.popinet@gmail.com>**20121127022712
+ Ignore-this: 68cc39bd6c2584b8f18fdbe7798c6b14
+ 
+ This is necessary to avoid re-compilation during load-balancing.
+] 
+hash: 0000000504-889677c99041adb60804101455446c75c9d3b3ce92a0662b96d4eb4166310c3c
+[Fix for command-line events and GfsFunctions
+Stephane Popinet <s.popinet@gmail.com>**20121128204947
+ Ignore-this: 133f43d89ff2c4bd3187032f58ab2691
+] 
+hash: 0000000461-e96d4407f3a9f07e232a5b2dac7b2b6a3e99dad623605a3839220be4fba5a97f
+[Renamed configure.in to configure.ac
+Stephane Popinet <s.popinet@gmail.com>**20121128212316
+ Ignore-this: 405d3793a325e2ac4afb9af6dbfc1830
+] 
+hash: 0000001006-9c08961f967fb93a61f16aece4488c1f8322f2643bb53dc4085f73a30284ffd9
+[Consistent temporary file creation
+Stephane Popinet <s.popinet@gmail.com>**20121129021212
+ Ignore-this: 768fecfcc7ce02976126cb0b7a716c8c
+] 
+hash: 0000004936-e00c1fb1338360343f9454a2eba429a0b84548e2800ea5bf08e64f5c7db632c8
+[Replaced tmpfile() with open_memstream()
+Stephane Popinet <s.popinet@gmail.com>**20121129091322
+ Ignore-this: f03a1eee92d1367a5d36124649e42993
+ 
+ This avoids using (often flaky) filesystems so should be more robust
+ and more efficient.
+] 
+hash: 0000007420-45d59ccfd75f6c3b5d64a7267ba1d6ef81321142fc14d421392d265e7853e02c
+[Use only glib functions for temporary file creation
+Stephane Popinet <s.popinet@gmail.com>**20121129215626
+ Ignore-this: 69b45dda2c3768b9068ebd8fb97c9079
+ 
+ System-supplied versions are very flaky on some systems (e.g. AIX).
+] 
+hash: 0000002421-fc63a39cabf044f18e7904a44e69b05e3d31655959e14760c129fcb6ebcdb1d2
+[Set "feature test macros" correctly for open_memstream()
+Stephane Popinet <s.popinet@gmail.com>**20121130041943
+ Ignore-this: dafa9fd5a763eb5d880dbf9d0eb3d5d
+] 
+hash: 0000001064-77f6072319ab3a3a60d00a1d6785cdcfbba62b379ca266ca1c93c68210dc0c96
+[Added GNUlib open_memstream() implementation for BSD systems
+Stephane Popinet <popinet@users.sf.net>**20121201051357
+ Ignore-this: 528050d8630bf0d9ec673b4de1d24c2f
+] 
+hash: 0000016186-5fc797cb9d77b3f9cb2cc4890c1456bfdea653770d3ac5fe6dbb6d6393eb9da0
+[VariableVOFConcentration is defined now as per cell volume
+jose.lopez.herrera.s@gmail.com**20121115101918
+ Ignore-this: 376ab1cabcdf2822e4275f5913289e95
+] 
+hash: 0000000965-528da1baaaa1a8f2a8449a6667785d09a15287931692a5ad4fb5ae8a8756d431
+[concentration test is adapted to the new definition of VariableVOFConcentration
+jose.lopez.herrera.s@gmail.com**20121115102729
+ Ignore-this: 3851c90b3dd51cabc312cbb516c83d7b
+] 
+hash: 0000001133-6a1725658d8de833c15eaaef60b315afbc735b61fc6417d403ccee4e474bd24b
+[cylinder test updated
+jose.lopez.herrera.s@gmail.com**20121115114925
+ Ignore-this: 21dca5838a7b0d98af7ddaf989053480
+] 
+hash: 0000001047-17b2d115e761acb534ff4089a2ff7330e3b9dd7710b29b4c93aec8d6fe59671b
+[new test case to check diffusion applied to VariableVOFConcentration
+jose.lopez.herrera.s@gmail.com**20121115115256
+ Ignore-this: 5ea1048f7362809e2a8df9f918b2a38b
+] 
+hash: 0000003674-d79b2442197b7424290723cf9900a598f2828b34a155511eb9ede51852f86ac5
+[Cosmetics for VOFConcentration
+Stephane Popinet <popinet@users.sf.net>**20130109005032
+ Ignore-this: 37d4430d4c96065e39d11fbffd7698e2
+] 
+hash: 0000002507-fbff8d34c1ded1a74c15ce559d24826a3fbdc2e39f683518530b6a820cfd4791
+[Added missing BCs for OutputScalar when using functions
+Stephane Popinet <popinet@users.sf.net>**20130109025608
+ Ignore-this: 994677d53a5bc54258c7f746f4ed85b
+] 
+hash: 0000000444-62462958632a31d5d0a525d233dee7368d20ce785f50db5caafdabc3afe3497f
+[Fix for incorrect pending functions
+Stephane Popinet <popinet@users.sf.net>**20130109033100
+ Ignore-this: 2c8dcb5c686787439d0b4144808f4dfd
+] 
+hash: 0000000632-ad5952d9df6195757a6bfcb7beaf9429f5802379eb810e433ca0bc6b06199519
+[Fixes for convergence checks for Boyd's culvert model
+Stephane Popinet <s.popinet@gmail.com>**20130109233334
+ Ignore-this: 619cbc091a236128ce6567e782e8b221
+] 
+hash: 0000000892-699dd7844d6d9c078139ff96fc166891b05874846fe9ce36c49d860c6b88b144
+[Checks that SourcePipe does not use negative water depths
+Stephane Popinet <s.popinet@gmail.com>**20130109233358
+ Ignore-this: 4e10db007cd445e73c60afe3f66732ae
+] 
+hash: 0000000538-7be93800be48d215c1994f3791da2cb48f8351af4ea168e256f597db5d63d9f3
+[Fixed scaling of 'geo' test case
+Stephane Popinet <popinet@users.sf.net>**20130112073809
+ Ignore-this: 547c44e8e4381629022f39bb55e2f629
+] 
+hash: 0000063747-160c1e5e535234c657072989e69f258af68af25dca5609d6c873a90bac2fde50
+[Cosmetics for Rossby test case
+Stephane Popinet <popinet@users.sf.net>**20130112074114
+ Ignore-this: c97eec09cfb7b23dea0c5c5cb8f7afed
+] 
+hash: 0000000454-d129a6c10e32710be6a4cd01c683929be22f8b41535bbc924eee9f6fe2bc084d
+[New test case geostrophic adjustment with Saint Venant
+Stephane Popinet <popinet@users.sf.net>**20130112075545
+ Ignore-this: f73c579e9cfaf0802ef742755fed8f74
+] 
+hash: 0000033688-919576855aba0e04da7a89adae2031c7b4b708ae37d9509624f867eaffc34400
+[Preliminary implementation of new object GfsVariableWavelet.
+Stephane Popinet <popinet@users.sf.net>**20121114212753
+ Ignore-this: 30ec68dabb5c466f62280d74d6033527
+] 
+hash: 0000004415-4710a1fa7de2e397e04ad2bfbf02613f4d60f93cdf8ea8cd051ac5979cd89fd6
+[New implementation of AdaptError
+Stephane Popinet <s.popinet@gmail.com>**20130111031748
+ Ignore-this: 4ced26684acd3c2b8c1be8f6abeaa627
+ 
+ Note that the old values of cmax need to be multiplied by (approx.) 2
+ for a comparable accuracy to the old implementation.
+] 
+hash: 0000006026-65a2f05b75c4c4871f5f29cfaa12400a5e73a3a68738083171e0fbbe8217bd2d
+[A new wavelet module (draft version)
+Daniel Fuster <dfuster@gmail.com>**20130121135347
+ Ignore-this: 73a70382c2a4d1550b0a04fb3e9e8dae
+] 
+hash: 0000014628-4e719930e97ab96316b14ff216bdc07c52c2e2c808c52ed11769ec0fdbb1c96c
+[New improvements in wavelet module to test adaptive techniques
+Daniel Fuster <dfuster@gmail.com>**20130125111133
+ Ignore-this: 2b7e55757f23e4f3d16a0876d5d314a1
+] 
+hash: 0000002992-fdc3fc0af3275508a2e9b8a722fa74775e9ed3a8b63f429fdff76eefcbc32fcf
+[Bug in GfsSourceParticulate
+Cheng Peng <peng.cheng.hit@gmail.com>**20130211143716
+ Ignore-this: d7035258fc0f4a56857f06bc65c86f75
+] 
+hash: 0000000387-d2035df377baa3116f72d6507953eb47ad18c35ce3cbc806b55bcd7fe03820c1
+[The wavelet module works now in 3D
+Daniel Fuster <dfuster@gmail.com>**20130212100433
+ Ignore-this: 6baf68e6ff47992f01e534476293a2af
+] 
+hash: 0000001504-c07032f189c7b4db1962784116e5e0a3546391fb1f222c7991378af3993b2ce8
+[Modifs in ftt module to perform the fft of the interface position
+Daniel Fuster <dfuster@gmail.com>**20130212100834
+ Ignore-this: 884eba744489cb5ac1ada7a42b161b0b
+] 
+hash: 0000004801-e890545e0818fb2ac0d7a6074abd19c7e9c04cb610ad7f2588b1ca002c7eb75a
+[GfsInitSpectra requires the variables to initialize
+Daniel Fuster <dfuster@gmail.com>**20130212100948
+ Ignore-this: 466199bffd3ab3b9f445145fd505dae4
+] 
+hash: 0000001442-b729bfd140aaa71fe5b72edfeae5c3e635ced79c56a33586a1f38bc2187b575e
+[Several improvements in GfsOutputSpectraInterface
+Daniel Fuster <dfuster@gmail.com>**20130213132458
+ Ignore-this: c4de8a039641ec693e82241f43a66f15
+] 
+hash: 0000009397-471424d32f163e07cec8c5a3f69beb1126a84f27b185b52d06071552fcb91fc9
+[some small fixes for turbulence model and domain.c
+Daniel Fuster <dfuster@gmail.com>**20130531120431
+ Ignore-this: 4dc521c340af7de5022ca83edf23581d
+] 
+hash: 0000001080-bcf527b31cae1a4fa754f45b6f6a9c7089cd1454ea226fe9a65aab25d2053b30
+[Bug fix in ParticleSource
+Daniel Fuster <dfuster@gmail.com>**20130619063132
+ Ignore-this: 750db1409715750a3476ac77b384cf95
+] 
+hash: 0000001518-4c7634ef79d410302804d67775cf7e13324413458b175c6a22124c1557f098a4
+[degraded variable
+Daniel Fuster <dfuster@gmail.com>**20130619063304
+ Ignore-this: 9b36423c7c425a2563818101b00de0af
+] 
+hash: 0000006587-d7890d407850e12ba0826cffe3e047bae3f1da87af21d01792a0c27e1a29c6e6
+[event istep bug in SourceParticles
+Daniel Fuster <dfuster@gmail.com>**20130619065752
+ Ignore-this: aecc7efbef801696826cdd90b23147b6
+] 
+hash: 0000000204-94d112f44ae8ce8f88b918320480c43039b6d133d42e7e4b995b3e843859b553
+[New GfsOutputInterface object
+Daniel Fuster <dfuster@gmail.com>**20130627112908
+ Ignore-this: f061585789e6a1b05d060afe08690504
+ The sorting procedure in GfsOutputDropletSums is also removed to be consistent between the id showed in the output file and the real tag stored in the corresponding variable
+] 
+hash: 0000005167-0160e3668b22e6c66cd08f2d544ccce6503ffc782c0abc13fa4d31727b0e47cd
+[New GfsOutputParticle object
+Daniel Fuster <dfuster@gmail.com>**20130702123550
+ Ignore-this: f5036021bc2a3659624adda334060cd3
+] 
+hash: 0000005185-643d8cc8b54b578d91c3e113a8fef282443222379996795bff19dc81ebce52d2
+[Adaptive integration module
+Daniel Fuster <dfuster@gmail.com>**20130704092527
+ Ignore-this: bc7e4dbbdce86e1b59fe8373cf99fb11
+] 
+hash: 0000017197-37076e8fc1d833f6df5466aaeef4a45173418c82a84e0f680243af9e79040566
+[Improvements in the wavelet module
+Daniel Fuster <dfuster@gmail.com>**20130704093204
+ Ignore-this: 8d4e89fd18e8c93bcfd3eedbc16419f5
+] 
+hash: 0000006688-ea3e561ca22b97579f155f0e0380962fdbb804201dc0fee2875c4e7f9d04d4b2
+[new GfsSourceParticulateVol object
+Daniel Fuster <dfuster@gmail.com>**20130704203754
+ Ignore-this: e8e187c15d1bb427e288daf70572a650
+] 
+hash: 0000004648-10560ddf30ddbb44d859d0347dd01cc5c6c6b3024ef3ec07ed14ee0e4b7d1f79
+[GfsSourceParticulateMass
+Daniel Fuster <dfuster@gmail.com>**20130709210515
+ Ignore-this: 9af41a6aa6d7fbad988dc6146f5f1c36
+] 
+hash: 0000004981-88067a82465339d947ccdd6f4092e92f21f48cffb31d2a232fcca0d112ecc02d
+[Change in the temporal integration of GfsParticulates to avoid errors when the GfsSourceParticulate object is added
+Daniel Fuster <dfuster@gmail.com>**20130712141738
+ Ignore-this: bcc01651c2c30edee040bb51a9d2804
+] 
+hash: 0000001245-11c0d745431f17299f2f14d0e74bd80cb3e8a278c552051b5380da2bd7540cbd
+[GfsSourceParticulateVol allow for a variable to store the change of volume within the cell
+Daniel Fuster <dfuster@gmail.com>**20130712141952
+ Ignore-this: f7e1548445feec92c1ddd1e51e929286
+] 
+hash: 0000000945-67c1920a180f8f5f43fbc5d0ce6ca6c3b6e580b7f0c4314b5a219ec219bbaabf
+[new GfsVariableDerivative object
+Daniel Fuster <dfuster@gmail.com>**20130712142110
+ Ignore-this: 85ab405bf41d97124de8f8e5191c574a
+] 
+hash: 0000004634-4676a2f79362f1d93994c5fe72fd8fcaaec00e09d94f659a73cbbfe8d177029c
+[GfsBubble solver Params
+Daniel Fuster <dfuster@gmail.com>**20130720161117
+ Ignore-this: f14a90884ce47bb4cfc4f44fe94719d6
+] 
+hash: 0000002927-5023721122bf1c5a1f40ec7b5331d4b4dc077aaa947d5971ff1bbd7b4198605a
+[New GfsFeedBubble object
+Daniel Fuster <dfuster@gmail.com>**20130720161302
+ Ignore-this: 2229cb1d21aa99daf65bd16a531a7513
+] 
+hash: 0000004351-3a8bcb3e474bbbdfc12be99d25b7ee9b859aae02fd0933a1ca035adcaec8232b
+[bug: global declaration of some functions used in bubbles.c
+Daniel Fuster <dfuster@gmail.com>**20130721204037
+ Ignore-this: dcecbef8c337cee02dc83b8982c8f1b6
+] 
+hash: 0000000938-65634c1e364aabb31ad5dbf4ab6419dfc1054835c2febd278f64aa2c1cc8721d
+[GfsBubbleParams is now an event
+Daniel Fuster <dfuster@gmail.com>**20130721204134
+ Ignore-this: 3669c09d8c2059a5d9ad2d4563f93404
+] 
+hash: 0000004103-723c433eb0d21ac86adc683e0b63e1952de0100cfceab661b2831b1d91eddebc
+[Multiple improvements in the RK procedure in the bubble module
+Daniel Fuster <dfuster@gmail.com>**20130722115313
+ Ignore-this: 5778e9304f5c43867317ac741aacdd0b
+] 
+hash: 0000006042-8ca5481324f246ba07af52dc709c8b78dbdd6d6999e8439451f9ca76370d2b65
+[GfsBubbleParams allows introducing the pressure variable to be used
+Daniel Fuster <dfuster@gmail.com>**20130722184540
+ Ignore-this: 4b0704c01301e2e0d7bf28ca88b8a484
+] 
+hash: 0000001083-cab088bc80a6ba61c33ebfea7cf3152f7e87b33f537f8fb56cafebf1d3b30ad8
+[Several important fixes in the bubble module (still needed for more)
+Daniel Fuster <dfuster@gmail.com>**20130722214721
+ Ignore-this: a097ea0685331891b112c66bb850fe2d
+] 
+hash: 0000003455-61d0483a8a6ac8a5a3d16aff4324d28963a70474289a0c6ae241b93d0e445dee
+[Some extra improvements regarding the temporal integration of the bubble position
+Daniel Fuster <dfuster@gmail.com>**20130723082238
+ Ignore-this: ab93672cda59eecb25cc0aff71d21416
+] 
+hash: 0000007776-63f5513cbbe59bcf85f0577a85e91ab3d432ec468863b72c36d57bb2887b3994
+[Changes in the fftw module (now GfsOutputSpectra and GfsOuputSpectraInterface work using the same routines)
+Daniel Fuster <dfuster@gmail.com>**20130723103817
+ Ignore-this: c6c3cd24651aa4fd6568efc4a025b53f
+] 
+hash: 0000001491-51bfb4fe42d63a882a4406d242f2a6bf8aa35c9767faa7a91a9ad9328144d7bd
+[GfsBubbleParams allows for choosing your favorite Rayleigh Plesset equation + bug fix in volume reseting when negative
+Daniel Fuster <dfuster@gmail.com>**20130724182051
+ Ignore-this: 8d87e22add1abe804bf2b15ec53af60a
+] 
+hash: 0000012945-0a3a289c7c1e89593a3e0aa40f7a9f666d7c220bf3f2236dd3413f579044c75c
+[Check if cell exists interpolating the pressure in GfsBubble
+Daniel Fuster <dfuster@gmail.com>**20130805210759
+ Ignore-this: 8ac8fa184a04004db52736a8a0193d18
+] 
+hash: 0000000857-8767740649b5fe82987e8c22ac3e8e848aa47bdf9c396f937845730601df4174
+[Surface tension is taken into account in GfsFeedBubble
+Daniel Fuster <dfuster@gmail.com>**20130805211723
+ Ignore-this: ed198d490675d3181666cc33b7712d60
+] 
+hash: 0000001098-84a97d8a51750770e9ae01c1f4f1d6b1e5c8488fd0516edde5c8dfdace929fd6
+[The optional variable in GfsOutputDroplets does not need to be previously defined (strangely, the old syntax was causing problems in babbage2)
+Daniel Fuster <dfuster@gmail.com>**20130812140705
+ Ignore-this: 5cb51ffefecf0796b20e197bd3544e23
+] 
+hash: 0000000445-0d5f5deef8a4f661393de6ffba5784940f42a3f40db7d35e844c2e46d1ce7a6d
+[the wavelet module is only compiled when the GSL libraries are installed
+Daniel Fuster <dfuster@gmail.com>**20130815124238
+ Ignore-this: 4097630d495cdd634153ed6e859e3d9
+] 
+hash: 0000000333-64b02644bbdf93c9ae686e577e361ded18d80319febf9c30c6cf8ede205a2ffe
+[advanced syntax for fftw node distribution using mpi
+Daniel Fuster <dfuster@gmail.com>**20130819074444
+ Ignore-this: 2ac5d119f3ec034d6d93e4d701261f91
+] 
+hash: 0000001375-061be5df3e8547ecb9179ced49bcdd1a3a7adf78bb7eb92041370c8bcf5ba4ff
+[Removal of velocity limitation (it is not physical)
+Daniel Fuster <dfuster@gmail.com>**20130820121959
+ Ignore-this: 273461322daa87ae67a022db21d35d18
+] 
+hash: 0000000319-2aae0a5caf071278a7b499d32c72baf484700d0c3ebef25b234ef29596a58fee
+[Important bug fixes when using the function GfsInitSpectra
+Daniel Fuster <dfuster@gmail.com>**20130821160623
+ Ignore-this: aec62081299efed27bc6113c164851c
+] 
+hash: 0000003110-7c944411941d2738f89b02f5eedc381fd44819747282dc33fc1993de34d7284b
+[Bug: No need for intermediate projection in the linear version
+Daniel Fuster <dfuster@gmail.com>**20130222132422
+ Ignore-this: 927d915dcb7bc92ab30150d2292b45b4
+] 
+hash: 0000000504-193df6e27246947ee660a4bbca3dd065b5c824e9bdd599d0fb93aa7c0ca3a725
+[electric BC fixed
+Jose M. Lopez-Herrera Sanchez <jose.lopez.herrera.s@gmail.com>**20130528111034
+ Ignore-this: b5f19faeca25f632b83d4188f358e62b
+ 
+ This patch solve defective BC application in parallel runs
+] 
+hash: 0000002795-817fa69049364200a423eed54a261d43a87a8aa17b59d3e72619bb2e8e64aad1
+[Corrections to gfs_vof_face_value
+Jose M. Lopez-Herrera Sanchez <jose.lopez.herrera.s@gmail.com>**20130118122555
+ Ignore-this: 107cf63e8b4efc42fffc283b2fc4c784
+] 
+hash: 0000000801-971e9672f41914543eb06fa091db784fea1b2f141c0acad3da751d9528ce46a4
+[New object gfs_vof_face_fraction
+Jose M. Lopez-Herrera Sanchez <jose.lopez.herrera.s@gmail.com>**20130118125427
+ Ignore-this: 413535c2a0360ca7a1bc3eb97c9f9cc6
+] 
+hash: 0000002390-c24814f55f464b910e9406424e559d2615f3ee52d91bb8792849609bf584ac57
+[For VariableVOFConcentration face diffusion is set to zero
+Jose M. Lopez-Herrera Sanchez <jose.lopez.herrera.s@gmail.com>**20130220174915
+ Ignore-this: c267278ae6aedf39e1b53efd6cb7876a
+] 
+hash: 0000001625-3065fe4e0c3ff63e4e309113743d6c53527301b1ffe23abea99c1a25ff3a6d8a
+[Cosmetics
+Stephane Popinet <popinet@basilisk.fr>**20130724023201
+ Ignore-this: e9ee0ba2584f950b076c89487687174b
+] 
+hash: 0000001245-b91fd451378907fae1804242ca08120f72ef1eb1b6046a245dbe4fb4607eb4ca
+[Fixed qsort() function call in kdt
+Stephane Popinet <popinet@basilisk.fr>**20130724023418
+ Ignore-this: 32ba4b55e5227225bcc9f83ea9f42074
+] 
+hash: 0000004089-850ea8928b59b95f8848ac86ea05169954971da78c86433c07bede97e0f904cb
+[New tool 'gfscombine'
+Stephane Popinet <s.popinet@gmail.com>**20120726234623
+ Ignore-this: 73e5e90fd5cd12fdaa18bd62b627a2ea
+] 
+hash: 0000007511-ffcf77789f4b42d99a462c9f61b518dcd5bd71d1782c4a8e565170dc435684c1
+[Fluxes are reset properly
+Stephane Popinet <popinet@basilisk.fr>**20130801000121
+ Ignore-this: 28dca076e65e0b13bd9f46412712fe6e
+ 
+ The previous implementation could cause FPEs when trying to reuse
+ non-initialised invalid values.
+] 
+hash: 0000003051-0e0b120ffe8f8ff06ef444161ba923968a7a5fa302efbd4bf4dcaf3abb367ff4
+[Updated Poisson tests references for new hypre version
+Stephane Popinet <popinet@users.sf.net>**20130801221638
+ Ignore-this: 2d896ac0f6ef99212a82b78fcfb12dce
+] 
+hash: 0000007837-5156708f08e2aee043ab9d70cf3ca30cb5ab83b99d1a7b70467d834cb40326be
+[Removed obsolete --partial darcs option
+Stephane Popinet <s.popinet@gmail.com>**20130802011625
+ Ignore-this: 66c4e32774dc8b6edd87a8ffb8bd4366
+] 
+hash: 0000000275-6ba76b08e770751107060c2403641a06aa96f9338289a5aed3b7fba9fde881e2
+[Fix for 32-bits padding in kdt
+Stephane Popinet <s.popinet@gmail.com>**20130802015000
+ Ignore-this: 78f17cda79fda0c487022633fb7e14a3
+] 
+hash: 0000000509-689e9ba17003c1da3f178cbbe9f9844bacefa4af3cb68cd5b84aebd7b1721f17
+[face reset fluxes
+Daniel Fuster <dfuster@gmail.com>**20130826095502
+ Ignore-this: 588ec1cd8133419b97e2339ba1285c19
+] 
+hash: 0000000424-58d1678437e3efc922e19a59e8f0edfc0f90be7dd92b2ae7578e610250e86de8
+[Bug correction in adaptive integration
+Daniel Fuster <dfuster@gmail.com>**20130830194341
+ Ignore-this: b34ef7bf053ee481b7bc0db074a7d918
+] 
+hash: 0000000382-37dcc4f670414f127385533e73c2cf924afb9d8bdda181045a3cc8bcfbe20355
+[New GfsAdaptHessianExtrapolation object
+Daniel Fuster <dfuster@gmail.com>**20130830194436
+ Ignore-this: 2f06296579bd4c83fd186aa7e096bf5f
+] 
+hash: 0000007356-1c3dd461e130dce769625c8d5cd8759e17493c34d16cddf9dc3b064446766175
+[Bug correction in forces when using adaptive  RK in bubbles.c
+Daniel Fuster <dfuster@gmail.com>**20130923190024
+ Ignore-this: a27c5e72c2767838db242c22cd64a4ce
+] 
+hash: 0000003019-14247790ee6ebe5535c863913adc4d12448081528c110dfce930be63396e3197
+[Relative velocities are allowed in the functions for Sourcemass and Sourcevol for particles
+Daniel Fuster <dfuster@gmail.com>**20130923190225
+ Ignore-this: 1d9e1305ad8f51ae9cd2550c22efa48f
+] 
+hash: 0000003268-8ecdc4e2aae572621626bee3790c46543dd408e8ed64aba644f28a1b04e3e47d
+[bug correction in turbulence model
+Daniel Fuster <dfuster@gmail.com>**20130923190514
+ Ignore-this: 5bd3846344cf0190263a3825d63585a1
+] 
+hash: 0000000188-d131aadb23a4d3691172a6775236b495fa16f95b480a11bf34d23896669cb311
+[defectous patch for bubbles
+Daniel Fuster <dfuster@gmail.com>**20130923190958
+ Ignore-this: ba77ecc91fce6717ee2e30b6d354c0ef
+] 
+hash: 0000000608-6311fb160806cefbd59618e638a32e8d8270318a3df696fcae0a02459f892e3f
+[InitSpectra allows to specify a seed for random number generation
+Daniel Fuster <dfuster@gmail.com>**20130925121620
+ Ignore-this: 8107aa9ba134db7392bfb9daf2bc1ace
+] 
+hash: 0000001418-b0831c86bcb81c77a1c4883ceb23446e7502d7624b804a4c60711a9b75bfeb25
+[extra parenthesis, definitely I do not understand darcs :)
+Daniel Fuster <dfuster@gmail.com>**20130925211604
+ Ignore-this: 43e953d781fbaaa031458539689c1687
+] 
+hash: 0000000192-e0daadb114072ed9adaa79ea34c90886222e165571e8f9be1cd39d0c18d4fdae
+[Some modifications in the parallel version of the turbulence module
+Daniel Fuster <dfuster@gmail.com>**20130930163620
+ Ignore-this: 8fd9639f8443360fa27532acecf27371
+] 
+hash: 0000004607-ee025d6e6e343c219e86d9f02fea121cf278eddb50827bce6c6420ef4c05454a
+[bug correction to allow for dynamic adaptation of solids (probably this patch can be improved)
+Daniel Fuster <dfuster@gmail.com>**20131101120747
+ Ignore-this: 9098c7d19cfbce7aef6a760affd67313
+] 
+hash: 0000002416-b1d77322f47c67ac3f8d620b14bd8872cfb36525c04324495571c7c7fb863960
+[new object GfsVariableLevel
+Daniel Fuster <dfuster@gmail.com>**20131102140036
+ Ignore-this: cd2ad00ebeac84ef45d0d0e69b2ca8c
+] 
+hash: 0000004856-ad98f8fb527d29e25b0666ab067e4c172b39361bef801998b714ac2755dd53c4
+[bug corrections in force inertia (thanks to Matias Duran Matute)
+Daniel Fuster <dfuster@gmail.com>**20140823174600
+ Ignore-this: d033cc7a4fea62baf5a8d1535cf1ae96
+] 
+hash: 0000001089-0d78a3ed0a9ccc12132e0a3e503aab39ba1c7139763e07b76680dce15e5f1e20
