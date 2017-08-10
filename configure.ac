@@ -359,11 +359,6 @@ AM_CONDITIONAL(BUILD_LIS, test x$lis = xyes)
 
 # Build fft module if fttw3 is installed
 PKG_CHECK_MODULES(FFTW3, [ fftw3 >= 3 ], [ fftw3="yes" ], [ fftw3="no" ])
-
-AC_CHECK_LIB([fftw3_mpi], [fftw3="yes"], [fftw3="no"])
-if test x$fftw3 = xno; then
-   AC_MSG_WARN([fftw3_mpi not found.])
-fi
 AM_CONDITIONAL(HAS_FFTW3, test x$fftw3 = xyes)
 AC_SUBST(FFTW3_CFLAGS)
 AC_SUBST(FFTW3_LIBS)
@@ -467,5 +462,9 @@ echo "  bubbles           = yes"
 else
 echo "  bubbles           = no"
 fi
-echo "  fftw3             = $fftw3"
+if test x$fftw3 != xno; then
+echo "  fft               = yes"
+else
+echo "  fft               = no"
+fi
 echo

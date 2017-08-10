@@ -1297,47 +1297,6 @@ gdouble gfs_function_face_value (GfsFunction * f, FttCellFace * fa)
 }
 
 /**
- * gfs_function_pos:
- * @f: a #GfsFunction.
- * @pos: a #FttVector.
- *
- * Returns: the value of function @f at @pos.
- */
-gdouble gfs_function_pos (GfsFunction * f, FttVector p)
-{
-  g_return_val_if_fail (f != NULL, 0.);
-
-  gdouble dimensional;
-  if (f->s) {
-    dimensional = interpolated_value (f, &p);
-  }
-  else if (f->g) {
-    FttVector p1 = {0.,0.,0.};
-    if (cgd_is_spatial (f))
-      p1 = p;
-    dimensional = interpolated_cgd (f, &p1);
-  }
-  else if (f->v) {
-    FttCell * cell = gfs_domain_locate (GFS_DOMAIN (gfs_object_simulation (f)), p, -1, NULL);
-    dimensional = gfs_dimensional_value (f->v, GFS_VALUE (cell, f->v));
-  }
-  else if (f->dv) {
-    FttCell * cell = gfs_domain_locate (GFS_DOMAIN (gfs_object_simulation (f)), p, -1, NULL);
-    dimensional = (* (GfsFunctionDerivedFunc) f->dv->func) (cell, NULL,
-							    gfs_object_simulation (f),
-							    f->dv->data);
-  }
-  else if (f->f) {
-    FttCell * cell = gfs_domain_locate (GFS_DOMAIN (gfs_object_simulation (f)), p, -1, NULL);
-    dimensional = (* f->f) (cell, NULL, gfs_object_simulation (f), f->var, f->dvar);
-  }
-  else
-    dimensional = f->val;
-  return adimensional_value (f, dimensional);
-}
-
-
-/**
  * gfs_function_set_constant_value:
  * @f: a #GfsFunction.
  * @val: the value.

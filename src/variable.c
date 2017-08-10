@@ -98,6 +98,14 @@ static void gfs_variable_destroy (GtsObject * object)
     v->domain->variables = g_slist_remove (v->domain->variables, v);
   }
 
+  if (GFS_IS_VARIABLE_TRACER (v)) {
+    FttComponent c;
+    GfsVariableTracer * t = GFS_IS_VARIABLE_TRACER (v);
+    for (c = 0; c < FTT_DIMENSION; c++)
+      if (t->advection.sink[c])
+	gts_object_destroy (GTS_OBJECT (t->advection.sink[c]));
+  }
+
   (* GTS_OBJECT_CLASS (gfs_variable_class ())->parent_class->destroy) (object);
 }
 
@@ -621,119 +629,6 @@ GfsVariableClass * gfs_variable_filtered_class (void)
 }
 
 /** \endobject{GfsVariableFiltered} */
-
-/**
- * Wavelet analysis.
- * \beginobject{GfsVariableWavelet}
- */
-
-static void variable_wavelet_read (GtsObject ** o, GtsFile * fp)
-{
-  GfsVariableWavelet * v = GFS_VARIABLE_WAVELET (*o);
-  GfsDomain * domain;
-
-  (* GTS_OBJECT_CLASS (gfs_variable_wavelet_class ())->parent_class->read) (o, fp);
-  if (fp->type == GTS_ERROR)
-    return;
-
-  if (fp->type != GTS_STRING) {
-    gts_file_error (fp, "expecting a string (v)");
-    return;
-  }
-  domain = GFS_DOMAIN (gfs_object_simulation (*o));
-  if (!(v->v = gfs_variable_from_name (domain->variables, fp->token->str))) {
-    gts_file_error (fp, "unknown variable `%s'", fp->token->str);
-    return;
-  }
-  gts_file_next_token (fp);
-
-  if (GFS_VARIABLE (v)->description)
-    g_free (GFS_VARIABLE (v)->description);
-  GFS_VARIABLE (v)->description = g_strjoin (" ", "Wavelet coefficients for variable", v->v->name,
-					     NULL);
-  GFS_VARIABLE (v)->units = v->v->units;
-}
-
-static void variable_wavelet_write (GtsObject * o, FILE * fp)
-{
-  (* GTS_OBJECT_CLASS (gfs_variable_wavelet_class ())->parent_class->write) (o, fp);
-
-  fprintf (fp, " %s", GFS_VARIABLE_WAVELET (o)->v->name);
-}
-
-static void wavelet_coefficients (FttCell * cell, GfsVariableWavelet * w)
-{
-  FttCell * parent = ftt_cell_parent (cell);
-  if (parent) {
-    FttVector p;
-    ftt_cell_pos (cell, &p);
-    gdouble f[4*(FTT_DIMENSION - 1) + 1];
-    gfs_cell_corner_values (parent, w->v, ftt_cell_level (parent), f);
-    GFS_VALUE (cell, GFS_VARIABLE (w)) = GFS_VALUE (cell, w->v) 
-      - gfs_interpolate_from_corners (parent, p, f);
-      //      - GFS_VALUE (parent, w->v);
-  }
-  else
-    GFS_VALUE (cell, GFS_VARIABLE (w)) = GFS_VALUE (cell, w->v);
-}
-
-static gboolean variable_wavelet_event (GfsEvent * event, GfsSimulation * sim)
-{
-  if ((* GFS_EVENT_CLASS (GTS_OBJECT_CLASS (gfs_variable_wavelet_class ())->parent_class)->event)
-      (event, sim)) {
-    GfsDomain * domain = GFS_DOMAIN (sim);
-    GfsVariable * v = GFS_VARIABLE (event), * wv = GFS_VARIABLE_WAVELET (event)->v;
-    gfs_domain_cell_traverse (domain,
-			      FTT_POST_ORDER, FTT_TRAVERSE_NON_LEAFS, -1,
-			      (FttCellTraverseFunc) wv->fine_coarse, wv);
-    gfs_domain_bc (domain, FTT_TRAVERSE_NON_LEAFS, -1, wv);
-    gfs_domain_cell_traverse (domain,
-			      FTT_POST_ORDER, FTT_TRAVERSE_ALL, -1,
-			      (FttCellTraverseFunc) wavelet_coefficients, v);
-    gfs_domain_bc (domain, FTT_TRAVERSE_ALL, -1, v);
-    return TRUE;
-  }
-  return FALSE;
-}
-
-static void variable_wavelet_class_init (GtsObjectClass * klass)
-{
-  klass->read = variable_wavelet_read;
-  klass->write = variable_wavelet_write;
-  GFS_EVENT_CLASS (klass)->event = variable_wavelet_event;
-}
-
-static void none (FttCell * parent, GfsVariable * v)
-{
-}
-
-static void variable_wavelet_init (GfsVariable * v)
-{
-  v->fine_coarse = none;
-  v->coarse_fine = none;
-}
-
-GfsVariableClass * gfs_variable_wavelet_class (void)
-{
-  static GfsVariableClass * klass = NULL;
-
-  if (klass == NULL) {
-    GtsObjectClassInfo info = {
-      "GfsVariableWavelet",
-      sizeof (GfsVariableWavelet),
-      sizeof (GfsVariableClass),
-      (GtsObjectClassInitFunc) variable_wavelet_class_init,
-      (GtsObjectInitFunc) variable_wavelet_init,
-      (GtsArgSetFunc) NULL,
-      (GtsArgGetFunc) NULL
-    };
-    klass = gts_object_class_new (GTS_OBJECT_CLASS (gfs_variable_class ()), &info);
-  }
-
-  return klass;
-}
-
-/** \endobject{GfsVariableWavelet} */
 
 /**
  * \beginobject{GfsVariableDiagonal}
@@ -1358,6 +1253,10 @@ static void variable_age_class_init (GtsObjectClass * klass)
   GFS_EVENT_CLASS (klass)->event = variable_age_event;
 }
 
+static void none (FttCell * parent, GfsVariable * v)
+{
+}
+
 static void variable_age_init (GfsVariable * v)
 {
   v->fine_coarse = none;
@@ -1922,124 +1821,3 @@ GfsDerivedVariable * gfs_derived_variable_from_name (GSList * i, const gchar * n
 }
 
 /** \endobject{GfsDerivedVariable} */
-
-/**
- * \beginobject{GfsVariableDerivative}
- */
-
-static void variable_derivative_read (GtsObject ** o, GtsFile * fp)
-{
-  GfsVariableDerivative * v = GFS_VARIABLE_DERIVATIVE (*o);
-  GfsDomain * domain;
-
-  (* GTS_OBJECT_CLASS (gfs_variable_derivative_class ())->parent_class->read) (o, fp); 
-  if (fp->type == GTS_ERROR)
-    return;
-
-  domain = GFS_DOMAIN (gfs_object_simulation (*o));
-  v->vold = gfs_domain_get_or_add_variable(domain, "Xold", "value at previous time step");
-
-  if (fp->type != GTS_STRING) {
-    gts_file_error (fp, "expecting a string (v)");
-    return;
-  }
-  if (!(v->v = gfs_variable_from_name (domain->variables, fp->token->str))) {
-    gts_file_error (fp, "unknown variable `%s'", fp->token->str);
-    return;
-  }
-  gts_file_next_token (fp);
-
-  if (GFS_VARIABLE (v)->description)
-    g_free (GFS_VARIABLE (v)->description);
-  GFS_VARIABLE (v)->description = g_strjoin (" ", "Variable", v->v->name, "degraded", NULL);
-
-  GFS_VARIABLE (v)->units = v->v->units;
-}
-
-static void variable_derivative_write (GtsObject * o, FILE * fp)
-{
-  (* GTS_OBJECT_CLASS (gfs_variable_derivative_class ())->parent_class->write) (o, fp); 
-
-  fprintf (fp, " %s", GFS_VARIABLE_DERIVATIVE (o)->v->name);
-}
-
-typedef struct {
-  GfsVariableDerivative * vd;
-  GfsSimulation * sim; 
-} DerivData;
-
-static void get_derivative (FttCell * cell, DerivData * dd) 
-{
-  GfsVariableDerivative * v = dd->vd;
-  GFS_VALUE(cell,GFS_VARIABLE(v)) = (-GFS_VALUE(cell,v->vold) + GFS_VALUE(cell,v->v))/dd->sim->advection_params.dt;
-}
-
-static void get_old (FttCell * cell, GfsVariableDerivative * v )
-{
-  GFS_VALUE(cell,v->vold) = GFS_VALUE(cell,v->v);
-}
-
-static gboolean variable_derivative_event (GfsEvent * event, GfsSimulation * sim)
-{
-  if ((* GFS_EVENT_CLASS (GTS_OBJECT_CLASS (gfs_variable_derivative_class ())->parent_class)->event)
-      (event, sim)) {
-    GfsVariableDerivative * v  = GFS_VARIABLE_DERIVATIVE(event);
-    GfsDomain * domain = GFS_DOMAIN(v);
-    DerivData dd = { v, sim };
-    if (sim->time.i > 0) {
-      gfs_domain_cell_traverse (GFS_DOMAIN (sim),
-			      FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
-			      (FttCellTraverseFunc) get_derivative, &dd);
-
-    }
-    else
-      gfs_domain_cell_traverse (GFS_DOMAIN (sim),
-			      FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
-			      (FttCellTraverseFunc) gfs_cell_reset, GFS_VARIABLE(v));
-
-    gfs_domain_cell_traverse (GFS_DOMAIN (sim),
-			      FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
-			      (FttCellTraverseFunc) get_old, v);
-
-    return TRUE;
-  }
-  return FALSE;
-}
-
-static void variable_derivative_class_init (GtsObjectClass * klass)
-{
-  klass->read = variable_derivative_read;
-  klass->write = variable_derivative_write;
-  GFS_EVENT_CLASS (klass)->event = variable_derivative_event;
-}
-
-static void variable_derivative_init (GfsEvent * v)
-{
-  /* the variable/event may need to be initialised at the start */
-  v->start = -1;
-}
-
-GfsVariableClass * gfs_variable_derivative_class (void)
-{
-  static GfsVariableClass * klass = NULL;
-
-  if (klass == NULL) {
-    GtsObjectClassInfo gfs_variable_derivative_info = {
-      "GfsVariableDerivative",
-      sizeof (GfsVariableDerivative),
-      sizeof (GfsVariableClass),
-      (GtsObjectClassInitFunc) variable_derivative_class_init,
-      (GtsObjectInitFunc) variable_derivative_init,
-      (GtsArgSetFunc) NULL,
-      (GtsArgGetFunc) NULL
-    };
-    klass = gts_object_class_new (GTS_OBJECT_CLASS (gfs_variable_class ()), 
-                                  &gfs_variable_derivative_info);
-  }
-
-  return klass;
-}
-
-/** \endobject{GfsVariableDerivative} **/
-
-

@@ -131,10 +131,25 @@ GfsEventClass * gfs_adapt_gradient_class  (void);
 
 /* GfsAdaptError: Header */
 
+typedef struct _GfsAdaptError         GfsAdaptError;
+
+struct _GfsAdaptError {
+  /*< private >*/
+  GfsAdaptGradient parent;
+  GfsVariable * dv[FTT_DIMENSION];
+  FttComponent c;
+
+  /*< public >*/
+  GfsVariable * v;
+};
+
+#define GFS_ADAPT_ERROR(obj)            GTS_OBJECT_CAST (obj,\
+					         GfsAdaptError,\
+					         gfs_adapt_error_class ())
 #define GFS_IS_ADAPT_ERROR(obj)         (gts_object_is_from_class (obj,\
 						 gfs_adapt_error_class ()))
 
-GfsEventClass * gfs_adapt_error_class (void);
+GfsEventClass * gfs_adapt_error_class  (void);
 
 /* GfsAdaptThickness: Header */
 
@@ -155,31 +170,6 @@ struct _GfsAdaptThickness {
 						 gfs_adapt_thickness_class ()))
 
 GfsEventClass * gfs_adapt_thickness_class  (void);
-
-
-/* GfsAdaptHessianExtrapolation: Header */
-
-typedef struct _GfsAdaptHessianExtrapolation         GfsAdaptHessianExtrapolation;
-
-struct _GfsAdaptHessianExtrapolation {
-  /*< private >*/
-  GfsAdaptFunction parent;
-  GfsVariable * v;
-
-  /*< public >*/
-  GfsVariable * error;
-  guint np;
-  gdouble norm;
-};
-
-#define GFS_ADAPT_HESSIAN_EXTRAPOLATION(obj)            GTS_OBJECT_CAST (obj,\
-					         GfsAdaptHessianExtrapolation,\
-					         gfs_adapt_hessian_extrapolation_class ())
-#define GFS_IS_ADAPT_HESSIAN_EXTRAPOLATION(obj)         (gts_object_is_from_class (obj,\
-						 gfs_adapt_hessian_extrapolation_class ()))
-
-GfsEventClass * gfs_adapt_hessian_extrapolation_class  (void);
- 
 
 #ifdef __cplusplus
 }

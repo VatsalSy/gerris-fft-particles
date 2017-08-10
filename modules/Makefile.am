@@ -33,12 +33,10 @@ ODE = libode2D.la libode3D.la
 endif
 if HAS_GSL
 BUBBLES = libbubbles2D.la libbubbles3D.la
-WAVELET = libwavelets2D.la libwavelets3D.la
 endif
-#if HAS_FFTW3
-#FFT = libfft2D.la libfft3D.la
-#TUR = libturbulence2D.la libturbulence3D.la
-#endif
+if HAS_FFTW3
+FFT = libfft2D.la libfft3D.la
+endif
 
 pkglib_LTLIBRARIES = \
 	$(MAP) \
@@ -65,11 +63,7 @@ pkglib_LTLIBRARIES = \
 	$(AGMG) \
 	$(ODE) \
         $(BUBBLES) \
-	$(FFT) \
-	$(TUR) \
-	$(WAVELET) \
-        libadaptiveintegration2D.la \
-        libadaptiveintegration3D.la
+	$(FFT)
 
 bin_PROGRAMS = \
 	rsurface2kdt
@@ -156,19 +150,10 @@ libbubbles2D_la_DEPENDENCIES = libparticulatecommon2D.la
 
 libfft3D_la_SOURCES = fft.c
 libfft3D_la_CFLAGS = $(AM_CFLAGS) $(FFTW3_CFLAGS)
-libfft3D_la_LIBADD = $(GFS3D_LIBS) -lfftw3 -lfftw3_mpi
+libfft3D_la_LIBADD = $(GFS3D_LIBS) $(FFTW3_LIBS)
 libfft2D_la_SOURCES = fft.c
 libfft2D_la_CFLAGS = $(AM_CFLAGS) $(FFTW3_CFLAGS) -DFTT_2D=1
-libfft2D_la_LIBADD = $(GFS2D_LIBS) -lfftw3 -lfftw3_mpi
-
-libturbulence3D_la_SOURCES = turbulence.c
-libturbulence3D_la_CFLAGS = $(AM_CFLAGS) $(FFTW3_CFLAGS)
-libturbulence3D_la_LIBADD = libfft3D.la $(GFS3D_LIBS) -lfftw3 -lfftw3_mpi
-libfft3D_la_DEPENDENCIES = libfft3D.la
-libturbulence2D_la_SOURCES = turbulence.c
-libturbulence2D_la_CFLAGS = $(AM_CFLAGS) $(FFTW3_CFLAGS) -DFTT_2D=1
-libturbulence2D_la_LIBADD = libfft2D.la $(GFS2D_LIBS) -lfftw3 -lfftw3_mpi
-libfft2D_la_DEPENDENCIES = libfft2D.la
+libfft2D_la_LIBADD = $(GFS2D_LIBS) $(FFTW3_LIBS)
 
 libhypre3D_la_SOURCES = hypre.c
 libhypre3D_la_CFLAGS = $(AM_CFLAGS)
@@ -231,17 +216,3 @@ libculvert2D_la_DEPENDENCIES = culvert/libboyd87.la
 liblayered2D_la_SOURCES = layered.c
 liblayered2D_la_CFLAGS = $(AM_CFLAGS) -DFTT_2D=1
 liblayered2D_la_LIBADD = $(GFS2D_LIBS)
-
-libwavelets3D_la_SOURCES = wavelets.c
-libwavelets3D_la_CFLAGS = $(AM_CFLAGS) $(GSL_CFLAGS)
-libwavelets3D_la_LIBADD = $(GFS3D_LIBS) $(GFS3D_LIBS) $(GSL_LIBS)
-libwavelets2D_la_SOURCES = wavelets.c
-libwavelets2D_la_CFLAGS = $(AM_CFLAGS) $(GSL_CFLAGS) -DFTT_2D=1
-libwavelets2D_la_LIBADD = $(GFS2D_LIBS) $(GFS3D_LIBS) $(GSL_LIBS)
-
-libadaptiveintegration3D_la_SOURCES = adaptiveintegration.c
-libadaptiveintegration3D_la_CFLAGS = $(AM_CFLAGS)
-libadaptiveintegration3D_la_LIBADD = $(GFS3D_LIBS)
-libadaptiveintegration2D_la_SOURCES = adaptiveintegration.c
-libadaptiveintegration2D_la_CFLAGS = $(AM_CFLAGS) -DFTT_2D=1
-libadaptiveintegration2D_la_LIBADD = $(GFS2D_LIBS)

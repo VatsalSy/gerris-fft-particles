@@ -28,15 +28,16 @@
  * \beginobject{GfsParticle}
  */
 
-static gboolean gfs_particle_event (GfsEvent * event,
+static gboolean gfs_particle_event (GfsEvent * event, 
 				    GfsSimulation * sim)
 {
   if ((* GFS_EVENT_CLASS (GTS_OBJECT_CLASS (gfs_particle_class ())->parent_class)->event)
       (event, sim)) {
     GfsParticle * p = GFS_PARTICLE (event);
     FttVector pos = p->pos;
-    p->pos_old = p->pos;
+    gfs_simulation_map (sim, &pos);
     gfs_domain_advect_point (GFS_DOMAIN (sim), &pos, sim->advection_params.dt);
+    gfs_simulation_map_inverse (sim, &pos);
     p->pos = pos;
     return TRUE;
   }
@@ -45,12 +46,6 @@ static gboolean gfs_particle_event (GfsEvent * event,
 
 static void gfs_particle_read (GtsObject ** o, GtsFile * fp)
 {
-
-  (* GTS_OBJECT_CLASS (gfs_particle_class ())->parent_class->read) (o, fp);
-
-  if (fp->type == GTS_ERROR)
-    return;
-
   GfsParticle * p = GFS_PARTICLE(*o);
 
   if (fp->type != GTS_INT) {
@@ -66,36 +61,26 @@ static void gfs_particle_read (GtsObject ** o, GtsFile * fp)
   }
   p->pos.x = atof (fp->token->str);
   gts_file_next_token (fp);
-
+  
   if (fp->type != GTS_INT && fp->type != GTS_FLOAT) {
     gts_file_error (fp, "expecting a number (p.y)");
     return;
   }
   p->pos.y = atof (fp->token->str);
   gts_file_next_token (fp);
-
+  
   if (fp->type != GTS_INT && fp->type != GTS_FLOAT) {
     gts_file_error (fp, "expecting a number (p.z)");
     return;
   }
   p->pos.z = atof (fp->token->str);
   gts_file_next_token (fp);
-
-  gfs_simulation_map (gfs_object_simulation(*o), &p->pos);
 }
 
 static void gfs_particle_write (GtsObject * o, FILE * fp)
 {
-
-  //  if (GTS_OBJECT_CLASS (gfs_particle_class ())->parent_class->write)
-  //  (* GTS_OBJECT_CLASS (gfs_particle_class ())->parent_class->write)
-  //    (o, fp);
-  fprintf (fp, "%s", o->klass->info.name);
   GfsParticle * p = GFS_PARTICLE(o);
-
-  gfs_simulation_map_inverse (gfs_object_simulation(o), &p->pos);
   fprintf (fp, " %d %g %g %g", p->id, p->pos.x, p->pos.y, p->pos.z);
-  gfs_simulation_map (gfs_object_simulation(o), &p->pos);
 }
 
 static void gfs_particle_class_init (GfsEventClass * klass)

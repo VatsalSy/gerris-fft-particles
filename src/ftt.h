@@ -45,7 +45,7 @@ typedef struct _FttCellChildren  FttCellChildren;
 typedef struct _FttVector        FttVector;
 
 struct _FttVector {
-  gdouble x, y, z, r;
+  gdouble x, y, z;
 };
 
 #if FTT_2D

@@ -3629,13 +3629,11 @@ static void touching_regions (guint tag1, guint tag2, guint * touch)
   guint ntag = touch[tag2];
   if (ntag == tag1)
     return;
-  if (ntag == 0) {
+  if (ntag == 0)
     touch[tag2] = tag1;
-  }
   else {
-    if (tag1 < ntag) {
+    if (tag1 < ntag)
       touch[tag2] = tag1;
-    }
     touching_regions (tag1, ntag, touch);
   }
 }
@@ -3648,7 +3646,7 @@ static void reduce_touching_regions (void * in, void * inout, int * len, MPI_Dat
   guint i;
 
   for (i = 1; i < *len; i++)
-    if (ltouch[i] > 0) 
+    if (ltouch[i] > 0)
       touching_regions (i, ltouch[i], gtouch);
 }
 
@@ -3737,7 +3735,6 @@ guint gfs_domain_tag_droplets (GfsDomain * domain,
   p.c = c;
   p.v = tag;
   p.tag = 0;
-
   gfs_domain_cell_traverse (domain, FTT_PRE_ORDER, FTT_TRAVERSE_ALL, -1,
 			    (FttCellTraverseFunc) gfs_cell_reset, tag);
   gfs_domain_cell_traverse (domain, FTT_PRE_ORDER, FTT_TRAVERSE_LEAFS, -1,
