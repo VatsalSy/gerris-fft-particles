@@ -6,7 +6,8 @@ tool for the numerical simulation of fluid flows.
 
 The official web site is: http://gfs.sourceforge.net
 
-The original gerris source code written by Prof. Popinet and modified by Tomar et al. We aim at modifying the code further to implement better Lagrangian model
+The original gerris source code written by Popinet and modified by Tomar et al. 
+We aim at modifying the code further to implement better Lagrangian model
 
 
 Copying
