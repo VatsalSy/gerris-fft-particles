@@ -34,9 +34,9 @@ endif
 if HAS_GSL
 BUBBLES = libbubbles2D.la libbubbles3D.la
 endif
-if HAS_FFTW3
-FFT = libfft2D.la libfft3D.la
-endif
+#if HAS_FFTW3
+#FFT = libfft2D.la libfft3D.la
+#endif
 
 pkglib_LTLIBRARIES = \
 	$(MAP) \
