@@ -37,13 +37,15 @@ endif
 if HAS_FFTW3
 FFT = libfft2D.la libfft3D.la
 endif
-
+#vatsal
 pkglib_LTLIBRARIES = \
 	$(MAP) \
 	libterrain2D.la \
 	libterrain3D.la \
 	libparticulates2D.la \
 	libparticulates3D.la \
+	libmasstransfer2D.la \
+    libmasstransfer3D.la \
 	libokada2D.la \
 	libokada3D.la \
 	libdf33D.la \
@@ -193,6 +195,13 @@ libelectrohydro3D_la_LIBADD = $(GFS3D_LIBS)
 libelectrohydro2D_la_SOURCES = electrohydro.c
 libelectrohydro2D_la_CFLAGS = $(AM_CFLAGS) -DFTT_2D=1
 libelectrohydro2D_la_LIBADD = $(GFS2D_LIBS)
+
+libmasstransfer3D_la_SOURCES = masstransfer.c
+libmasstransfer3D_la_CFLAGS = $(AM_CFLAGS)
+libmasstransfer3D_la_LIBADD = $(GFS3D_LIBS)
+libmasstransfer2D_la_SOURCES = masstransfer.c
+libmasstransfer2D_la_CFLAGS = $(AM_CFLAGS) -DFTT_2D=1
+libmasstransfer2D_la_LIBADD = $(GFS2D_LIBS)
 
 libskewsymmetric3D_la_SOURCES = skewsymmetric.c
 libskewsymmetric3D_la_CFLAGS = $(AM_CFLAGS)
